@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anchor Homes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* Global Styles */
+    :root {
+      --bg-main: #050505;
+      --bg-alt: #101010;
+      --bg-card: #151515;
+      --accent: #ffffff;
+      --accent-soft: #cfcfcf;
+      --border-subtle: #2b2b2b;
+      --error: #ff4d4d;
+      --radius-lg: 16px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--accent-soft);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 5, 5, 0.94),
+        rgba(5, 5, 5, 0.85)
+      );
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    .brand-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .brand-name {
+      font-size: 1.15rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .brand-tagline {
+      font-size: 0.8rem;
+      color: #9f9f9f;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: #cccccc;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      background: transparent;
+    }
+
+    .nav-link:hover {
+      background: var(--bg-card);
+      border-color: var(--border-subtle);
+      color: var(--accent);
+    }
+
+    .nav-link.active {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .content {
+      max-width: 1100px;
+      margin: 1.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #1e1e1e 0, #101010 45%, #050505 100%);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem 2rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-header {
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: #9f9f9f;
+      margin-top: 0.4rem;
+    }
+
+    .muted {
+      color: #9f9f9f;
+      font-size: 0.95rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .info-block {
+      margin-bottom: 1rem;
+    }
+
+    .info-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #b0b0b0;
+      margin-bottom: 0.25rem;
+    }
+
+    .info-value {
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    /* Forms */
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #b0b0b0;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="file"],
+    textarea {
+      padding: 0.65rem 0.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background-color: var(--bg-alt);
+      color: var(--accent);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      width: 100%;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #777777;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #ffffff;
+      box-shadow: 0 0 0 1px #ffffff22;
+      background-color: #151515;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: #8a8a8a;
+    }
+
+    .button-row {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: #ffffff;
+      color: #000000;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .required {
+      color: var(--error);
+      margin-left: 0.1rem;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 1rem 1.5rem 1.5rem;
+      font-size: 0.8rem;
+      color: #777777;
+      text-align: center;
+    }
+
+    /* Address autocomplete */
+
+    .autocomplete-wrapper {
+      position: relative;
+    }
+
+    .autocomplete-list {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      margin-top: 4px;
+      background: #151515;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      max-height: 220px;
+      overflow-y: auto;
+      box-shadow: var(--shadow-soft);
+      display: none;
+      z-index: 50;
+    }
+
+    .autocomplete-item {
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--accent-soft);
+    }
+
+    .autocomplete-item strong {
+      color: var(--accent);
+    }
+
+    .autocomplete-item:hover {
+      background: #1f1f1f;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .two-column {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .card {
+        padding: 1.25rem 1.1rem 1.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-logo">
+            <!-- Replace "logo.png" with the actual path/filename of your logo -->
+            <img src="logo.png" alt="Anchor Homes logo" />
+          </div>
+          <div class="brand-text">
+            <div class="brand-name">Anchor Homes</div>
+            <div class="brand-tagline">Custom Homes & Renovations</div>
+          </div>
+        </div>
+
+        <nav>
+          <button class="nav-link active" data-section="about">About Us</button>
+          <button class="nav-link" data-section="services">Services</button>
+          <button class="nav-link" data-section="contact">Contact</button>
+          <button class="nav-link" data-section="change-requests">Change Request</button>
+          <button class="nav-link" data-section="subcontractors">Subcontractor Invoices</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="content">
+        <!-- ABOUT US -->
+        <section id="about" class="section active">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">About Us</h1>
+              <p class="card-subtitle">
+                A brief overview of who you are, what you build, and what sets Anchor Homes apart.
+              </p>
+            </div>
+            <div class="two-column">
+              <div>
+                <p class="muted">
+                  Anchor Homes is a residential and commercial builder focused on clean design,
+                  honest communication, and durable craftsmanship. From first walkthrough to final
+                  punch list, our goal is to keep every project predictable, transparent, and
+                  enjoyable for the families and businesses who trust us.
+                </p>
+              </div>
+              <div>
+                <p class="muted">
+                  Led by owner <strong style="color:#ffffff;">Austin Bream</strong>, Anchor Homes
+                  combines practical job-site experience with a detail-driven planning process. Austin Bream has achieved local legend status not for his athleticism or academic prowess, but for his truly unhinged devotion to raw hotdogs—no buns, no condiments, just cold, slippery tubes of mystery meat straight from the pack. While most folks reach for a grill, Austin reaches for the fridge with the confidence of a man who’s made peace with his choices. Around town, he's affectionately (and somewhat fearfully) known as the “Glizzy Gobbler,” a title he wears like a badge of honor. But it’s the whispered moniker “Throat Goat” that really cements his legacy—earned not through scandal, but through the sheer velocity and volume with which he can down a raw frank. Neighborhood barbecues haven’t been the same since.
+                </p>
+              </div>
+            </div>
+
+            <!-- Block where you can paste your own About text -->
+            <div class="card" style="margin-top: 1.5rem; background: rgba(5,5,5,0.6);">
+              <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
+                <h2 class="card-title" style="font-size: 1rem;">Your About Us Content</h2>
+              </div>
+              <p class="hint" style="margin-top: 0.4rem;">
+                Replace this placeholder text with your detailed About Us description in the HTML file.
+              </p>
+              <p style="margin-top: 0.75rem;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat dolor
+                vitae est interdum, in auctor arcu faucibus. <!-- Replace with real content -->
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="section">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Services</h1>
+              <p class="card-subtitle">
+                Residential and commercial construction services tailored to your project.
+              </p>
+            </div>
+
+            <div class="two-column">
+              <div>
+                <h2 class="info-label" style="margin-bottom:0.4rem;">Residential Construction</h2>
+                <ul class="muted" style="padding-left:1.2rem; margin-bottom:1.5rem;">
+                  <li>Custom new-home builds</li>
+                  <li>Whole-home renovations & gut remodels</li>
+                  <li>Kitchen & bath remodels</li>
+                  <li>Room additions & second stories</li>
+                  <li>Basement & bonus room build-outs</li>
+                  <li>Outdoor living spaces, decks, and covered porches</li>
+                  <li>Exterior upgrades, siding, roofing, and windows</li>
+                </ul>
+              </div>
+              <div>
+                <h2 class="info-label" style="margin-bottom:0.4rem;">Commercial & Light Commercial</h2>
+                <ul class="muted" style="padding-left:1.2rem; margin-bottom:1.5rem;">
+                  <li>Tenant build-outs and interior finish-outs</li>
+                  <li>Office and professional space remodeling</li>
+                  <li>Retail and showroom improvements</li>
+                  <li>Small business build-to-suit projects</li>
+                  <li>Site and accessibility upgrades</li>
+                  <li>Ongoing maintenance and small-project work</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="muted">
+              If you don’t see your exact project type listed, reach out—we can usually tailor a
+              solution or point you to someone we trust.
+            </p>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="section">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Contact</h1>
+              <p class="card-subtitle">
+                Reach out to Anchor Homes for questions, consultations, or project updates.
+              </p>
+            </div>
+
+            <div class="two-column">
+              <div>
+                <div class="info-block">
+                  <div class="info-label">Phone</div>
+                  <!-- Replace with your real phone number -->
+                  <div class="info-value">(555) 555-5555</div>
+                </div>
+                <div class="info-block">
+                  <div class="info-label">Email</div>
+                  <!-- Replace with your real email -->
+                  <div class="info-value">
+                    <a href="mailto:info@anchorhomes.com">info@anchorhomes.com</a>
+                  </div>
+                </div>
+                <div class="info-block">
+                  <div class="info-label">Business Address</div>
+                  <!-- Replace with your real address -->
+                  <div class="info-value">
+                    1234 Anchor Way<br />
+                    Suite 100<br />
+                    Your City, ST 00000
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p class="muted">
+                  Office hours, service areas, or additional contact notes can be listed here. For
+                  example: “Meetings by appointment only,” or “Serving Williamson County and the
+                  Greater Nashville area.”
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CHANGE REQUESTS -->
+        <section id="change-requests" class="section">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Change Request</h1>
+              <p class="card-subtitle">
+                Use this form to request changes to your current Anchor Homes project.
+              </p>
+            </div>
+
+            <!-- Replace YOUR_CHANGE_REQUEST_FORM_ID with your Formspree form ID -->
+            <form
+              action="https://formspree.io/f/YOUR_CHANGE_REQUEST_FORM_ID"
+              method="POST"
+              accept-charset="UTF-8"
+            >
+              <input type="hidden" name="form_name" value="Change Request" />
+
+              <div class="field-group">
+                <label for="cr-name">
+                  Customer Name<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="cr-name"
+                  name="customer_name"
+                  required
+                  placeholder="First and last name"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="cr-phone">
+                  Phone<span class="required">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="cr-phone"
+                  name="customer_phone"
+                  required
+                  placeholder="(555) 555-5555"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="cr-email">
+                  Email<span class="required">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="cr-email"
+                  name="customer_email"
+                  required
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="cr-address">
+                  Project Address<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="cr-address"
+                  name="project_address"
+                  required
+                  placeholder="Start typing your project address..."
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="cr-details">
+                  Change Request Details<span class="required">*</span>
+                </label>
+                <textarea
+                  id="cr-details"
+                  name="change_request_details"
+                  required
+                  placeholder="Describe the change you are requesting. Include room, finishes, materials, and any timeline notes."
+                ></textarea>
+                <p class="hint">
+                  Please note that all change requests are subject to pricing review and schedule
+                  impact. Your project manager will follow up to confirm details.
+                </p>
+              </div>
+
+              <div class="button-row">
+                <button type="submit" class="btn btn-primary">
+                  Submit Change Request
+                </button>
+                <button type="reset" class="btn btn-outline">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- SUBCONTRACTOR INVOICES -->
+        <section id="subcontractors" class="section">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Subcontractor Invoices</h1>
+              <p class="card-subtitle">
+                Subcontractors can upload invoices here for processing and payment.
+              </p>
+            </div>
+
+            <!-- Replace YOUR_SUBCONTRACTOR_FORM_ID with your Formspree form ID -->
+            <form
+              action="https://formspree.io/f/YOUR_SUBCONTRACTOR_FORM_ID"
+              method="POST"
+              enctype="multipart/form-data"
+              accept-charset="UTF-8"
+            >
+              <input type="hidden" name="form_name" value="Subcontractor Invoice" />
+
+              <div class="field-group">
+                <label for="sub-name">
+                  Contact Name<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="sub-name"
+                  name="sub_name"
+                  required
+                  placeholder="First and last name"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="sub-company">
+                  Company Name<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="sub-company"
+                  name="sub_company"
+                  required
+                  placeholder="Business or trade name"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="sub-email">
+                  Email<span class="required">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="sub-email"
+                  name="sub_email"
+                  required
+                  placeholder="you@yourcompany.com"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="sub-phone">
+                  Phone<span class="required">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="sub-phone"
+                  name="sub_phone"
+                  required
+                  placeholder="(555) 555-5555"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="sub-project">
+                  Project Name / Address<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="sub-project"
+                  name="sub_project"
+                  required
+                  placeholder="Start typing the project address or name..."
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="sub-amount">
+                  Invoice Amount (Optional)
+                </label>
+                <input
+                  type="text"
+                  id="sub-amount"
+                  name="sub_amount"
+                  placeholder="$0.00"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="sub-file">
+                  Upload Invoice<span class="required">*</span>
+                </label>
+                <input
+                  type="file"
+                  id="sub-file"
+                  name="invoice_file"
+                  required
+                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx"
+                />
+                <p class="hint">
+                  Accepted formats: PDF, image files, Word, or Excel. One file per submission.
+                </p>
+              </div>
+
+              <div class="field-group">
+                <label for="sub-notes">
+                  Notes (Optional)
+                </label>
+                <textarea
+                  id="sub-notes"
+                  name="sub_notes"
+                  placeholder="Any notes related to this invoice, work completed, or billing period."
+                ></textarea>
+              </div>
+
+              <div class="button-row">
+                <button type="submit" class="btn btn-primary">
+                  Submit Invoice
+                </button>
+                <button type="reset" class="btn btn-outline">
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      &copy; <span id="year"></span> Anchor Homes. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    // ==== CONFIGURE YOUR MAPS.CO API KEY HERE ====
+    // Get your key from https://geocode.maps.co and replace the placeholder below.
+    const MAPSCO_API_KEY = "6930d4d437fad769672610qmbb9060f";
+
+    // Handle tab-like navigation between sections
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll(".section");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        const targetId = link.getAttribute("data-section");
+
+        navLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
+
+        sections.forEach((section) => {
+          section.classList.toggle("active", section.id === targetId);
+        });
+      });
+    });
+
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Address autocomplete using geocode.maps.co
+    function attachAddressAutocomplete(input) {
+      if (!MAPSCO_API_KEY || MAPSCO_API_KEY === "YOUR_MAPSCO_API_KEY_HERE") {
+        console.warn(
+          "Maps.co API key is not set. Address autocomplete is disabled for:",
+          input.id
+        );
+        return;
+      }
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "autocomplete-wrapper";
+
+      // Wrap the existing input
+      input.parentNode.insertBefore(wrapper, input);
+      wrapper.appendChild(input);
+
+      const list = document.createElement("div");
+      list.className = "autocomplete-list";
+      wrapper.appendChild(list);
+
+      let currentFetchId = 0;
+
+      input.addEventListener("input", () => {
+        const query = input.value.trim();
+        if (query.length < 3) {
+          list.innerHTML = "";
+          list.style.display = "none";
+          return;
+        }
+
+        const fetchId = ++currentFetchId;
+
+        fetch(
+          "https://geocode.maps.co/search?q=" +
+            encodeURIComponent(query) +
+            "&api_key=" +
+            encodeURIComponent(MAPSCO_API_KEY)
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            if (fetchId !== currentFetchId) return;
+            list.innerHTML = "";
+
+            if (!Array.isArray(data) || data.length === 0) {
+              list.style.display = "none";
+              return;
+            }
+
+            data.slice(0, 5).forEach((place) => {
+              const item = document.createElement("div");
+              item.className = "autocomplete-item";
+              item.textContent = place.display_name || "";
+              item.addEventListener("click", () => {
+                input.value = place.display_name || "";
+                list.innerHTML = "";
+                list.style.display = "none";
+              });
+              list.appendChild(item);
+            });
+
+            list.style.display = "block";
+          })
+          .catch((err) => {
+            console.error("Error fetching suggestions from maps.co:", err);
+            list.innerHTML = "";
+            list.style.display = "none";
+          });
+      });
+
+      // Hide list when clicking outside
+      document.addEventListener("click", (event) => {
+        if (!wrapper.contains(event.target)) {
+          list.style.display = "none";
+        }
+      });
+    }
+
+    // Attach autocomplete to address fields
+    const addressInputs = [
+      document.getElementById("cr-address"),
+      document.getElementById("sub-project")
+    ].filter(Boolean);
+
+    addressInputs.forEach(attachAddressAutocomplete);
+  </script>
+</body>
+</html>
