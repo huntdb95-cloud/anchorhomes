@@ -1683,7 +1683,8 @@
   <!-- Signature Pad for drawing signatures -->
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
   <!-- html2pdf for generating PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-YcsIPzN0xTFO2J7gH+fAMG0zdy8lxCU9XUDwQqQVgVDuayWkt8UfHwOZgIygnWmrd7rZ9CkS4iigFsBVfXQEiA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- html2pdf for generating PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -1854,10 +1855,11 @@
         subForm.addEventListener("submit", async (e) => {
           e.preventDefault();
 
-          if (!window.html2pdf) {
-            alert("Unable to submit right now (PDF library not loaded). Please try again.");
-            return;
-          }
+          if (typeof window.html2pdf === "undefined") {
+  alert("Unable to submit right now (PDF library not loaded). Please try again.");
+  console.error("html2pdf is not defined. Check that the html2pdf script tag is loading correctly.");
+  return;
+}
           if (!window.agreementPad || window.agreementPad.isEmpty()) {
             alert("Please sign the Subcontractors Agreement before submitting.");
             return;
