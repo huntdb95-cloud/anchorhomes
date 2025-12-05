@@ -1447,172 +1447,183 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      /* ----- NAVIGATION ----- */
-      const navLinks = document.querySelectorAll(".nav-link");
-      const sections = document.querySelectorAll(".section");
+  document.addEventListener("DOMContentLoaded", () => {
+    /* ----- NAVIGATION ----- */
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll(".section");
 
-      function activateSection(targetId) {
-        navLinks.forEach((l) => {
-          const id = l.getAttribute("data-section");
-          l.classList.toggle("active", id === targetId);
-        });
-        sections.forEach((section) => {
-          section.classList.toggle("active", section.id === targetId);
-        });
-      }
-
-      navLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          const targetId = link.getAttribute("data-section");
-          activateSection(targetId);
-        });
+    function activateSection(targetId) {
+      navLinks.forEach((l) => {
+        const id = l.getAttribute("data-section");
+        l.classList.toggle("active", id === targetId);
       });
-
-      document.querySelectorAll("[data-jump]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const targetId = btn.getAttribute("data-jump");
-          activateSection(targetId);
-        });
+      sections.forEach((section) => {
+        section.classList.toggle("active", section.id === targetId);
       });
+    }
 
-      /* ----- FOOTER YEAR ----- */
-      const yearSpan = document.getElementById("year");
-      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-      /* ----- HERO SLIDESHOW ----- */
-      const slides = Array.from(document.querySelectorAll(".hero-slide"));
-      if (slides.length > 1) {
-        let order = slides.map((_, idx) => idx);
-        function shuffle(array) {
-          for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-          }
-        }
-        shuffle(order);
-        let pointer = 0;
-        function showNextSlide() {
-          const index = order[pointer];
-          slides.forEach((slide, i) => {
-            slide.classList.toggle("active", i === index);
-          });
-          pointer++;
-          if (pointer >= order.length) {
-            pointer = 0;
-            shuffle(order);
-          }
-        }
-        showNextSlide();
-        setInterval(showNextSlide, 5000);
-      }
-
-      /* ----- SIGNATURE PADS (no auto-clear on scroll/resize) ----- */
-      function initSignaturePads() {
-        const pads = document.querySelectorAll(".signature-pad");
-        pads.forEach((pad) => {
-          const canvas = pad.querySelector("canvas");
-          const clearBtn = pad.querySelector(".signature-clear");
-          if (!canvas) return;
-
-          const ctx = canvas.getContext("2d");
-
-          // Size the canvas ONCE (no resize listener – prevents clearing while scrolling)
-          const rect = canvas.getBoundingClientRect();
-          canvas.width = rect.width * window.devicePixelRatio;
-          canvas.height = rect.height * window.devicePixelRatio;
-          ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
-          ctx.lineWidth = 2;
-          ctx.lineCap = "round";
-          ctx.strokeStyle = "#000000"; // black so it shows on the white PDFs
-
-          let drawing = false;
-          let lastX = 0;
-          let lastY = 0;
-
-          function getPos(evt) {
-            const bounds = canvas.getBoundingClientRect();
-            const point = evt.touches ? evt.touches[0] : evt;
-            return {
-              x: point.clientX - bounds.left,
-              y: point.clientY - bounds.top,
-            };
-          }
-
-          function startDrawing(evt) {
-            evt.preventDefault();
-            drawing = true;
-            const pos = getPos(evt);
-            lastX = pos.x;
-            lastY = pos.y;
-          }
-
-          function draw(evt) {
-            if (!drawing) return;
-            evt.preventDefault();
-            const pos = getPos(evt);
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(pos.x, pos.y);
-            ctx.stroke();
-            lastX = pos.x;
-            lastY = pos.y;
-          }
-
-          function stopDrawing(evt) {
-            if (!drawing) return;
-            evt.preventDefault();
-            drawing = false;
-          }
-
-          canvas.addEventListener("mousedown", startDrawing);
-          canvas.addEventListener("mousemove", draw);
-          canvas.addEventListener("mouseup", stopDrawing);
-          canvas.addEventListener("mouseleave", stopDrawing);
-
-          canvas.addEventListener("touchstart", startDrawing, { passive: false });
-          canvas.addEventListener("touchmove", draw, { passive: false });
-          canvas.addEventListener("touchend", stopDrawing);
-          canvas.addEventListener("touchcancel", stopDrawing);
-
-          if (clearBtn) {
-            clearBtn.addEventListener("click", () => {
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              const hiddenId = pad.getAttribute("data-input-id");
-              if (hiddenId) {
-                const hidden = document.getElementById(hiddenId);
-                if (hidden) hidden.value = "";
-              }
-            });
-          }
-        });
-      }
-
-      initSignaturePads();
-
-      function captureSignaturesForForm(form) {
-        const pads = form.querySelectorAll(".signature-pad");
-        pads.forEach((pad) => {
-          const canvas = pad.querySelector("canvas");
-          const hiddenId = pad.getAttribute("data-input-id");
-          if (!canvas || !hiddenId) return;
-          const hidden = document.getElementById(hiddenId);
-          if (!hidden) return;
-          try {
-            hidden.value = canvas.toDataURL("image/png");
-          } catch (e) {
-            console.warn("Unable to capture signature data URL:", e);
-          }
-        });
-      }
-
-      const newSubForm = document.getElementById("new-subcontractor-form");
-      if (newSubForm) {
-        newSubForm.addEventListener("submit", () => {
-          captureSignaturesForForm(newSubForm);
-        });
-      }
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        const targetId = link.getAttribute("data-section");
+        activateSection(targetId);
+      });
     });
-  </script>
+
+    document.querySelectorAll("[data-jump]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.getAttribute("data-jump");
+        activateSection(targetId);
+      });
+    });
+
+    /* ----- FOOTER YEAR ----- */
+    const yearSpan = document.getElementById("year");
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+    /* ----- HERO SLIDESHOW ----- */
+    const slides = Array.from(document.querySelectorAll(".hero-slide"));
+    if (slides.length > 1) {
+      let order = slides.map((_, idx) => idx);
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+      shuffle(order);
+      let pointer = 0;
+      function showNextSlide() {
+        const index = order[pointer];
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+        });
+        pointer++;
+        if (pointer >= order.length) {
+          pointer = 0;
+          shuffle(order);
+        }
+      }
+      showNextSlide();
+      setInterval(showNextSlide, 5000);
+    }
+
+    /* ----- SIGNATURE PADS (only clear on button) ----- */
+    function initSignaturePads() {
+      const pads = document.querySelectorAll(".signature-pad");
+      pads.forEach((pad) => {
+        const canvas = pad.querySelector("canvas");
+        const clearBtn = pad.querySelector(".signature-clear");
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+
+        // VISUAL STYLING – make sure you can see the box
+        canvas.style.border = "2px solid #000000";
+        canvas.style.backgroundColor = "transparent";
+
+        // Size the canvas ONCE (no resize listener – prevents clearing on scroll)
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        // Pen settings – ALWAYS black
+        ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+        ctx.strokeStyle = "#000000";
+
+        let drawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        function getPos(evt) {
+          const bounds = canvas.getBoundingClientRect();
+          const point = evt.touches ? evt.touches[0] : evt;
+          return {
+            x: point.clientX - bounds.left,
+            y: point.clientY - bounds.top,
+          };
+        }
+
+        function startDrawing(evt) {
+          evt.preventDefault();
+          drawing = true;
+          const pos = getPos(evt);
+          lastX = pos.x;
+          lastY = pos.y;
+        }
+
+        function draw(evt) {
+          if (!drawing) return;
+          evt.preventDefault();
+          const pos = getPos(evt);
+
+          // Make absolutely sure we’re drawing in black
+          ctx.strokeStyle = "#000000";
+
+          ctx.beginPath();
+          ctx.moveTo(lastX, lastY);
+          ctx.lineTo(pos.x, pos.y);
+          ctx.stroke();
+          lastX = pos.x;
+          lastY = pos.y;
+        }
+
+        function stopDrawing(evt) {
+          if (!drawing) return;
+          evt.preventDefault();
+          drawing = false;
+        }
+
+        canvas.addEventListener("mousedown", startDrawing);
+        canvas.addEventListener("mousemove", draw);
+        canvas.addEventListener("mouseup", stopDrawing);
+        canvas.addEventListener("mouseleave", stopDrawing);
+
+        canvas.addEventListener("touchstart", startDrawing, { passive: false });
+        canvas.addEventListener("touchmove", draw, { passive: false });
+        canvas.addEventListener("touchend", stopDrawing);
+        canvas.addEventListener("touchcancel", stopDrawing);
+
+        if (clearBtn) {
+          clearBtn.addEventListener("click", () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const hiddenId = pad.getAttribute("data-input-id");
+            if (hiddenId) {
+              const hidden = document.getElementById(hiddenId);
+              if (hidden) hidden.value = "";
+            }
+          });
+        }
+      });
+    }
+
+    initSignaturePads();
+
+    function captureSignaturesForForm(form) {
+      const pads = form.querySelectorAll(".signature-pad");
+      pads.forEach((pad) => {
+        const canvas = pad.querySelector("canvas");
+        const hiddenId = pad.getAttribute("data-input-id");
+        if (!canvas || !hiddenId) return;
+        const hidden = document.getElementById(hiddenId);
+        if (!hidden) return;
+        try {
+          hidden.value = canvas.toDataURL("image/png");
+        } catch (e) {
+          console.warn("Unable to capture signature data URL:", e);
+        }
+      });
+    }
+
+    const newSubForm = document.getElementById("new-subcontractor-form");
+    if (newSubForm) {
+      newSubForm.addEventListener("submit", () => {
+        captureSignaturesForForm(newSubForm);
+      });
+    }
+  });
+</script>
 </body>
 </html>
