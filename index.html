@@ -473,10 +473,6 @@
     }
 
     /* Agreement and signatures */
-    .signature-group {
-      margin-top: 1rem;
-    }
-
     .signature-pad {
       margin-top: 0.35rem;
       padding: 0.6rem;
@@ -495,11 +491,6 @@
       background: #111111;
       border: 1px dashed #3a3a3a;
       touch-action: none;
-    }
-
-    .signature-actions {
-      display: flex;
-      justify-content: flex-end;
     }
 
     .signature-note {
@@ -538,17 +529,17 @@
       pointer-events: auto;
     }
 
+    /* Make overlay fields readable on white pages */
     .pdf-field input[type="text"],
     .pdf-field input[type="email"],
     .pdf-field input[type="tel"],
     .pdf-field textarea {
-      background: transparent;
-      border-radius: 0;
-      border: none;
-      border-bottom: 1px solid #555555;
-      padding: 0.05rem 0.15rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 4px;
+      border: 1px solid #444444;
+      padding: 0.05rem 0.18rem;
       font-size: 0.75rem;
-      color: #ffffff;
+      color: #000000;
       width: 100%;
     }
 
@@ -565,7 +556,7 @@
 
     .pdf-field .signature-pad canvas {
       background: transparent;
-      border: 1px solid #666666;
+      border: 1px solid #000000;
       height: 70px;
     }
 
@@ -765,7 +756,7 @@
             </div>
 
             <form
-              action="https://formspree.io/f/xanrbjlk"
+              action="https://formspree.io/f/YOUR_CHANGE_REQUEST_FORM_ID"
               method="POST"
               accept-charset="UTF-8"
             >
@@ -988,7 +979,7 @@
           </div>
         </section>
 
-        <!-- NEW SUBCONTRACTORS (all 8 pages + W9 overlay) -->
+        <!-- NEW SUBCONTRACTORS -->
         <section id="new-subcontractors" class="section">
           <div class="card">
             <div class="card-header">
@@ -1150,7 +1141,7 @@
 
               <div class="section-divider"></div>
 
-              <!-- SECTION B – SUBCONTRACTOR AGREEMENT (8 PAGES OVERLAYED) -->
+              <!-- SECTION B – SUBCONTRACTOR AGREEMENT (7 PAGES OVERLAYED) -->
               <span class="pill-label">
                 Section B – Subcontractor Agreement / Acuerdo de Subcontratista
               </span>
@@ -1246,8 +1237,8 @@
                     />
                   </div>
 
-                  <!-- Page 1 initials: Subcontractor -->
-                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                  <!-- Page 1 initials: Subcontractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 23%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-sub-p1">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1256,8 +1247,8 @@
                     </div>
                   </div>
 
-                  <!-- Page 1 initials: Contractor -->
-                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                  <!-- Page 1 initials: Contractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 48%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-contractor-p1">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1282,8 +1273,8 @@
                     />
                   </div>
 
-                  <!-- Page 2 initials: Subcontractor -->
-                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                  <!-- Page 2 initials: Subcontractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 23%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-sub-p2">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1292,8 +1283,8 @@
                     </div>
                   </div>
 
-                  <!-- Page 2 initials: Contractor -->
-                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                  <!-- Page 2 initials: Contractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 48%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-contractor-p2">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1318,8 +1309,8 @@
                     />
                   </div>
 
-                  <!-- Page 3 initials: Subcontractor -->
-                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                  <!-- Page 3 initials: Subcontractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 23%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-sub-p3">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1328,8 +1319,8 @@
                     </div>
                   </div>
 
-                  <!-- Page 3 initials: Contractor -->
-                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                  <!-- Page 3 initials: Contractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 48%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-contractor-p3">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1344,8 +1335,8 @@
               <div class="pdf-overlay">
                 <img src="subagreement-page4.png" alt="Subcontractor Agreement page 4" />
                 <div class="pdf-overlay-layer">
-                  <!-- Page 4 initials: Subcontractor -->
-                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                  <!-- Page 4 initials: Subcontractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 23%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-sub-p4">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1354,8 +1345,8 @@
                     </div>
                   </div>
 
-                  <!-- Page 4 initials: Contractor -->
-                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                  <!-- Page 4 initials: Contractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 48%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-contractor-p4">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1370,8 +1361,8 @@
               <div class="pdf-overlay">
                 <img src="subagreement-page5.png" alt="Subcontractor Agreement page 5" />
                 <div class="pdf-overlay-layer">
-                  <!-- Page 5 initials: Subcontractor -->
-                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                  <!-- Page 5 initials: Subcontractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 23%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-sub-p5">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1380,8 +1371,8 @@
                     </div>
                   </div>
 
-                  <!-- Page 5 initials: Contractor -->
-                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                  <!-- Page 5 initials: Contractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 48%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-contractor-p5">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1396,8 +1387,8 @@
               <div class="pdf-overlay">
                 <img src="subagreement-page6.png" alt="Subcontractor Agreement page 6" />
                 <div class="pdf-overlay-layer">
-                  <!-- Page 6 initials: Subcontractor -->
-                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                  <!-- Page 6 initials: Subcontractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 23%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-sub-p6">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1406,8 +1397,8 @@
                     </div>
                   </div>
 
-                  <!-- Page 6 initials: Contractor -->
-                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                  <!-- Page 6 initials: Contractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 48%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-contractor-p6">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1422,8 +1413,8 @@
               <div class="pdf-overlay">
                 <img src="subagreement-page7.png" alt="Subcontractor Agreement page 7" />
                 <div class="pdf-overlay-layer">
-                  <!-- Subcontractor signature -->
-                  <div class="pdf-field" style="top: 78%; left: 12%; width: 28%;">
+                  <!-- Subcontractor signature (moved up a little) -->
+                  <div class="pdf-field" style="top: 74%; left: 12%; width: 28%;">
                     <div class="signature-pad" data-input-id="sig-subcontractor">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1432,18 +1423,8 @@
                     </div>
                   </div>
 
-                  <!-- Contractor signature -->
-                  <div class="pdf-field" style="top: 78%; left: 60%; width: 28%;">
-                    <div class="signature-pad" data-input-id="sig-contractor">
-                      <canvas></canvas>
-                      <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear
-                      </button>
-                    </div>
-                  </div>
-
                   <!-- Subcontractor printed name -->
-                  <div class="pdf-field" style="top: 82.5%; left: 14%; width: 26%;">
+                  <div class="pdf-field" style="top: 78.5%; left: 14%; width: 26%;">
                     <input
                       type="text"
                       id="agr-sub-by"
@@ -1452,18 +1433,8 @@
                     />
                   </div>
 
-                  <!-- Contractor printed name -->
-                  <div class="pdf-field" style="top: 82.5%; left: 62%; width: 26%;">
-                    <input
-                      type="text"
-                      id="agr-contractor-by"
-                      name="agreement_contractor_by"
-                      placeholder="Contractor - printed name"
-                    />
-                  </div>
-
                   <!-- Subcontractor title -->
-                  <div class="pdf-field" style="top: 86%; left: 14%; width: 26%;">
+                  <div class="pdf-field" style="top: 82%; left: 14%; width: 26%;">
                     <input
                       type="text"
                       id="agr-sub-title"
@@ -1472,18 +1443,10 @@
                     />
                   </div>
 
-                  <!-- Contractor title -->
-                  <div class="pdf-field" style="top: 86%; left: 62%; width: 26%;">
-                    <input
-                      type="text"
-                      id="agr-contractor-title"
-                      name="agreement_contractor_title"
-                      placeholder="Title"
-                    />
-                  </div>
+                  <!-- NOTE: Contractor signature/printed/title fields removed per request -->
 
-                  <!-- Page 7 initials: Subcontractor -->
-                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                  <!-- Page 7 initials: Subcontractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 23%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-sub-p7">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
@@ -1492,35 +1455,9 @@
                     </div>
                   </div>
 
-                  <!-- Page 7 initials: Contractor -->
-                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                  <!-- Page 7 initials: Contractor (moved up/right) -->
+                  <div class="pdf-field" style="top: 88%; left: 48%; width: 13%;">
                     <div class="signature-pad" data-input-id="sig-initials-contractor-p7">
-                      <canvas></canvas>
-                      <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- PAGE 8 -->
-              <div class="pdf-overlay">
-                <img src="subagreement-page8.png" alt="Subcontractor Agreement page 8" />
-                <div class="pdf-overlay-layer">
-                  <!-- Page 8 initials: Subcontractor -->
-                  <div class="pdf-field" style="top: 95%; left: 18%; width: 13%;">
-                    <div class="signature-pad" data-input-id="sig-initials-sub-p8">
-                      <canvas></canvas>
-                      <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Page 8 initials: Contractor -->
-                  <div class="pdf-field" style="top: 95%; left: 43%; width: 13%;">
-                    <div class="signature-pad" data-input-id="sig-initials-contractor-p8">
                       <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
                         Clear
@@ -1545,11 +1482,9 @@
               <input type="hidden" name="sig_initials_contractor_p6_data" id="sig-initials-contractor-p6" />
               <input type="hidden" name="sig_initials_sub_p7_data" id="sig-initials-sub-p7" />
               <input type="hidden" name="sig_initials_contractor_p7_data" id="sig-initials-contractor-p7" />
-              <input type="hidden" name="sig_initials_sub_p8_data" id="sig-initials-sub-p8" />
-              <input type="hidden" name="sig_initials_contractor_p8_data" id="sig-initials-contractor-p8" />
 
               <input type="hidden" name="sig_subcontractor_data" id="sig-subcontractor" />
-              <input type="hidden" name="sig_contractor_data" id="sig-contractor" />
+              <!-- Contractor main signature hidden field removed -->
 
               <div class="section-divider"></div>
 
@@ -1781,7 +1716,7 @@
 
   <script>
     /* Insert your actual Maps.co API key here */
-    const MAPSCO_API_KEY = "6930d4d437fad769672610qmbb9060f";
+    const MAPSCO_API_KEY = "YOUR_MAPSCO_API_KEY_HERE";
 
     document.addEventListener("DOMContentLoaded", () => {
       // Navigation
@@ -1962,7 +1897,7 @@
             ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
             ctx.lineWidth = 2;
             ctx.lineCap = "round";
-            ctx.strokeStyle = "#ffffff";
+            ctx.strokeStyle = "#000000"; // black so it's visible on white pages
           }
           resizeCanvas();
           window.addEventListener("resize", resizeCanvas);
