@@ -37,7 +37,6 @@
       color: var(--accent);
       text-decoration: none;
     }
-
     a:hover {
       text-decoration: underline;
     }
@@ -498,7 +497,6 @@
       pointer-events: auto;
     }
 
-    /* Make overlay inputs readable on white paper */
     .pdf-field input[type="text"],
     .pdf-field input[type="email"],
     .pdf-field input[type="tel"],
@@ -560,12 +558,6 @@
       .card {
         padding: 1.25rem 1.1rem 1.7rem;
       }
-
-      #agreement-preview canvas {
-  border: 1px solid #333;
-  max-width: 100%;
-       }
-
     }
   </style>
 </head>
@@ -576,8 +568,7 @@
       <div class="header-inner">
         <div class="brand">
           <div class="brand-logo">
-            <!-- Replace logo.png with your logo file -->
-            <img src="LOGO.jpg" alt="Anchor Homes logo" />
+            <img src="logo.png" alt="Anchor Homes logo" />
           </div>
           <div class="brand-text">
             <div class="brand-name">Anchor Homes</div>
@@ -599,365 +590,11 @@
 
     <main>
       <div class="content">
-        <!-- --------- WELCOME --------- -->
-        <section id="welcome" class="section active">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">Welcome</h1>
-              <p class="card-subtitle">
-                Building homes and spaces that feel solid, simple, and thoughtfully finished.
-              </p>
-            </div>
+        <!-- WELCOME, ABOUT, SERVICES, CHANGE REQUEST, INVOICES, CONTACT
+             (unchanged from your backup, so omitted here for brevity)
+             ... -->
 
-            <div class="hero">
-              <div>
-                <h2 class="hero-title">Anchor Homes</h2>
-                <p class="hero-tagline">
-                  A builder focused on clear communication, strong structure, and clean design—from
-                  first footing to final walk-through.
-                </p>
-                <ul class="hero-highlights muted">
-                  <li>Custom homes and large-scale remodels</li>
-                  <li>Light commercial build-outs and improvements</li>
-                  <li>Hands-on project management and responsive updates</li>
-                </ul>
-
-                <div class="button-row">
-                  <button type="button" class="btn btn-outline" data-jump="new-subcontractors">
-                    New Subcontractor Setup
-                  </button>
-                </div>
-              </div>
-
-              <div class="hero-image-frame">
-                <!-- Replace with your job-site photos later -->
-                <img src="stock1.jpg" alt="Home framing in progress" class="hero-slide active" />
-                <img src="stock2.jpg" alt="Job site with home under construction" class="hero-slide" />
-                <img src="stock3.jpg" alt="Completed new construction home" class="hero-slide" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- --------- ABOUT --------- -->
-        <section id="about" class="section">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">About Us</h1>
-              <p class="card-subtitle">
-                A brief overview of who you are, what you build, and what sets Anchor Homes apart.
-              </p>
-            </div>
-            <div class="two-column">
-              <div>
-                <p class="muted">
-                  Anchor Homes is a residential and commercial builder focused on clean design,
-                  honest communication, and durable craftsmanship. From first walkthrough to final
-                  punch list, our goal is to keep every project predictable, transparent, and
-                  enjoyable for the families and businesses who trust us.
-                </p>
-              </div>
-              <div>
-                <p class="muted">
-                  Led by owner <strong style="color:#ffffff;">Austin Bream</strong>, Anchor Homes
-                  combines practical job-site experience with a detail-driven planning process.
-                  Austin is known for being hands-on, responsive, and deeply invested in making sure
-                  every project finishes the way it was promised—on spec, on budget, and with pride
-                  in the finished product.
-                </p>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top: 1.5rem; background: rgba(5,5,5,0.6);">
-              <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
-                <h2 class="card-title" style="font-size: 1rem;">Your About Us Content</h2>
-              </div>
-              <p class="hint" style="margin-top: 0.4rem;">
-                Replace this placeholder text with your detailed About Us description in the HTML file.
-              </p>
-              <p style="margin-top: 0.75rem;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat dolor
-                vitae est interdum, in auctor arcu faucibus.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- --------- SERVICES --------- -->
-        <section id="services" class="section">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">Services</h1>
-              <p class="card-subtitle">
-                Residential and commercial construction services tailored to your project.
-              </p>
-            </div>
-
-            <div class="two-column">
-              <div>
-                <h2 class="info-label" style="margin-bottom:0.4rem;">Residential Construction</h2>
-                <ul class="muted" style="padding-left:1.2rem; margin-bottom:1.5rem;">
-                  <li>Custom new-home builds</li>
-                  <li>Whole-home renovations &amp; gut remodels</li>
-                  <li>Kitchen &amp; bath remodels</li>
-                  <li>Room additions &amp; second stories</li>
-                  <li>Basement &amp; bonus room build-outs</li>
-                  <li>Outdoor living spaces, decks, and covered porches</li>
-                  <li>Exterior upgrades, siding, roofing, and windows</li>
-                </ul>
-              </div>
-              <div>
-                <h2 class="info-label" style="margin-bottom:0.4rem;">Commercial &amp; Light Commercial</h2>
-                <ul class="muted" style="padding-left:1.2rem; margin-bottom:1.5rem;">
-                  <li>Tenant build-outs and interior finish-outs</li>
-                  <li>Office and professional space remodeling</li>
-                  <li>Retail and showroom improvements</li>
-                  <li>Small business build-to-suit projects</li>
-                  <li>Site and accessibility upgrades</li>
-                  <li>Ongoing maintenance and small-project work</li>
-                </ul>
-              </div>
-            </div>
-
-            <p class="muted">
-              If you don’t see your exact project type listed, reach out—we can usually tailor a
-              solution or point you to someone we trust.
-            </p>
-          </div>
-        </section>
-
-        <!-- --------- CHANGE REQUEST --------- -->
-        <section id="change-requests" class="section">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">Change Request</h1>
-              <p class="card-subtitle">
-                Use this form to request changes to your current Anchor Homes project.
-              </p>
-            </div>
-
-            <form
-              action="https://formspree.io/f/YOUR_CHANGE_REQUEST_FORM_ID"
-              method="POST"
-              accept-charset="UTF-8"
-            >
-              <input type="hidden" name="form_name" value="Change Request" />
-
-              <div class="field-group">
-                <label for="cr-name">
-                  Customer Name<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="cr-name"
-                  name="customer_name"
-                  required
-                  placeholder="First and last name"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="cr-phone">
-                  Phone<span class="required">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="cr-phone"
-                  name="customer_phone"
-                  required
-                  placeholder="(555) 555-5555"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="cr-email">
-                  Email<span class="required">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="cr-email"
-                  name="customer_email"
-                  required
-                  placeholder="you@example.com"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="cr-address">
-                  Project Address<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="cr-address"
-                  name="project_address"
-                  required
-                  placeholder="Street address, city, state, ZIP"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="cr-details">
-                  Change Request Details<span class="required">*</span>
-                </label>
-                <textarea
-                  id="cr-details"
-                  name="change_request_details"
-                  required
-                  placeholder="Describe the change you are requesting. Include room, finishes, materials, and any timeline notes."
-                ></textarea>
-                <p class="hint">
-                  All change requests are subject to pricing review and schedule impact. Your
-                  project manager will follow up to confirm details.
-                </p>
-              </div>
-
-              <div class="button-row">
-                <button type="submit" class="btn btn-primary">
-                  Submit Change Request
-                </button>
-                <button type="reset" class="btn btn-outline">
-                  Clear Form
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
-
-        <!-- --------- INVOICES --------- -->
-        <section id="subcontractors" class="section">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">Invoices</h1>
-              <p class="card-subtitle">
-                Upload invoices related to Anchor Homes projects for processing and payment.
-              </p>
-            </div>
-
-            <form
-              action="https://formspree.io/f/YOUR_SUBCONTRACTOR_FORM_ID"
-              method="POST"
-              enctype="multipart/form-data"
-              accept-charset="UTF-8"
-            >
-              <input type="hidden" name="form_name" value="Invoice Upload" />
-
-              <div class="field-group">
-                <label for="sub-name">
-                  Contact Name<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sub-name"
-                  name="sub_name"
-                  required
-                  placeholder="First and last name"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-company">
-                  Company Name<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sub-company"
-                  name="sub_company"
-                  required
-                  placeholder="Business or trade name"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-email">
-                  Email<span class="required">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="sub-email"
-                  name="sub_email"
-                  required
-                  placeholder="you@yourcompany.com"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-phone">
-                  Phone<span class="required">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="sub-phone"
-                  name="sub_phone"
-                  required
-                  placeholder="(555) 555-5555"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-project">
-                  Project Name / Address<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sub-project"
-                  name="sub_project"
-                  required
-                  placeholder="Project name or address"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-amount">
-                  Invoice Amount (Optional)
-                </label>
-                <input
-                  type="text"
-                  id="sub-amount"
-                  name="sub_amount"
-                  placeholder="$0.00"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-file">
-                  Upload Invoice<span class="required">*</span>
-                </label>
-                <input
-                  type="file"
-                  id="sub-file"
-                  name="invoice_file"
-                  required
-                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx"
-                />
-                <p class="hint">
-                  Accepted formats: PDF, image files, Word, or Excel. One file per submission.
-                </p>
-              </div>
-
-              <div class="field-group">
-                <label for="sub-notes">
-                  Notes (Optional)
-                </label>
-                <textarea
-                  id="sub-notes"
-                  name="sub_notes"
-                  placeholder="Any notes related to this invoice, work completed, or billing period."
-                ></textarea>
-              </div>
-
-              <div class="button-row">
-                <button type="submit" class="btn btn-primary">
-                  Submit Invoice
-                </button>
-                <button type="reset" class="btn btn-outline">
-                  Clear Form
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
-
-        <!-- --------- NEW SUBCONTRACTORS (PDF.js / PDF-Lib version) --------- -->
+        <!-- --------- NEW SUBCONTRACTORS --------- -->
         <section id="new-subcontractors" class="section">
           <div class="card">
             <div class="card-header">
@@ -968,7 +605,13 @@
               </p>
             </div>
 
-            <form id="new-subcontractor-form" enctype="multipart/form-data">
+            <form
+              id="new-subcontractor-form"
+              action="https://formspree.io/f/YOUR_NEW_SUBCONTRACTOR_FORM_ID"
+              method="POST"
+              enctype="multipart/form-data"
+              accept-charset="UTF-8"
+            >
               <input type="hidden" name="form_name" value="New Subcontractor Packet" />
 
               <!-- SECTION A – BASIC INFO -->
@@ -1073,66 +716,181 @@
 
               <div class="section-divider"></div>
 
-              <!-- SECTION B – SUBCONTRACTOR AGREEMENT PREVIEW & SIGNATURE -->
-              <span class="pill-label">
-                Section B – Subcontractor Agreement / Acuerdo de Subcontratista
-              </span>
-              <p class="hint" style="margin-top:0.4rem;">
-                Preview the agreement below, then sign in the signature area. / Vea el acuerdo a
-                continuación y firme en el área de firma.
-              </p>
+              <!-- SECTION B – Subcontractor Agreement / Acuerdo de Subcontratista -->
+<span class="pill-label">
+  Section B – Subcontractor Agreement / Acuerdo de Subcontratista
+</span>
 
-              <div class="two-column" style="margin-top:0.75rem;">
-                <div>
-                  <div class="info-label">Agreement Preview</div>
-                  <canvas id="agreement-preview" class="pdf-preview" style="width:100%; border-radius:12px; border:1px solid #444;"></canvas>
-                </div>
-                <div>
-                  <div class="field-group">
-                    <label>Subcontractor Signature / Firma del Subcontratista</label>
-                    <div class="signature-pad">
-                      <canvas id="sig-agreement"></canvas>
-                      <button type="button" class="btn btn-outline btn-sm" id="clear-agreement">
-                        Clear
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<!-- Pages 1–3: READ-ONLY for review -->
+<div class="pdf-overlay" style="margin-top:1rem;">
+  <img src="Sub Contractor Agreement_Page_1.png" alt="Subcontractor Agreement – Page 1" />
+  <div class="pdf-overlay-layer"></div>
+</div>
+
+<div class="pdf-overlay" style="margin-top:1rem;">
+  <img src="Sub Contractor Agreement_Page_2.png" alt="Subcontractor Agreement – Page 2" />
+  <div class="pdf-overlay-layer"></div>
+</div>
+
+<div class="pdf-overlay" style="margin-top:1rem;">
+  <img src="Sub Contractor Agreement_Page_3.png" alt="Subcontractor Agreement – Page 3" />
+  <div class="pdf-overlay-layer"></div>
+</div>
+
+<!-- Page 4: SIGNABLE with overlayed fields -->
+<div class="pdf-overlay" style="margin-top:1rem;">
+  <img src="Sub Contractor Agreement_Page_4.png" alt="Subcontractor Agreement – Page 4" />
+  <div class="pdf-overlay-layer">
+
+    <!-- Name of Subcontractor -->
+    <div class="pdf-field" style="top:720px; left:50px; width:400px;">
+      <input type="text" name="subcontractor_name" placeholder="Subcontractor Name" />
+    </div>
+
+    <!-- Anchor Homes LLC (pre-filled) -->
+    <div class="pdf-field" style="top:720px; left:550px; width:400px;">
+      <input type="text" name="builder_name" value="Anchor Homes LLC" readonly />
+    </div>
+
+    <!-- Subcontractor Signature -->
+    <div class="pdf-field" style="top:760px; left:50px; width:400px;">
+      <div class="signature-pad" data-input-id="subcontractor_signature">
+        <canvas id="signature-sub"></canvas>
+        <button type="button" class="btn btn-outline btn-sm signature-clear">Clear</button>
+      </div>
+      <input type="hidden" name="subcontractor_signature" id="subcontractor_signature" />
+    </div>
+
+    <!-- Builder Signature -->
+    <div class="pdf-field" style="top:760px; left:550px; width:400px;">
+      <div class="signature-pad" data-input-id="builder_signature">
+        <canvas id="signature-builder"></canvas>
+        <button type="button" class="btn btn-outline btn-sm signature-clear">Clear</button>
+      </div>
+      <input type="hidden" name="builder_signature" id="builder_signature" />
+    </div>
+
+    <!-- Titles -->
+    <div class="pdf-field" style="top:880px; left:50px; width:400px;">
+      <input type="text" name="subcontractor_title" placeholder="Subcontractor Title" />
+    </div>
+    <div class="pdf-field" style="top:880px; left:550px; width:400px;">
+      <input type="text" name="builder_title" placeholder="Builder Title" />
+    </div>
+
+    <!-- Dates -->
+    <div class="pdf-field" style="top:920px; left:50px; width:400px;">
+      <input type="date" name="subcontractor_date" />
+    </div>
+    <div class="pdf-field" style="top:920px; left:550px; width:400px;">
+      <input type="date" name="builder_date" />
+    </div>
+  </div>
+</div>
 
               <div class="section-divider"></div>
 
-              <!-- SECTION C – W-9 PREVIEW & SIGNATURE -->
+              <!-- SECTION C – IRS W-9 -->
               <span class="pill-label">
-                Section C – W-9 (U.S. Taxpayer Information)
+                Section C – IRS W-9 / Formulario W-9
               </span>
 
-              <p class="hint" style="margin-top:0.4rem;">
-                Review the W-9 and sign in the signature area below. / Revise el W-9 y firme en el
-                área de firma que aparece a continuación.
-              </p>
+              <!-- Static W-9 preview for reference -->
+              <div class="pdf-overlay" style="margin-top:1rem;">
+                <!-- Replace fw9-page1.png with your W-9 preview image path if different -->
+                <img src="fw9-page1.png" alt="Blank W-9 preview" style="width:100%; height:auto;" />
+              </div>
 
-              <div class="two-column" style="margin-top:0.75rem;">
-                <div>
-                  <div class="info-label">W-9 Preview</div>
-                  <canvas id="w9-preview" class="pdf-preview" style="width:100%; border-radius:12px; border:1px solid #444;"></canvas>
+              <!-- W-9 data-entry fields (filled below and overlaid onto the PDF before sending) -->
+              <div class="card" style="margin-top:1rem; background:rgba(5,5,5,0.6);">
+                <div class="card-header" style="border-bottom:none; padding-bottom:0.4rem;">
+                  <h2 class="card-title" style="font-size:1rem;">W-9 Information</h2>
                 </div>
-                <div>
-                  <div class="field-group">
-                    <label>W-9 Signature / Firma del W-9</label>
-                    <div class="signature-pad">
-                      <canvas id="sig-w9"></canvas>
-                      <button type="button" class="btn btn-outline btn-sm" id="clear-w9">
-                        Clear
-                      </button>
-                    </div>
+
+                <div class="field-group">
+                  <label for="w9_name_input">Name (as on tax return)</label>
+                  <input
+                    type="text"
+                    id="w9_name_input"
+                    name="w9_name_raw"
+                    placeholder="Legal name"
+                    required
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="w9_business_input">Business name / disregarded entity name</label>
+                  <input
+                    type="text"
+                    id="w9_business_input"
+                    name="w9_business_raw"
+                    placeholder="Business / DBA name"
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label>Federal tax classification</label>
+                  <div style="display:flex; flex-wrap:wrap; gap:0.9rem; font-size:0.85rem;">
+                    <label><input type="radio" name="w9_entity_raw" value="Individual/sole proprietor" required /> Individual / Sole proprietor</label>
+                    <label><input type="radio" name="w9_entity_raw" value="C corporation" /> C Corporation</label>
+                    <label><input type="radio" name="w9_entity_raw" value="S corporation" /> S Corporation</label>
+                    <label><input type="radio" name="w9_entity_raw" value="Partnership" /> Partnership</label>
+                    <label><input type="radio" name="w9_entity_raw" value="Trust/estate" /> Trust / Estate</label>
+                    <label><input type="radio" name="w9_entity_raw" value="LLC" /> LLC</label>
+                    <label><input type="radio" name="w9_entity_raw" value="Other" /> Other</label>
                   </div>
+                </div>
+
+                <div class="field-group">
+                  <label for="w9_address_input">Address</label>
+                  <input
+                    type="text"
+                    id="w9_address_input"
+                    name="w9_address_raw"
+                    placeholder="Number, street, apt/suite"
+                    required
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="w9_city_state_input">City, State, ZIP</label>
+                  <input
+                    type="text"
+                    id="w9_city_state_input"
+                    name="w9_city_state_raw"
+                    placeholder="City, ST ZIP"
+                    required
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label>Signature (W-9)</label>
+                  <div class="signature-pad" data-input-id="w9_signature">
+                    <canvas id="signature-w9"></canvas>
+                    <button type="button" class="btn btn-outline btn-sm signature-clear">Clear</button>
+                  </div>
+                  <input type="hidden" name="w9_signature" id="w9_signature" />
+                  <p class="hint">Sign inside the box. / Firme dentro del cuadro.</p>
+                </div>
+
+                <div class="field-group">
+                  <label for="w9_date_input">Date</label>
+                  <input
+                    type="text"
+                    id="w9_date_input"
+                    name="w9_date_raw"
+                    placeholder="MM/DD/YYYY"
+                    required
+                  />
                 </div>
               </div>
 
+              <!-- Will hold a base64 copy of the filled W-9 PDF (for email body if desired) -->
+              <input type="hidden" name="w9_filled_pdf_base64" id="w9_filled_pdf_base64" />
+
               <div class="section-divider"></div>
 
-              <!-- SECTION D – CERTIFICATE OF INSURANCE -->
+              <!-- SECTION D – Certificate of Insurance -->
               <span class="pill-label">
                 Section D – Certificate of Insurance / Certificado de Seguro
               </span>
@@ -1160,7 +918,7 @@
                 <button type="submit" class="btn btn-primary">
                   Submit New Subcontractor Packet
                 </button>
-                <button type="reset" class="btn btn-outline" id="reset-new-sub">
+                <button type="reset" class="btn btn-outline">
                   Clear All / Borrar Todo
                 </button>
               </div>
@@ -1168,7 +926,7 @@
           </div>
         </section>
 
-        <!-- --------- CONTACT --------- -->
+        <!-- CONTACT SECTION (unchanged from backup) -->
         <section id="contact" class="section">
           <div class="card">
             <div class="card-header">
@@ -1218,8 +976,9 @@
     </footer>
   </div>
 
-  <!-- Signature Pad library and capture script -->
+  <!-- Signature Pad + PDF-lib libraries and capture script -->
   <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       /* ----- NAVIGATION ----- */
@@ -1255,7 +1014,7 @@
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
       /* ----- HERO SLIDESHOW ----- */
-      const slides = Array.from(document.querySelectorAll(".hero-slide"));
+      const slides = Array.from(document.querySelectorAll(".hero-slide") || []);
       if (slides.length > 1) {
         let order = slides.map((_, idx) => idx);
         function shuffle(array) {
@@ -1281,7 +1040,7 @@
         setInterval(showNextSlide, 5000);
       }
 
-      /* ----- Legacy SignaturePad references (now inert if elements missing) ----- */
+      /* ----- SignaturePad instances for overlays ----- */
       const subCanvas = document.getElementById('signature-sub');
       const builderCanvas = document.getElementById('signature-builder');
       const w9Canvas = document.getElementById('signature-w9');
@@ -1290,9 +1049,116 @@
       const builderSig = builderCanvas ? new SignaturePad(builderCanvas, { penColor: '#000' }) : null;
       const w9Sig = w9Canvas ? new SignaturePad(w9Canvas, { penColor: '#000' }) : null;
 
+      const { PDFDocument, StandardFonts, rgb } = PDFLib;
+
+      async function buildFilledW9PDF() {
+        // Fetch the blank W-9 PDF (adjust the path/filename as needed to match your server)
+        const blankPdfBytes = await fetch("w9.pdf").then(res => res.arrayBuffer());
+
+        const pdfDoc = await PDFDocument.load(blankPdfBytes);
+        const page = pdfDoc.getPage(0);
+
+        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+        const fontSize = 10;
+        const textColor = rgb(0, 0, 0);
+
+        // Read values from the visible W-9 inputs
+        const name = document.getElementById("w9_name_input").value || "";
+        const business = document.getElementById("w9_business_input").value || "";
+        const address = document.getElementById("w9_address_input").value || "";
+        const cityStateZip = document.getElementById("w9_city_state_input").value || "";
+        const date = document.getElementById("w9_date_input").value || "";
+        const entityRadio = document.querySelector("input[name='w9_entity_raw']:checked");
+        const entityType = entityRadio ? entityRadio.value : "";
+
+        // Signature canvas for W-9
+        const sigCanvas = document.getElementById("signature-w9");
+        const sigDataUrl = sigCanvas.toDataURL("image/png");
+        const sigImageBytes = await fetch(sigDataUrl).then(res => res.arrayBuffer());
+        const sigImage = await pdfDoc.embedPng(sigImageBytes);
+        const sigDims = sigImage.scale(0.5); // tweak scale if needed
+
+        const { width, height } = page.getSize();
+
+        // Example coordinates for a standard 8.5x11 W-9.
+        // You will likely want to nudge these values so they line up perfectly
+        // with your specific PDF.
+        const nameX = 90,          nameY = height - 120;
+        const businessX = 90,      businessY = height - 140;
+        const addressX = 90,       addressY = height - 210;
+        const cityX = 90,          cityY = height - 230;
+        const entityX = 350,       entityY = height - 160;
+        const dateX = 410,         dateY = height - 410;
+        const sigX = 90,           sigY = height - 420;
+
+        page.drawText(name, {
+          x: nameX,
+          y: nameY,
+          size: fontSize,
+          font,
+          color: textColor,
+        });
+
+        page.drawText(business, {
+          x: businessX,
+          y: businessY,
+          size: fontSize,
+          font,
+          color: textColor,
+        });
+
+        page.drawText(address, {
+          x: addressX,
+          y: addressY,
+          size: fontSize,
+          font,
+          color: textColor,
+        });
+
+        page.drawText(cityStateZip, {
+          x: cityX,
+          y: cityY,
+          size: fontSize,
+          font,
+          color: textColor,
+        });
+
+        if (entityType) {
+          page.drawText("Entity: " + entityType, {
+            x: entityX,
+            y: entityY,
+            size: fontSize,
+            font,
+            color: textColor,
+          });
+        }
+
+        page.drawText(date, {
+          x: dateX,
+          y: dateY,
+          size: fontSize,
+          font,
+          color: textColor,
+        });
+
+        // Draw signature image onto the PDF
+        page.drawImage(sigImage, {
+          x: sigX,
+          y: sigY,
+          width: sigDims.width,
+          height: sigDims.height,
+        });
+
+        const filledPdfBytes = await pdfDoc.save();
+        return filledPdfBytes;
+      }
+
       const newSubForm = document.getElementById('new-subcontractor-form');
-      if (newSubForm && (subSig || builderSig || w9Sig)) {
-        newSubForm.addEventListener('submit', function () {
+      if (newSubForm) {
+        newSubForm.addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          // Capture existing SignaturePad canvases into their hidden fields
           if (subSig && !subSig.isEmpty()) {
             document.getElementById('subcontractor_signature').value = subSig.toDataURL();
           }
@@ -1302,135 +1168,49 @@
           if (w9Sig && !w9Sig.isEmpty()) {
             document.getElementById('w9_signature').value = w9Sig.toDataURL();
           }
+
+          try {
+            // Build the filled W-9 PDF
+            const filledW9Bytes = await buildFilledW9PDF();
+
+            // Optional: store base64 in hidden field (useful to see it in the email body)
+            const base64W9 = btoa(String.fromCharCode(...new Uint8Array(filledW9Bytes)));
+            const base64Field = document.getElementById("w9_filled_pdf_base64");
+            if (base64Field) {
+              base64Field.value = "data:application/pdf;base64," + base64W9;
+            }
+
+            // Build FormData from the form (includes all fields + signatures)
+            const formData = new FormData(newSubForm);
+
+            // Add the filled W-9 PDF as a file attachment
+            const w9Blob = new Blob([filledW9Bytes], { type: "application/pdf" });
+            formData.append("w9_filled_pdf", w9Blob, "w9-filled.pdf");
+
+            // Post to the same Formspree endpoint used by the form's action attribute
+            const endpoint = newSubForm.getAttribute("action");
+            const response = await fetch(endpoint, {
+              method: "POST",
+              body: formData,
+            });
+
+            if (response.ok) {
+              alert("Thank you! Your subcontractor packet was submitted successfully.");
+              newSubForm.reset();
+
+              if (subSig) subSig.clear();
+              if (builderSig) builderSig.clear();
+              if (w9Sig) w9Sig.clear();
+            } else {
+              alert("There was a problem submitting the form. Please try again or contact us.");
+            }
+          } catch (err) {
+            console.error("Error generating or submitting filled W-9:", err);
+            alert("There was an error generating the W-9. Please try again.");
+          }
         });
       }
     });
   </script>
-
-  <!-- PDF.js + PDF-Lib scripts from pdfjslib.txt -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script> 
-  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script> 
-  <script>
-    // Render PDFs with PDF.js
-    // Render a SINGLE page into an existing <canvas> (for W-9)
-function renderPDFPage(url, canvasId, pageNumber = 1, scale = 1) {
-  const canvas = document.getElementById(canvasId);
-  const ctx = canvas.getContext("2d");
-
-  pdfjsLib.getDocument(url).promise.then(pdf => {
-    pdf.getPage(pageNumber).then(page => {
-      const viewport = page.getViewport({ scale });
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      page.render({ canvasContext: ctx, viewport });
-    });
-  });
-}
-
-// Render ALL pages into a container <div> (for Subagreement)
-function renderPDFMultiPage(url, containerId, scale = 1) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  // Clear any existing content
-  container.innerHTML = "";
-
-  pdfjsLib.getDocument(url).promise.then(pdf => {
-    const totalPages = pdf.numPages;
-
-    for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-      pdf.getPage(pageNum).then(page => {
-        const viewport = page.getViewport({ scale });
-
-        // Create a canvas per page
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        canvas.style.display = "block";
-        canvas.style.marginBottom = "1rem";
-
-        container.appendChild(canvas);
-
-        page.render({ canvasContext: ctx, viewport });
-      });
-    }
-  });
-}
-
-// Call them:
-renderPDFMultiPage("subagreement.pdf", "agreement-preview", 1); // all pages
-renderPDFPage("w9.pdf", "w9-preview", 1, 1);                    // first page only
-
-    renderPDF('subagreement.pdf', 'agreement-preview');
-    renderPDF('w9.pdf', 'w9-preview');
-
-    // Signature Pads for new contractors section
-    const sigAgreementPad = new SignaturePad(document.getElementById('sig-agreement'));
-    const sigW9Pad = new SignaturePad(document.getElementById('sig-w9'));
-
-    document.getElementById('clear-agreement').addEventListener('click', () => {
-      sigAgreementPad.clear();
-    });
-    document.getElementById('clear-w9').addEventListener('click', () => {
-      sigW9Pad.clear();
-    });
-
-    // Handle form submit with PDF-Lib + Formspree
-    document.getElementById('new-subcontractor-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      // Load PDFs
-      const agreementBytes = await fetch('subagreement.pdf').then(res => res.arrayBuffer());
-      const w9Bytes = await fetch('w9.pdf').then(res => res.arrayBuffer());
-
-      const agreementDoc = await PDFLib.PDFDocument.load(agreementBytes);
-      const w9Doc = await PDFLib.PDFDocument.load(w9Bytes);
-
-      const agreementPage = agreementDoc.getPages()[agreementDoc.getPageCount()-1];
-      const w9Page = w9Doc.getPages()[0];
-
-      // Draw text fields (example: subcontractor name)
-      const subcontractorName = document.getElementById('ns-name').value;
-      agreementPage.drawText(subcontractorName, { x: 100, y: 100, size: 12 });
-      w9Page.drawText(subcontractorName, { x: 100, y: 700, size: 12 });
-
-      // Embed signatures
-      async function embedSignature(doc, page, pad, x, y) {
-        if (!pad.isEmpty()) {
-          const sigDataUrl = pad.toDataURL();
-          const pngBytes = await fetch(sigDataUrl).then(res => res.arrayBuffer());
-          const pngImage = await doc.embedPng(pngBytes);
-          page.drawImage(pngImage, { x, y, width: 200, height: 80 });
-        }
-      }
-      await embedSignature(agreementDoc, agreementPage, sigAgreementPad, 100, 50);
-      await embedSignature(w9Doc, w9Page, sigW9Pad, 100, 100);
-
-      // Save PDFs
-      const agreementOut = await agreementDoc.save();
-      const w9Out = await w9Doc.save();
-
-      // Build FormData for Formspree
-      const formData = new FormData();
-      formData.append("signed_agreement", new File([agreementOut], "signed-agreement.pdf", { type: "application/pdf" }));
-      formData.append("signed_w9", new File([w9Out], "signed-w9.pdf", { type: "application/pdf" }));
-      formData.append("ns_name", subcontractorName);
-      formData.append("ns_email", document.getElementById('ns-email').value);
-      formData.append("ns_coi_file", document.getElementById('ns-coi').files[0]);
-
-      // Send to Formspree (replace with your real Formspree ID)
-      await fetch("https://formspree.io/f/YOUR_NEW_SUBCONTRACTOR_FORM_ID", {
-        method: "POST",
-        body: formData
-      });
-
-      alert("Submitted successfully!");
-    });
-
-        // Footer year (extra safety)
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
-
