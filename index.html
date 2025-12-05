@@ -1484,10 +1484,10 @@
                   </label>
                   <input
                     type="text"
-                  id="w9-city"
-                  name="w9_city"
-                  required
-                  placeholder="City"
+                    id="w9-city"
+                    name="w9_city"
+                    required
+                    placeholder="City"
                   />
                 </div>
                 <div class="field-group">
@@ -1682,8 +1682,8 @@
 
   <!-- Signature Pad for drawing signatures -->
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-  <!-- html2pdf for generating PDF (downgraded to 0.9.3 for stability) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <!-- html2pdf for generating PDF (0.10.1, official Worker API) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -1881,11 +1881,10 @@
               return v == null ? "" : v.toString();
             };
 
-            // (We still create these in case you want them later, but the PDF will capture the canvases directly)
+            // Signatures as data URLs (not strictly needed for PDF, but kept if you want them in the email)
             const agreementSigDataUrl = window.agreementPad.toDataURL("image/png");
             const w9SigDataUrl = window.w9Pad.toDataURL("image/png");
 
-            // Generate PDF from the visible New Subcontractors section
             const pdfElement = document.getElementById("new-subcontractors");
             if (!pdfElement) {
               throw new Error("PDF element (#new-subcontractors) not found.");
@@ -1899,8 +1898,8 @@
               jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
             };
 
-            const worker = html2pdf().set(opt).from(pdfElement);
-            const pdfBlob = await worker.outputPdf("blob");
+            // Use official Worker API: output('blob')
+            const pdfBlob = await html2pdf().set(opt).from(pdfElement).output("blob");
 
             // Build the payload for Formspree
             const sendData = new FormData();
@@ -1910,11 +1909,16 @@
             sendData.append("sc_email", getVal("sc_email"));
             sendData.append("sc_phone", getVal("sc_phone"));
 
+            // Include all original fields too
             fd.forEach((value, key) => {
               if (!sendData.has(key)) {
                 sendData.append(key, value);
               }
             });
+
+            // Optionally include signature data URLs as fields (for reference)
+            sendData.append("agreement_signature_image", agreementSigDataUrl);
+            sendData.append("w9_signature_image", w9SigDataUrl);
 
             // Attach the generated PDF
             sendData.append("signed_pdf", pdfBlob, "Signed_Agreement_W9.pdf");
