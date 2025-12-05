@@ -184,8 +184,7 @@
 
     .card-subtitle {
       font-size: 0.85rem;
-      color: #9f9f9f;
-      margin-top: 0.45rem;
+      color: #9f9ff; margin-top: 0.45rem;
     }
 
     .muted {
@@ -246,6 +245,7 @@
     input[type="email"],
     input[type="tel"],
     input[type="file"],
+    input[type="date"],
     textarea {
       padding: 0.7rem 0.85rem;
       border-radius: 11px;
@@ -484,6 +484,100 @@
       color: #b0b0b0;
     }
 
+    /* --------- AGREEMENT & W9 STYLES --------- */
+    .agreement-box,
+    .w9-box {
+      background: #0b0b0b;
+      border-radius: 12px;
+      border: 1px solid #262626;
+      padding: 0.9rem 0.95rem;
+      max-height: 260px;
+      overflow-y: auto;
+      font-size: 0.85rem;
+      color: #d0d0d0;
+      line-height: 1.5;
+      margin-bottom: 0.9rem;
+    }
+
+    .agreement-box h3,
+    .w9-box h3 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #f0f0f0;
+      margin-bottom: 0.5rem;
+    }
+
+    .agreement-box p,
+    .w9-box p {
+      margin-bottom: 0.45rem;
+    }
+
+    .agreement-box ul {
+      padding-left: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .signature-block {
+      margin-top: 0.75rem;
+      border-top: 1px dashed #333333;
+      padding-top: 0.75rem;
+    }
+
+    .signature-canvas-wrapper {
+      margin-top: 0.4rem;
+      border-radius: 10px;
+      border: 1px dashed #444444;
+      background: #050505;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .signature-canvas-wrapper canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .inline-inputs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .inline-inputs .field-group {
+      flex: 1 1 120px;
+    }
+
+    .w9-tax-classification {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.35rem;
+      margin-top: 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .w9-tax-classification label {
+      font-size: 0.8rem;
+      text-transform: none;
+      letter-spacing: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: #d0d0d0;
+    }
+
+    .w9-tax-classification input[type="radio"] {
+      width: auto;
+    }
+
+    .tiny-note {
+      font-size: 0.75rem;
+      color: #8a8a8a;
+    }
+
     @media (max-width: 768px) {
       .header-inner {
         flex-direction: column;
@@ -514,7 +608,7 @@
         <div class="brand">
           <div class="brand-logo">
             <!-- Replace logo.png with your logo file -->
-            <img src="LOGO.jpg" alt="Anchor Homes logo" />
+            <img src="logo.png" alt="Anchor Homes logo" />
           </div>
           <div class="brand-text">
             <div class="brand-name">Anchor Homes</div>
@@ -904,21 +998,637 @@
           </div>
         </section>
 
-        <!-- --------- NEW SUBCONTRACTORS (CLEAN STUB, NO AGREEMENT/W-9) --------- -->
+        <!-- --------- NEW SUBCONTRACTORS (AGREEMENT + W9) --------- -->
         <section id="new-subcontractors" class="section">
           <div class="card">
             <div class="card-header">
               <h1 class="card-title">New Subcontractors</h1>
               <p class="card-subtitle">
-                We’re currently updating our online onboarding process for new subcontractors.
+                Complete the Subcontractors Agreement and W-9 so we can add you to our system.
               </p>
             </div>
-            <p class="muted">
-              For now, please email your information to
-              <a href="mailto:info@anchorhomes.com">info@anchorhomes.com</a> or call our office to
-              get set up as a new subcontractor. This page will soon include a streamlined,
-              mobile-friendly onboarding form.
-            </p>
+
+            <form
+              id="new-subcontractor-form"
+              action="https://formspree.io/f/xanrbjlk"
+              method="POST"
+              accept-charset="UTF-8"
+              onsubmit="return handleSubFormSubmit(event);"
+            >
+              <input type="hidden" name="form_name" value="New Subcontractor Agreement and W9" />
+              <input type="hidden" name="agreement_signature_data" id="agreement-signature-data" />
+              <input type="hidden" name="w9_signature_data" id="w9-signature-data" />
+
+              <!-- BASIC INFO -->
+              <span class="pill-label">Step 1 · Subcontractor Information</span>
+
+              <div class="field-group">
+                <label for="sc-company">
+                  Company / Subcontractor Name<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="sc-company"
+                  name="sc_company_name"
+                  required
+                  placeholder="Legal business name"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="sc-contact">
+                  Contact Name<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="sc-contact"
+                  name="sc_contact_name"
+                  required
+                  placeholder="First and last name"
+                />
+              </div>
+
+              <div class="inline-inputs">
+                <div class="field-group">
+                  <label for="sc-email">
+                    Email<span class="required">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="sc-email"
+                    name="sc_email"
+                    required
+                    placeholder="you@yourcompany.com"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="sc-phone">
+                    Phone<span class="required">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="sc-phone"
+                    name="sc_phone"
+                    required
+                    placeholder="(555) 555-5555"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="sc-address">
+                  Mailing Address<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="sc-address"
+                  name="sc_address"
+                  required
+                  placeholder="Street address"
+                />
+              </div>
+
+              <div class="inline-inputs">
+                <div class="field-group">
+                  <label for="sc-city">
+                    City<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="sc-city"
+                    name="sc_city"
+                    required
+                    placeholder="City"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="sc-state">
+                    State<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="sc-state"
+                    name="sc_state"
+                    required
+                    placeholder="ST"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="sc-zip">
+                    ZIP<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="sc-zip"
+                    name="sc_zip"
+                    required
+                    placeholder="00000"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="sc-trade">
+                  Primary Trade / Scope of Work<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="sc-trade"
+                  name="sc_trade"
+                  required
+                  placeholder="Example: framing, electrical, drywall, etc."
+                />
+              </div>
+
+              <div class="section-divider"></div>
+
+              <!-- SUBCONTRACTOR AGREEMENT -->
+              <span class="pill-label">Step 2 · Subcontractors Agreement</span>
+
+              <div class="agreement-box">
+                <h3>Subcontractors Agreement</h3>
+
+                <p>
+                  This document is a binding contract, which will serve as a blanket agreement for and between
+                  <strong>Kristina Chapman Contractor Dba Chapman &amp; Chapman Homes</strong> (herein known as
+                  <strong>Builder</strong>) and the undersigned (herein known as <strong>Subcontractor</strong>).
+                  By signing, Subcontractor and Builder agree to the terms set forth herein. This agreement shall remain
+                  in force from the date hereof and from year to year unless changed in writing by both parties.
+                </p>
+
+                <p><strong>1. GENERAL PERFORMANCE</strong><br />
+                  All work of the Subcontractor will be performed in a good and workmanlike manner in accordance with
+                  the plans and specifications for each job and must comply with all applicable laws, codes, ordinances,
+                  and regulations. All permits, fees, taxes, and expenses connected with such compliance are to be paid
+                  by the Subcontractor.
+                </p>
+
+                <p><strong>2. INDEPENDENT CONTRACTOR</strong><br />
+                  The Builder and Subcontractor agree that the Subcontractor is being hired solely as an independent
+                  contractor and that neither the Subcontractor nor Subcontractor’s employees shall be deemed to be
+                  employees of the Builder.
+                </p>
+
+                <p><strong>3. TIME</strong><br />
+                  The Subcontractor agrees to promptly begin work as soon as notified by the Builder, and to complete
+                  the work in a professional manner within a reasonable period of time and by any deadlines established
+                  by the Builder in writing. Subcontractor shall coordinate with other trades to allow each to complete
+                  its work on schedule and shall provide proper supervision, labor, and materials to maintain the
+                  Builder’s schedule. If Subcontractor’s work does not conform to plans, specifications, or quality
+                  standards, Builder may require correction or may correct the work and back charge the Subcontractor.
+                </p>
+
+                <p><strong>4. EXTRAS</strong><br />
+                  No deviations from the work specified in the contract will be permitted or paid for unless a written
+                  extra work or change order is first agreed upon and signed as required.
+                </p>
+
+                <p><strong>5. ASSIGNMENT</strong><br />
+                  No assignment of this subcontract agreement by Subcontractor is permitted without prior written
+                  permission from the Builder.
+                </p>
+
+                <p><strong>6. HOLD HARMLESS</strong><br />
+                  The Subcontractor agrees to protect, defend, and indemnify the Builder against, and hold the Builder
+                  harmless for, any and all claims, demands, liabilities, losses, expenses, suits, and actions (including
+                  attorney’s fees) arising out of or in connection with the work covered by this subcontract, except to
+                  the extent a claim is determined to be attributable solely to the fault or negligence of the Builder.
+                  Builder may withhold funds to protect against such claims.
+                </p>
+
+                <p><strong>7. MECHANICS LIEN</strong><br />
+                  Subcontractor shall furnish all partial and final lien waivers and sworn statements as required by the
+                  Builder. If any lien, encumbrance, or claim of nonpayment is asserted against the Builder’s property
+                  arising out of Subcontractor’s work, Subcontractor shall protect, indemnify, and hold the Builder
+                  harmless from all such liens and related costs and expenses.
+                </p>
+
+                <p><strong>8. CLEAN-UP</strong><br />
+                  Subcontractor agrees to clean up all debris, trash, and refuse generated by its trade at the end of each
+                  day and to leave the job broom clean. Failure to do so after notice may result in clean-up by Builder
+                  and back charge to Subcontractor.
+                </p>
+
+                <p><strong>9. DEFAULT</strong><br />
+                  If Subcontractor defaults in performance of any duties or obligations hereunder and such default
+                  continues after notice, Builder may immediately terminate this Agreement. Subcontractor shall be due
+                  only such sums for approved work up to termination and shall furnish lien waivers upon payment.
+                </p>
+
+                <p><strong>10. CARE OF MATERIALS</strong><br />
+                  Subcontractor agrees to properly care for materials supplied by Builder, storing them to protect from
+                  damage and disposing of unusable materials responsibly. Builder may back charge Subcontractor for
+                  materials damaged by negligent care.
+                </p>
+
+                <p><strong>11. PAYMENT</strong><br />
+                  Builder shall provide time frames for Subcontractor to submit invoices. Late invoices will be processed
+                  in the next pay period. Invoices in dispute may be held until resolution, and payment for disputed
+                  amounts may be withheld from any sums due.
+                </p>
+
+                <p><strong>12. INSURANCE</strong><br />
+                  Subcontractor shall provide Builder with a Certificate of Insurance showing the following coverage and
+                  shall maintain such coverage during the contract period (with 30 days’ written notice of cancellation
+                  or non-renewal):
+                </p>
+                <ul>
+                  <li>Commercial General Liability with limits at or above:
+                    <br />$1,000,000 each occurrence / $2,000,000 general aggregate /
+                    $2,000,000 products-completed operations aggregate (Builder named as additional insured).</li>
+                  <li>Workers Compensation Insurance covering all persons performing work at Builder’s job sites.</li>
+                  <li>Automobile Liability Insurance for vehicles used at or to/from jobsites with minimum coverage of
+                    $500,000 per accident.</li>
+                </ul>
+
+                <p><strong>Health and Safety:</strong> Subcontractor agrees to comply with all applicable health and
+                  safety requirements, supply required protective equipment to its workers, and accept responsibility
+                  for penalties and costs resulting from non-compliance.
+                </p>
+
+                <p><strong>13. CONDUCT</strong><br />
+                  Subcontractor’s employees and agents shall conduct themselves professionally, free from drugs or
+                  alcohol on the job site. Subcontractor agrees to comply with any applicable drug-testing policy in the
+                  event of an accident and will not enter into any agreement directly with Builder’s customer regarding
+                  the property while it is under construction.
+                </p>
+
+                <p><strong>14. MAINTENANCE OF EROSION CONTROL</strong><br />
+                  Subcontractor shall not disturb erosion control systems on site. Any moved silt fencing or other
+                  measures shall be promptly restored, and Subcontractor shall indemnify Builder for any damages or
+                  fines resulting from their disturbance.
+                </p>
+
+                <p><strong>15. ARBITRATION</strong><br />
+                  Any dispute arising under this Agreement, or regarding the meaning of the Drawings or Specifications,
+                  shall be resolved by binding arbitration as the sole remedy. Each party shall select one arbitrator, and
+                  the two arbitrators shall select a third. The decision of a majority shall be final and binding, and the
+                  expense of arbitration shall be borne equally by Builder and Subcontractor.
+                </p>
+
+                <p><strong>16. WARRANTY</strong><br />
+                  Subcontractor warrants against defects in workmanship and materials supplied by Subcontractor for a
+                  period of one year from the date the home is first occupied by the homeowner, on the same standards
+                  and duration as the Builder’s warranty provided to the Owner.
+                </p>
+              </div>
+
+              <div class="field-group">
+                <label>
+                  <input type="checkbox" name="agreement_read_ack" required />
+                  &nbsp;I have read and agree to the Subcontractors Agreement above.
+                </label>
+              </div>
+
+              <div class="inline-inputs">
+                <div class="field-group">
+                  <label for="sc-agreement-name">
+                    Subcontractor Name (for Agreement)<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="sc-agreement-name"
+                    name="agreement_subcontractor_name"
+                    required
+                    placeholder="Name of Subcontractor / Company"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="sc-agreement-title">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    id="sc-agreement-title"
+                    name="agreement_subcontractor_title"
+                    placeholder="Owner, Manager, etc."
+                  />
+                </div>
+              </div>
+
+              <div class="inline-inputs">
+                <div class="field-group">
+                  <label for="sc-agreement-date">
+                    Agreement Date<span class="required">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    id="sc-agreement-date"
+                    name="agreement_date"
+                    required
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="sc-arb-initials">
+                    Arbitration Initials<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="sc-arb-initials"
+                    name="agreement_arbitration_initials"
+                    required
+                    placeholder="Initials to acknowledge arbitration clause"
+                  />
+                </div>
+              </div>
+
+              <div class="signature-block">
+                <div class="info-label">Subcontractor Signature (draw)</div>
+                <p class="tiny-note">
+                  Use your finger (on mobile) or mouse (on desktop) to sign inside the box. You can clear and redraw if needed.
+                </p>
+                <div class="signature-canvas-wrapper">
+                  <canvas id="agreement-signature"></canvas>
+                </div>
+                <div class="button-row">
+                  <button type="button" class="btn btn-outline btn-sm" id="agreement-clear">
+                    Clear Signature
+                  </button>
+                </div>
+                <div class="field-group" style="margin-top:0.5rem;">
+                  <label for="agreement-signature-name">
+                    Typed Name (Signature)<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="agreement-signature-name"
+                    name="agreement_typed_signature_name"
+                    required
+                    placeholder="Type your full name as signature"
+                  />
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <!-- W9 SECTION -->
+              <span class="pill-label">Step 3 · W-9 (Taxpayer Identification)</span>
+
+              <div class="w9-box">
+                <h3>Form W-9 – Request for Taxpayer Identification Number and Certification</h3>
+                <p class="tiny-note">
+                  This section collects the same information as IRS Form W-9, page 1. Please complete all
+                  required fields so we can issue any required tax forms (such as Form 1099).
+                </p>
+              </div>
+
+              <div class="field-group">
+                <label for="w9-name">
+                  Name (as shown on your income tax return)<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="w9-name"
+                  name="w9_name"
+                  required
+                  placeholder="Exact name from your tax return"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="w9-business">
+                  Business name / disregarded entity name (if different from above)
+                </label>
+                <input
+                  type="text"
+                  id="w9-business"
+                  name="w9_business_name"
+                  placeholder="Business or DBA name"
+                />
+              </div>
+
+              <div class="field-group">
+                <label>
+                  Federal Tax Classification<span class="required">*</span>
+                </label>
+                <div class="w9-tax-classification">
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="individual/sole proprietor" required />
+                    Individual / sole proprietor or single-member LLC
+                  </label>
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="c_corporation" />
+                    C Corporation
+                  </label>
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="s_corporation" />
+                    S Corporation
+                  </label>
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="partnership" />
+                    Partnership
+                  </label>
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="trust/estate" />
+                    Trust / Estate
+                  </label>
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="llc_other" />
+                    Limited liability company (enter tax classification in box below)
+                  </label>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="w9-llc-class">
+                  If LLC, enter tax classification (C = C corp, S = S corp, P = Partnership)
+                </label>
+                <input
+                  type="text"
+                  id="w9-llc-class"
+                  name="w9_llc_tax_classification"
+                  placeholder="C, S, or P"
+                />
+              </div>
+
+              <div class="inline-inputs">
+                <div class="field-group">
+                  <label for="w9-exempt-payee">
+                    Exempt payee code (if any)
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-exempt-payee"
+                    name="w9_exempt_payee_code"
+                    placeholder=""
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="w9-fatca">
+                    Exemption from FATCA reporting code (if any)
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-fatca"
+                    name="w9_fatca_code"
+                    placeholder=""
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="w9-address">
+                  Address (number, street, and apt. or suite no.)<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="w9-address"
+                  name="w9_address"
+                  required
+                  placeholder="Street address"
+                />
+              </div>
+
+              <div class="inline-inputs">
+                <div class="field-group">
+                  <label for="w9-city">
+                    City<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-city"
+                    name="w9_city"
+                    required
+                    placeholder="City"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="w9-state">
+                    State<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-state"
+                    name="w9_state"
+                    required
+                    placeholder="ST"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="w9-zip">
+                    ZIP<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-zip"
+                    name="w9_zip"
+                    required
+                    placeholder="00000"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="w9-account-nums">
+                  List account number(s) here (optional)
+                </label>
+                <input
+                  type="text"
+                  id="w9-account-nums"
+                  name="w9_account_numbers"
+                  placeholder="Account numbers, if any"
+                />
+              </div>
+
+              <div class="section-divider"></div>
+
+              <!-- TIN -->
+              <span class="pill-label">Step 4 · Taxpayer Identification Number</span>
+
+              <p class="tiny-note">
+                Enter your Social Security Number (SSN) or Employer Identification Number (EIN). Do not enter both unless applicable.
+              </p>
+
+              <div class="inline-inputs">
+                <div class="field-group">
+                  <label for="w9-ssn">
+                    Social Security Number (SSN)
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-ssn"
+                    name="w9_ssn"
+                    placeholder="XXX-XX-XXXX"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="w9-ein">
+                    Employer Identification Number (EIN)
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-ein"
+                    name="w9_ein"
+                    placeholder="XX-XXXXXXX"
+                  />
+                </div>
+              </div>
+
+              <p class="tiny-note">
+                By signing below, you certify that: (1) the number shown above is your correct taxpayer
+                identification number (or you are waiting for a number to be issued); (2) you are not
+                subject to backup withholding (unless otherwise indicated to us); and (3) you are a U.S.
+                person (including a U.S. resident alien).
+              </p>
+
+              <div class="signature-block">
+                <div class="info-label">W-9 Signature (draw)</div>
+                <p class="tiny-note">
+                  Use your finger (on mobile) or mouse (on desktop) to sign inside the box. You can clear and redraw if needed.
+                </p>
+                <div class="signature-canvas-wrapper">
+                  <canvas id="w9-signature"></canvas>
+                </div>
+                <div class="button-row">
+                  <button type="button" class="btn btn-outline btn-sm" id="w9-clear">
+                    Clear W-9 Signature
+                  </button>
+                </div>
+                <div class="inline-inputs" style="margin-top:0.5rem;">
+                  <div class="field-group">
+                    <label for="w9-signature-name">
+                      Typed Name (Signature)<span class="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="w9-signature-name"
+                      name="w9_typed_signature_name"
+                      required
+                      placeholder="Type your full name as signature"
+                    />
+                  </div>
+                  <div class="field-group">
+                    <label for="w9-signature-date">
+                      Date<span class="required">*</span>
+                    </label>
+                    <input
+                      type="date"
+                      id="w9-signature-date"
+                      name="w9_signature_date"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <!-- SUBMIT -->
+              <span class="pill-label">Step 5 · Submit</span>
+              <p class="tiny-note">
+                When you click Submit, your subcontractor information, agreement details, W-9 data, and signature images
+                will be sent securely to Anchor Homes via Formspree.
+              </p>
+
+              <div class="button-row">
+                <button type="submit" class="btn btn-primary">
+                  Submit to Anchor Homes
+                </button>
+                <button type="reset" class="btn btn-outline">
+                  Clear All
+                </button>
+              </div>
+            </form>
           </div>
         </section>
 
@@ -972,7 +1682,24 @@
     </footer>
   </div>
 
+  <!-- Signature Pad library for drawing signatures -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
   <script>
+    function handleSubFormSubmit(event) {
+      const agreementSigInput = document.getElementById("agreement-signature-data");
+      const w9SigInput = document.getElementById("w9-signature-data");
+
+      if (window.agreementPad && !window.agreementPad.isEmpty()) {
+        agreementSigInput.value = window.agreementPad.toDataURL("image/png");
+      }
+      if (window.w9Pad && !window.w9Pad.isEmpty()) {
+        w9SigInput.value = window.w9Pad.toDataURL("image/png");
+      }
+
+      return true; // allow form to submit
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       /* ----- NAVIGATION ----- */
       const navLinks = document.querySelectorAll(".nav-link");
@@ -1095,6 +1822,39 @@
 
         showNextReview();
         setInterval(showNextReview, 5000);
+      }
+
+      /* ----- SIGNATURE PADS FOR NEW SUBCONTRACTOR FORM ----- */
+      const agreementCanvas = document.getElementById("agreement-signature");
+      const w9Canvas = document.getElementById("w9-signature");
+      let agreementPadInstance = null;
+      let w9PadInstance = null;
+
+      if (window.SignaturePad) {
+        if (agreementCanvas) {
+          agreementPadInstance = new SignaturePad(agreementCanvas, {
+            backgroundColor: "#050505",
+            penColor: "#ffffff",
+          });
+          window.agreementPad = agreementPadInstance;
+        }
+        if (w9Canvas) {
+          w9PadInstance = new SignaturePad(w9Canvas, {
+            backgroundColor: "#050505",
+            penColor: "#ffffff",
+          });
+          window.w9Pad = w9PadInstance;
+        }
+      }
+
+      const agreementClear = document.getElementById("agreement-clear");
+      if (agreementClear && agreementPadInstance) {
+        agreementClear.addEventListener("click", () => agreementPadInstance.clear());
+      }
+
+      const w9Clear = document.getElementById("w9-clear");
+      if (w9Clear && w9PadInstance) {
+        w9Clear.addEventListener("click", () => w9PadInstance.clear());
       }
     });
   </script>
