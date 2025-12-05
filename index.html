@@ -560,6 +560,12 @@
       .card {
         padding: 1.25rem 1.1rem 1.7rem;
       }
+
+      #agreement-preview canvas {
+  border: 1px solid #333;
+  max-width: 100%;
+       }
+
     }
   </style>
 </head>
@@ -1306,18 +1312,56 @@
   <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script> 
   <script>
     // Render PDFs with PDF.js
-    function renderPDF(url, canvasId) {
-      const canvas = document.getElementById(canvasId);
-      const ctx = canvas.getContext('2d');
-      pdfjsLib.getDocument(url).promise.then(pdf => {
-        pdf.getPage(1).then(page => {
-          const viewport = page.getViewport({ scale: 1 });
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-          page.render({ canvasContext: ctx, viewport: viewport });
-        });
+    // Render a SINGLE page into an existing <canvas> (for W-9)
+function renderPDFPage(url, canvasId, pageNumber = 1, scale = 1) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext("2d");
+
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    pdf.getPage(pageNumber).then(page => {
+      const viewport = page.getViewport({ scale });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      page.render({ canvasContext: ctx, viewport });
+    });
+  });
+}
+
+// Render ALL pages into a container <div> (for Subagreement)
+function renderPDFMultiPage(url, containerId, scale = 1) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  // Clear any existing content
+  container.innerHTML = "";
+
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    const totalPages = pdf.numPages;
+
+    for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+      pdf.getPage(pageNum).then(page => {
+        const viewport = page.getViewport({ scale });
+
+        // Create a canvas per page
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        canvas.style.display = "block";
+        canvas.style.marginBottom = "1rem";
+
+        container.appendChild(canvas);
+
+        page.render({ canvasContext: ctx, viewport });
       });
     }
+  });
+}
+
+// Call them:
+renderPDFMultiPage("subagreement.pdf", "agreement-preview", 1); // all pages
+renderPDFPage("w9.pdf", "w9-preview", 1, 1);                    // first page only
+
     renderPDF('subagreement.pdf', 'agreement-preview');
     renderPDF('w9.pdf', 'w9-preview');
 
