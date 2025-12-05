@@ -421,194 +421,6 @@
       opacity: 1;
     }
 
-    /* --------- REVIEWS ON WELCOME PAGE --------- */
-    .reviews-section {
-      margin-top: 2rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid #262626;
-    }
-
-    .reviews-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .reviews-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #e0e0e0;
-    }
-
-    .reviews-subtitle {
-      font-size: 0.8rem;
-      color: #a3a3a3;
-    }
-
-    .reviews-rotator {
-      position: relative;
-      min-height: 110px;
-      margin-top: 0.5rem;
-    }
-
-    .review-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      pointer-events: none;
-    }
-
-    .review-slide.active {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .review-card {
-      padding: 0.9rem 1rem;
-      border-radius: 14px;
-      background: #101010;
-      border: 1px solid #252525;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
-    }
-
-    .review-text {
-      font-size: 0.95rem;
-      color: #e6e6e6;
-      margin-bottom: 0.5rem;
-    }
-
-    .review-author {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #b1b1b1;
-    }
-
-    /* --------- GALLERY & LIGHTBOX --------- */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .gallery-item {
-      background: transparent;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .gallery-thumb {
-      width: 100%;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s;
-      display: block;
-    }
-
-    .gallery-thumb:hover {
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 20px 46px rgba(0, 0, 0, 0.85);
-      border-color: #ffffff;
-    }
-
-    .gallery-caption {
-      margin-top: 0.45rem;
-      font-size: 0.8rem;
-      color: #bdbdbd;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
-
-    .lightbox.open {
-      display: flex;
-    }
-
-    .lightbox-inner {
-      position: relative;
-      max-width: 90vw;
-      max-height: 90vh;
-    }
-
-    #lightbox-image {
-      max-width: 100%;
-      max-height: 100%;
-      border-radius: 18px;
-      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.95);
-      background: #000;
-      display: block;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      border-radius: 999px;
-      border: none;
-      width: 32px;
-      height: 32px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      background: #ffffff;
-      color: #000000;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lightbox-close:hover {
-      transform: translateY(-1px);
-    }
-
-    /* --------- SITE MAPS --------- */
-    .sitemap-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .sitemap-thumb {
-      width: 100%;
-      height: 210px;
-      object-fit: contain;
-      background: #000;
-      border-radius: 14px;
-      border: 1px solid var(--border-subtle);
-      padding: 0.5rem;
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s;
-      display: block;
-    }
-
-    .sitemap-thumb:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
-      border-color: #ffffff;
-    }
-
     /* --------- MISC --------- */
     .section-divider {
       height: 1px;
@@ -685,7 +497,7 @@
       pointer-events: auto;
     }
 
-    /* overlay inputs readable on white paper */
+    /* Make overlay inputs readable on white paper */
     .pdf-field input[type="text"],
     .pdf-field input[type="email"],
     .pdf-field input[type="tel"],
@@ -747,10 +559,6 @@
       .card {
         padding: 1.25rem 1.1rem 1.7rem;
       }
-
-      .reviews-rotator {
-        min-height: 140px;
-      }
     }
   </style>
 </head>
@@ -761,7 +569,6 @@
       <div class="header-inner">
         <div class="brand">
           <div class="brand-logo">
-            <!-- Replace logo.png with your logo file -->
             <img src="LOGO.jpg" alt="Anchor Homes logo" />
           </div>
           <div class="brand-text">
@@ -774,8 +581,6 @@
           <button class="nav-link active" data-section="welcome">Welcome</button>
           <button class="nav-link" data-section="about">About Us</button>
           <button class="nav-link" data-section="services">Services</button>
-          <button class="nav-link" data-section="gallery">Gallery</button>
-          <button class="nav-link" data-section="sitemaps">Site Maps</button>
           <button class="nav-link" data-section="change-requests">Change Request</button>
           <button class="nav-link" data-section="subcontractors">Invoices</button>
           <button class="nav-link" data-section="new-subcontractors">New Subcontractors</button>
@@ -817,74 +622,9 @@
               </div>
 
               <div class="hero-image-frame">
-                <!-- Replace with your job-site photos later -->
                 <img src="stock1.jpg" alt="Home framing in progress" class="hero-slide active" />
                 <img src="stock2.jpg" alt="Job site with home under construction" class="hero-slide" />
                 <img src="stock3.jpg" alt="Completed new construction home" class="hero-slide" />
-              </div>
-            </div>
-
-            <!-- Reviews section -->
-            <div class="reviews-section">
-              <div class="reviews-header">
-                <div>
-                  <div class="reviews-title">Client Reviews</div>
-                  <div class="reviews-subtitle">
-                    What homeowners and partners are saying about Anchor Homes LLC.
-                  </div>
-                </div>
-              </div>
-
-              <div class="reviews-rotator">
-                <div class="review-slide active">
-                  <div class="review-card">
-                    <p class="review-text">
-                      “Anchor Homes LLC made our renovation stress-free. Professional team, clear
-                      communication, and excellent results!”
-                    </p>
-                    <div class="review-author">Danny H.</div>
-                  </div>
-                </div>
-
-                <div class="review-slide">
-                  <div class="review-card">
-                    <p class="review-text">
-                      “We hired Anchor Homes LLC for a kitchen remodel and couldn’t be happier.
-                      Quality craftsmanship and on-time delivery.”
-                    </p>
-                    <div class="review-author">Alex B.</div>
-                  </div>
-                </div>
-
-                <div class="review-slide">
-                  <div class="review-card">
-                    <p class="review-text">
-                      “Dependable, detail-oriented, and honest. Anchor Homes LLC exceeded our
-                      expectations on both budget and timeline.”
-                    </p>
-                    <div class="review-author">Mike Oxard</div>
-                  </div>
-                </div>
-
-                <div class="review-slide">
-                  <div class="review-card">
-                    <p class="review-text">
-                      “From start to finish, Anchor Homes LLC handled our project with care. Highly
-                      recommend for any home improvement needs.”
-                    </p>
-                    <div class="review-author">Puff Daddy</div>
-                  </div>
-                </div>
-
-                <div class="review-slide">
-                  <div class="review-card">
-                    <p class="review-text">
-                      “Anchor Homes LLC transformed our outdated space beautifully. Friendly crew,
-                      fair pricing, and outstanding work.”
-                    </p>
-                    <div class="review-author">Donnie K.</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -973,94 +713,6 @@
             <p class="muted">
               If you don’t see your exact project type listed, reach out—we can usually tailor a
               solution or point you to someone we trust.
-            </p>
-          </div>
-        </section>
-
-        <!-- --------- GALLERY --------- -->
-        <section id="gallery" class="section">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">Gallery</h1>
-              <p class="card-subtitle">
-                A look at recent builds, renovations, and details. Click any photo to view larger.
-              </p>
-            </div>
-
-            <p class="muted">
-              Replace the sample image filenames below (<code>gallery1.jpg</code>, etc.) with your
-              own project photos. Each tile will open in a lightbox.
-            </p>
-
-            <div class="gallery-grid">
-              <button type="button" class="gallery-item" data-full="gallery1.jpg">
-                <img src="gallery1.jpg" alt="Project photo 1" class="gallery-thumb" />
-                <div class="gallery-caption">Exterior &amp; Curb Appeal</div>
-              </button>
-
-              <button type="button" class="gallery-item" data-full="gallery2.jpg">
-                <img src="gallery2.jpg" alt="Project photo 2" class="gallery-thumb" />
-                <div class="gallery-caption">Kitchen &amp; Interior Finish</div>
-              </button>
-
-              <button type="button" class="gallery-item" data-full="gallery3.jpg">
-                <img src="gallery3.jpg" alt="Project photo 3" class="gallery-thumb" />
-                <div class="gallery-caption">Outdoor Living</div>
-              </button>
-
-              <button type="button" class="gallery-item" data-full="gallery4.jpg">
-                <img src="gallery4.jpg" alt="Project photo 4" class="gallery-thumb" />
-                <div class="gallery-caption">Custom Details</div>
-              </button>
-
-              <button type="button" class="gallery-item" data-full="gallery5.jpg">
-                <img src="gallery5.jpg" alt="Project photo 5" class="gallery-thumb" />
-                <div class="gallery-caption">Primary Suite</div>
-              </button>
-
-              <button type="button" class="gallery-item" data-full="gallery6.jpg">
-                <img src="gallery6.jpg" alt="Project photo 6" class="gallery-thumb" />
-                <div class="gallery-caption">Specialty Spaces</div>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- --------- SITE MAPS --------- -->
-        <section id="sitemaps" class="section">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">Site Maps</h1>
-              <p class="card-subtitle">
-                Sample site plans used for layout, grading, and hardscape planning.
-              </p>
-            </div>
-
-            <p class="muted">
-              These examples show how the home footprint, utilities, driveways, and landscape
-              elements are coordinated on the lot. Click any plan to view it larger.
-            </p>
-
-            <div class="sitemap-grid">
-              <button type="button" class="gallery-item" data-full="sitemap1.jpg">
-                <img src="sitemap1.jpg" alt="Site map 1" class="sitemap-thumb" />
-                <div class="gallery-caption">Site Plan – Example 1</div>
-              </button>
-
-              <button type="button" class="gallery-item" data-full="sitemap2.jpg">
-                <img src="sitemap2.jpg" alt="Site map 2" class="sitemap-thumb" />
-                <div class="gallery-caption">Site Plan – Example 2</div>
-              </button>
-
-              <button type="button" class="gallery-item" data-full="sitemap3.jpg">
-                <img src="sitemap3.jpg" alt="Site map 3" class="sitemap-thumb" />
-                <div class="gallery-caption">Site Plan – Concept Layouts</div>
-              </button>
-            </div>
-
-            <p class="hint" style="margin-top:1rem;">
-              For each project, we work from a detailed site plan provided by your surveyor,
-              engineer, or architect to ensure grading, drainage, and setbacks are all correct.
             </p>
           </div>
         </section>
@@ -1418,291 +1070,118 @@
 
               <div class="section-divider"></div>
 
-              <!-- SECTION B – 4-PAGE SUBCONTRACT AGREEMENT -->
+              <!-- SECTION B – Subcontractor Agreement -->
               <span class="pill-label">
                 Section B – Subcontractor Agreement / Acuerdo de Subcontratista
               </span>
-              <p class="hint" style="margin-top:0.4rem;">
-                Each page below is the original agreement page with fillable fields and a signature
-                / initials canvas where required so it appears as though you filled out the original
-                document. / Cada página es el acuerdo original con campos rellenables y firmas /
-                iniciales donde corresponde.
-              </p>
 
-              <!-- PAGE 1 (view only, swap src for your actual first page image) -->
-              <div class="pdf-overlay">
-                <img src="subcontract-page1.png" alt="Subcontract Agreement page 1" />
-                <div class="pdf-overlay-layer"></div>
-              </div>
-
-              <!-- PAGE 2 (view only) -->
-              <div class="pdf-overlay">
-                <img src="subcontract-page2.png" alt="Subcontract Agreement page 2" />
-                <div class="pdf-overlay-layer"></div>
-              </div>
-
-              <!-- PAGE 3 (view only) -->
-              <div class="pdf-overlay">
-                <img src="subcontract-page3.png" alt="Subcontract Agreement page 3" />
-                <div class="pdf-overlay-layer"></div>
-              </div>
-
-              <!-- PAGE 4 (initials + subcontractor signature block) -->
-              <div class="pdf-overlay">
-                <img src="subcontract-page4.png" alt="Subcontract Agreement page 4" />
+              <div class="pdf-overlay" style="margin-top:1rem;">
+                <img src="subcontractor-agreement.png" alt="Subcontractor Agreement Form" />
                 <div class="pdf-overlay-layer">
-                  <!-- Initials line near "Initials" text -->
-                  <div class="pdf-field" style="top: 57.5%; left: 17%; width: 18%;">
-                    <div class="signature-pad" data-input-id="sig-agr-initials">
-                      <canvas></canvas>
-                      <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear
-                      </button>
+
+                  <!-- Name of Subcontractor -->
+                  <div class="pdf-field" style="top:720px; left:50px; width:400px;">
+                    <input type="text" name="subcontractor_name" placeholder="Subcontractor Name" />
+                  </div>
+
+                  <!-- Anchor Homes LLC (pre-filled) -->
+                  <div class="pdf-field" style="top:720px; left:550px; width:400px;">
+                    <input type="text" name="builder_name" value="Anchor Homes LLC" readonly />
+                  </div>
+
+                  <!-- Subcontractor Signature -->
+                  <div class="pdf-field" style="top:760px; left:50px; width:400px;">
+                    <div class="signature-pad">
+                      <canvas id="signature-sub"></canvas>
                     </div>
+                    <input type="hidden" name="subcontractor_signature" id="subcontractor_signature" />
                   </div>
 
-                  <!-- Subcontractor / corporate name -->
-                  <div class="pdf-field" style="top: 73%; left: 14%; width: 36%;">
-                    <input
-                      type="text"
-                      id="agr-sub-company"
-                      name="agr_sub_company"
-                      placeholder="Name of Subcontractor and/or corporate name"
-                    />
-                  </div>
-
-                  <!-- Subcontractor signature (By:) -->
-                  <div class="pdf-field" style="top: 79%; left: 17%; width: 32%;">
-                    <div class="signature-pad" data-input-id="sig-subcontractor">
-                      <canvas></canvas>
-                      <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear
-                      </button>
+                  <!-- Builder Signature -->
+                  <div class="pdf-field" style="top:760px; left:550px; width:400px;">
+                    <div class="signature-pad">
+                      <canvas id="signature-builder"></canvas>
                     </div>
+                    <input type="hidden" name="builder_signature" id="builder_signature" />
                   </div>
 
-                  <!-- Subcontractor title -->
-                  <div class="pdf-field" style="top: 85%; left: 18%; width: 26%;">
-                    <input
-                      type="text"
-                      id="agr-sub-title"
-                      name="agr_sub_title"
-                      placeholder="Title"
-                    />
+                  <!-- Titles -->
+                  <div class="pdf-field" style="top:880px; left:50px; width:400px;">
+                    <input type="text" name="subcontractor_title" placeholder="Subcontractor Title" />
+                  </div>
+                  <div class="pdf-field" style="top:880px; left:550px; width:400px;">
+                    <input type="text" name="builder_title" placeholder="Builder Title" />
                   </div>
 
-                  <!-- Subcontractor date -->
-                  <div class="pdf-field" style="top: 89%; left: 18%; width: 20%;">
-                    <input
-                      type="text"
-                      id="agr-sub-date"
-                      name="agr_sub_date"
-                      placeholder="Date (MM/DD/YYYY)"
-                    />
+                  <!-- Dates -->
+                  <div class="pdf-field" style="top:920px; left:50px; width:400px;">
+                    <input type="date" name="subcontractor_date" />
                   </div>
-
-                  <!-- Contractor side left blank for office signing -->
+                  <div class="pdf-field" style="top:920px; left:550px; width:400px;">
+                    <input type="date" name="builder_date" />
+                  </div>
                 </div>
               </div>
-
-              <!-- Hidden signature data fields for agreement -->
-              <input type="hidden" name="sig_agr_initials_data" id="sig-agr-initials" />
-              <input type="hidden" name="sig_subcontractor_data" id="sig-subcontractor" />
 
               <div class="section-divider"></div>
 
-              <!-- SECTION C – W-9 OVERLAY -->
+              <!-- SECTION C – IRS W-9 -->
               <span class="pill-label">
-                Section C – W-9 (U.S. Taxpayer Information)
+                Section C – IRS W‑9 / Formulario W‑9
               </span>
 
-              <p class="hint" style="margin-top:0.4rem;">
-                The fields below are positioned over the W-9 image so it appears you are completing
-                the actual form. / Los campos están colocados sobre la imagen del W-9 para que
-                parezca que está completando el formulario real.
-              </p>
-
-              <div class="pdf-overlay">
-                <img src="fw9-page1.png" alt="IRS W-9" />
+              <div class="pdf-overlay" style="margin-top:1rem;">
+                <img src="w9.png" alt="IRS W-9 Form" />
                 <div class="pdf-overlay-layer">
-                  <!-- Line 1 name -->
-                  <div class="pdf-field" style="top: 16.7%; left: 18%; width: 60%;">
-                    <input
-                      type="text"
-                      id="w9-name"
-                      name="w9_name"
-                      placeholder="Name (as shown on tax return)"
-                    />
+
+                  <!-- Name -->
+                  <div class="pdf-field" style="top:100px; left:150px; width:400px;">
+                    <input type="text" name="w9_name" placeholder="Name (as shown on tax return)" />
                   </div>
 
-                  <!-- Line 2 business name -->
-                  <div class="pdf-field" style="top: 21%; left: 22%; width: 56%;">
-                    <input
-                      type="text"
-                      id="w9-business"
-                      name="w9_business_name"
-                      placeholder="Business name / disregarded entity name"
-                    />
+                  <!-- Business Name -->
+                  <div class="pdf-field" style="top:140px; left:150px; width:400px;">
+                    <input type="text" name="w9_business_name" placeholder="Business/disregarded entity name" />
                   </div>
 
-                  <!-- Line 3a checkboxes – tax classification -->
-                  <!-- Individual / sole proprietor -->
-                  <div class="pdf-field" style="top: 26.5%; left: 18.5%; width: 2%;">
-                    <input
-                      type="checkbox"
-                      name="w9_entity_type"
-                      value="Individual/sole proprietor"
-                      aria-label="Individual/sole proprietor or single-member LLC"
-                    />
+                  <!-- Entity Type Checkboxes -->
+                  <div class="pdf-field" style="top:180px; left:150px;">
+                    <label><input type="checkbox" name="entity_type" value="Individual"> Individual</label>
                   </div>
-                  <!-- C corporation -->
-                  <div class="pdf-field" style="top: 26.5%; left: 31%; width: 2%;">
-                    <input
-                      type="checkbox"
-                      name="w9_entity_type"
-                      value="C corporation"
-                      aria-label="C corporation"
-                    />
+                  <div class="pdf-field" style="top:210px; left:150px;">
+                    <label><input type="checkbox" name="entity_type" value="LLC"> LLC</label>
                   </div>
-                  <!-- S corporation -->
-                  <div class="pdf-field" style="top: 26.5%; left: 41.5%; width: 2%;">
-                    <input
-                      type="checkbox"
-                      name="w9_entity_type"
-                      value="S corporation"
-                      aria-label="S corporation"
-                    />
-                  </div>
-                  <!-- Partnership -->
-                  <div class="pdf-field" style="top: 26.5%; left: 52%; width: 2%;">
-                    <input
-                      type="checkbox"
-                      name="w9_entity_type"
-                      value="Partnership"
-                      aria-label="Partnership"
-                    />
-                  </div>
-                  <!-- Trust/estate -->
-                  <div class="pdf-field" style="top: 26.5%; left: 62%; width: 2%;">
-                    <input
-                      type="checkbox"
-                      name="w9_entity_type"
-                      value="Trust/estate"
-                      aria-label="Trust or estate"
-                    />
-                  </div>
-                  <!-- LLC check box -->
-                  <div class="pdf-field" style="top: 29.1%; left: 18.5%; width: 2%;">
-                    <input
-                      type="checkbox"
-                      name="w9_entity_type"
-                      value="LLC"
-                      aria-label="LLC"
-                    />
-                  </div>
-                  <!-- Other check box -->
-                  <div class="pdf-field" style="top: 29.1%; left: 62%; width: 2%;">
-                    <input
-                      type="checkbox"
-                      name="w9_entity_type"
-                      value="Other"
-                      aria-label="Other entity type"
-                    />
+                  <div class="pdf-field" style="top:240px; left:150px;">
+                    <label><input type="checkbox" name="entity_type" value="C Corporation"> C Corp</label>
                   </div>
 
-                  <!-- Exempt payee code -->
-                  <div class="pdf-field" style="top: 24.5%; left: 74%; width: 10%;">
-                    <input
-                      type="text"
-                      id="w9-exempt-payee"
-                      name="w9_exempt_payee_code"
-                      placeholder="Code"
-                    />
+                  <!-- Address -->
+                  <div class="pdf-field" style="top:280px; left:150px; width:400px;">
+                    <input type="text" name="w9_address" placeholder="Street address" />
+                  </div>
+                  <div class="pdf-field" style="top:320px; left:150px; width:400px;">
+                    <input type="text" name="w9_city_state_zip" placeholder="City, State, ZIP" />
                   </div>
 
-                  <!-- FATCA code -->
-                  <div class="pdf-field" style="top: 29.5%; left: 74%; width: 10%;">
-                    <input
-                      type="text"
-                      id="w9-exempt-fatca"
-                      name="w9_fatca_code"
-                      placeholder="Code"
-                    />
-                  </div>
-
-                  <!-- Address line (number & street) -->
-                  <div class="pdf-field" style="top: 35%; left: 20%; width: 58%;">
-                    <input
-                      type="text"
-                      id="w9-address"
-                      name="w9_address"
-                      placeholder="Number, street, and apt or suite"
-                    />
-                  </div>
-
-                  <!-- City, state, ZIP -->
-                  <div class="pdf-field" style="top: 39%; left: 23%; width: 55%;">
-                    <input
-                      type="text"
-                      id="w9-city-state-zip"
-                      name="w9_city_state_zip"
-                      placeholder="City, state, and ZIP code"
-                    />
-                  </div>
-
-                  <!-- Account numbers -->
-                  <div class="pdf-field" style="top: 43.2%; left: 24%; width: 54%;">
-                    <input
-                      type="text"
-                      id="w9-account"
-                      name="w9_account_numbers"
-                      placeholder="Account numbers (optional)"
-                    />
-                  </div>
-
-                  <!-- SSN -->
-                  <div class="pdf-field" style="top: 59.5%; left: 35%; width: 25%;">
-                    <input
-                      type="text"
-                      id="w9-ssn"
-                      name="w9_ssn"
-                      placeholder="XXX-XX-XXXX"
-                    />
-                  </div>
-
-                  <!-- EIN -->
-                  <div class="pdf-field" style="top: 59.5%; left: 73%; width: 18%;">
-                    <input
-                      type="text"
-                      id="w9-ein"
-                      name="w9_ein"
-                      placeholder="XX-XXXXXXX"
-                    />
+                  <!-- SSN or EIN -->
+                  <div class="pdf-field" style="top:400px; left:150px; width:400px;">
+                    <input type="text" name="w9_tin" placeholder="SSN or EIN" />
                   </div>
 
                   <!-- Signature -->
-                  <div class="pdf-field" style="top: 74%; left: 25%; width: 28%;">
-                    <div class="signature-pad" data-input-id="sig-w9">
-                      <canvas></canvas>
-                      <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear
-                      </button>
+                  <div class="pdf-field" style="top:480px; left:150px; width:400px;">
+                    <div class="signature-pad">
+                      <canvas id="signature-w9"></canvas>
                     </div>
+                    <input type="hidden" name="w9_signature" id="w9_signature" />
                   </div>
 
                   <!-- Date -->
-                  <div class="pdf-field" style="top: 74%; left: 70%; width: 16%;">
-                    <input
-                      type="text"
-                      id="w9-date"
-                      name="w9_date"
-                      placeholder="MM/DD/YYYY"
-                    />
+                  <div class="pdf-field" style="top:600px; left:150px; width:400px;">
+                    <input type="date" name="w9_date" />
                   </div>
                 </div>
               </div>
-
-              <input type="hidden" name="sig_w9_data" id="sig-w9" />
 
               <div class="section-divider"></div>
 
@@ -1792,184 +1271,93 @@
     </footer>
   </div>
 
+  <!-- Signature Pad library and capture script -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    /* ----- NAVIGATION ----- */
-    const navLinks = document.querySelectorAll(".nav-link");
-    const sections = document.querySelectorAll(".section");
+    document.addEventListener("DOMContentLoaded", () => {
+      /* ----- NAVIGATION ----- */
+      const navLinks = document.querySelectorAll(".nav-link");
+      const sections = document.querySelectorAll(".section");
 
-    function activateSection(targetId) {
-      navLinks.forEach((l) => {
-        const id = l.getAttribute("data-section");
-        l.classList.toggle("active", id === targetId);
-      });
-      sections.forEach((section) => {
-        section.classList.toggle("active", section.id === targetId);
-      });
-    }
-
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        const targetId = link.getAttribute("data-section");
-        activateSection(targetId);
-      });
-    });
-
-    document.querySelectorAll("[data-jump]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const targetId = btn.getAttribute("data-jump");
-        activateSection(targetId);
-      });
-    });
-
-    /* ----- FOOTER YEAR ----- */
-    const yearSpan = document.getElementById("year");
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-    /* ----- HERO SLIDESHOW ----- */
-    const slides = Array.from(document.querySelectorAll(".hero-slide"));
-    if (slides.length > 1) {
-      let order = slides.map((_, idx) => idx);
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-      }
-      shuffle(order);
-      let pointer = 0;
-      function showNextSlide() {
-        const index = order[pointer];
-        slides.forEach((slide, i) => {
-          slide.classList.toggle("active", i === index);
+      function activateSection(targetId) {
+        navLinks.forEach((l) => {
+          const id = l.getAttribute("data-section");
+          l.classList.toggle("active", id === targetId);
         });
-        pointer++;
-        if (pointer >= order.length) {
-          pointer = 0;
-          shuffle(order);
-        }
+        sections.forEach((section) => {
+          section.classList.toggle("active", section.id === targetId);
+        });
       }
-      showNextSlide();
-      setInterval(showNextSlide, 5000);
-    }
 
-    /* ----- SIGNATURE PADS (only clear on button) ----- */
-    function initSignaturePads() {
-      const pads = document.querySelectorAll(".signature-pad");
-      pads.forEach((pad) => {
-        const canvas = pad.querySelector("canvas");
-        const clearBtn = pad.querySelector(".signature-clear");
-        if (!canvas) return;
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          const targetId = link.getAttribute("data-section");
+          activateSection(targetId);
+        });
+      });
 
-        const ctx = canvas.getContext("2d");
+      document.querySelectorAll("[data-jump]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-jump");
+          activateSection(targetId);
+        });
+      });
 
-        // VISUAL STYLING – make sure you can see the box
-        canvas.style.border = "2px solid #000000";
-        canvas.style.backgroundColor = "transparent";
+      /* ----- FOOTER YEAR ----- */
+      const yearSpan = document.getElementById("year");
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-        // Size the canvas ONCE (no resize listener – prevents clearing on scroll)
-        const rect = canvas.getBoundingClientRect();
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = rect.width * dpr;
-        canvas.height = rect.height * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        // Pen settings – ALWAYS black
-        ctx.lineWidth = 2;
-        ctx.lineCap = "round";
-        ctx.strokeStyle = "#000000";
-
-        let drawing = false;
-        let lastX = 0;
-        let lastY = 0;
-
-        function getPos(evt) {
-          const bounds = canvas.getBoundingClientRect();
-          const point = evt.touches ? evt.touches[0] : evt;
-          return {
-            x: point.clientX - bounds.left,
-            y: point.clientY - bounds.top,
-          };
+      /* ----- HERO SLIDESHOW ----- */
+      const slides = Array.from(document.querySelectorAll(".hero-slide"));
+      if (slides.length > 1) {
+        let order = slides.map((_, idx) => idx);
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
         }
-
-        function startDrawing(evt) {
-          evt.preventDefault();
-          drawing = true;
-          const pos = getPos(evt);
-          lastX = pos.x;
-          lastY = pos.y;
-        }
-
-        function draw(evt) {
-          if (!drawing) return;
-          evt.preventDefault();
-          const pos = getPos(evt);
-
-          // Make absolutely sure we’re drawing in black
-          ctx.strokeStyle = "#000000";
-
-          ctx.beginPath();
-          ctx.moveTo(lastX, lastY);
-          ctx.lineTo(pos.x, pos.y);
-          ctx.stroke();
-          lastX = pos.x;
-          lastY = pos.y;
-        }
-
-        function stopDrawing(evt) {
-          if (!drawing) return;
-          evt.preventDefault();
-          drawing = false;
-        }
-
-        canvas.addEventListener("mousedown", startDrawing);
-        canvas.addEventListener("mousemove", draw);
-        canvas.addEventListener("mouseup", stopDrawing);
-        canvas.addEventListener("mouseleave", stopDrawing);
-
-        canvas.addEventListener("touchstart", startDrawing, { passive: false });
-        canvas.addEventListener("touchmove", draw, { passive: false });
-        canvas.addEventListener("touchend", stopDrawing);
-        canvas.addEventListener("touchcancel", stopDrawing);
-
-        if (clearBtn) {
-          clearBtn.addEventListener("click", () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const hiddenId = pad.getAttribute("data-input-id");
-            if (hiddenId) {
-              const hidden = document.getElementById(hiddenId);
-              if (hidden) hidden.value = "";
-            }
+        shuffle(order);
+        let pointer = 0;
+        function showNextSlide() {
+          const index = order[pointer];
+          slides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === index);
           });
+          pointer++;
+          if (pointer >= order.length) {
+            pointer = 0;
+            shuffle(order);
+          }
         }
-      });
-    }
+        showNextSlide();
+        setInterval(showNextSlide, 5000);
+      }
 
-    initSignaturePads();
+      /* ----- SignaturePad instances for overlays ----- */
+      const subCanvas = document.getElementById('signature-sub');
+      const builderCanvas = document.getElementById('signature-builder');
+      const w9Canvas = document.getElementById('signature-w9');
 
-    function captureSignaturesForForm(form) {
-      const pads = form.querySelectorAll(".signature-pad");
-      pads.forEach((pad) => {
-        const canvas = pad.querySelector("canvas");
-        const hiddenId = pad.getAttribute("data-input-id");
-        if (!canvas || !hiddenId) return;
-        const hidden = document.getElementById(hiddenId);
-        if (!hidden) return;
-        try {
-          hidden.value = canvas.toDataURL("image/png");
-        } catch (e) {
-          console.warn("Unable to capture signature data URL:", e);
-        }
-      });
-    }
+      const subSig = subCanvas ? new SignaturePad(subCanvas, { penColor: '#000' }) : null;
+      const builderSig = builderCanvas ? new SignaturePad(builderCanvas, { penColor: '#000' }) : null;
+      const w9Sig = w9Canvas ? new SignaturePad(w9Canvas, { penColor: '#000' }) : null;
 
-    const newSubForm = document.getElementById("new-subcontractor-form");
-    if (newSubForm) {
-      newSubForm.addEventListener("submit", () => {
-        captureSignaturesForForm(newSubForm);
-      });
-    }
-  });
-</script>
+      const newSubForm = document.getElementById('new-subcontractor-form');
+      if (newSubForm) {
+        newSubForm.addEventListener('submit', function () {
+          if (subSig && !subSig.isEmpty()) {
+            document.getElementById('subcontractor_signature').value = subSig.toDataURL();
+          }
+          if (builderSig && !builderSig.isEmpty()) {
+            document.getElementById('builder_signature').value = builderSig.toDataURL();
+          }
+          if (w9Sig && !w9Sig.isEmpty()) {
+            document.getElementById('w9_signature').value = w9Sig.toDataURL();
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
