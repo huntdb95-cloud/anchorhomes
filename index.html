@@ -12,11 +12,11 @@
       --bg-alt: #101010;
       --bg-card: #151515;
       --accent: #ffffff;
-      --accent-soft: #cfcfcf;
+      --accent-soft: #d3d3d3;
       --border-subtle: #2b2b2b;
       --error: #ff4d4d;
-      --radius-lg: 16px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.6);
+      --radius-lg: 18px;
+      --shadow-soft: 0 22px 50px rgba(0, 0, 0, 0.7);
     }
 
     * {
@@ -30,13 +30,13 @@
       background-color: var(--bg-main);
       color: var(--accent-soft);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     a {
       color: var(--accent);
       text-decoration: none;
     }
-
     a:hover {
       text-decoration: underline;
     }
@@ -52,23 +52,23 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       background: linear-gradient(
         to bottom,
-        rgba(5, 5, 5, 0.94),
-        rgba(5, 5, 5, 0.85)
+        rgba(5, 5, 5, 0.96),
+        rgba(5, 5, 5, 0.88)
       );
       border-bottom: 1px solid var(--border-subtle);
     }
 
     .header-inner {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 0.75rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
+      gap: 1.75rem;
     }
 
     .brand {
@@ -78,9 +78,9 @@
     }
 
     .brand-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border-subtle);
       display: flex;
@@ -98,7 +98,7 @@
     .brand-text {
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
+      gap: 0.12rem;
     }
 
     .brand-name {
@@ -123,22 +123,24 @@
     }
 
     .nav-link {
-      font-size: 0.9rem;
-      padding: 0.45rem 0.9rem;
+      font-size: 0.85rem;
+      padding: 0.45rem 0.95rem;
       border-radius: 999px;
       border: 1px solid transparent;
-      color: #cccccc;
+      color: #c0c0c0;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+        transform 0.1s ease;
       background: transparent;
     }
 
     .nav-link:hover {
-      background: var(--bg-card);
+      background: #1c1c1c;
       border-color: var(--border-subtle);
       color: var(--accent);
+      transform: translateY(-1px);
     }
 
     .nav-link.active {
@@ -152,15 +154,15 @@
     }
 
     .content {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 1.5rem auto 2.5rem;
       padding: 0 1.5rem;
     }
 
     .card {
-      background: radial-gradient(circle at top left, #1e1e1e 0, #101010 45%, #050505 100%);
+      background: radial-gradient(circle at top left, #222222 0, #121212 45%, #050505 100%);
       border-radius: var(--radius-lg);
-      padding: 1.75rem 1.5rem 2rem;
+      padding: 1.75rem 1.6rem 2.1rem;
       box-shadow: var(--shadow-soft);
       border: 1px solid var(--border-subtle);
       margin-bottom: 1.5rem;
@@ -169,11 +171,11 @@
     .card-header {
       margin-bottom: 1.25rem;
       border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 0.75rem;
+      padding-bottom: 0.9rem;
     }
 
     .card-title {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       color: var(--accent);
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -182,11 +184,11 @@
     .card-subtitle {
       font-size: 0.85rem;
       color: #9f9f9f;
-      margin-top: 0.4rem;
+      margin-top: 0.45rem;
     }
 
     .muted {
-      color: #9f9f9f;
+      color: #aaaaaa;
       font-size: 0.95rem;
     }
 
@@ -202,11 +204,11 @@
     }
 
     .info-label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: #b0b0b0;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
 
     .info-value {
@@ -228,10 +230,15 @@
     }
 
     label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: #b0b0b0;
+      color: #bbbbbb;
+    }
+
+    .label-sub {
+      font-size: 0.75rem;
+      color: #8c8c8c;
     }
 
     input[type="text"],
@@ -239,8 +246,8 @@
     input[type="tel"],
     input[type="file"],
     textarea {
-      padding: 0.65rem 0.8rem;
-      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      border-radius: 11px;
       border: 1px solid var(--border-subtle);
       background-color: var(--bg-alt);
       color: var(--accent);
@@ -259,7 +266,7 @@
     textarea:focus {
       border-color: #ffffff;
       box-shadow: 0 0 0 1px #ffffff22;
-      background-color: #151515;
+      background-color: #181818;
     }
 
     textarea {
@@ -281,29 +288,30 @@
 
     .btn {
       border-radius: 999px;
-      padding: 0.6rem 1.4rem;
+      padding: 0.65rem 1.5rem;
       border: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease,
-        color 0.2s ease;
+        color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
     }
 
     .btn-primary {
       background-color: #ffffff;
       color: #000000;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.6);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.8);
     }
 
     .btn-outline {
@@ -315,6 +323,12 @@
     .btn-outline:hover {
       background: #ffffff;
       color: #000000;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.85rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
     }
 
     .required {
@@ -351,7 +365,6 @@
     }
 
     /* Address autocomplete */
-
     .autocomplete-wrapper {
       position: relative;
     }
@@ -363,7 +376,7 @@
       top: 100%;
       margin-top: 4px;
       background: #151515;
-      border-radius: 10px;
+      border-radius: 11px;
       border: 1px solid var(--border-subtle);
       max-height: 220px;
       overflow-y: auto;
@@ -384,11 +397,143 @@
     }
 
     .autocomplete-item:hover {
-      background: #1f1f1f;
+      background: #232323;
+    }
+
+    /* Welcome hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: #d0d0d0;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-highlights {
+      list-style: none;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-highlights li::before {
+      content: "– ";
+      color: #ffffff;
+    }
+
+    .hero-image-frame {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      background: #000;
+      position: relative;
+      min-height: 260px;
+    }
+
+    .hero-image-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+
+    .hero-image-frame img.active {
+      opacity: 1;
+    }
+
+    /* Agreement and signatures */
+    .agreement-wrapper {
+      margin-top: 1.25rem;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #0d0d0d;
+      padding: 1.15rem 1.1rem 1.25rem;
+    }
+
+    .agreement-body {
+      max-height: 260px;
+      overflow-y: auto;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #262626;
+      background: #121212;
+      font-size: 0.9rem;
+      color: #c5c5c5;
+      white-space: pre-wrap;
+    }
+
+    .signature-group {
+      margin-top: 1rem;
+    }
+
+    .signature-pad {
+      margin-top: 0.35rem;
+      padding: 0.6rem;
+      border-radius: 12px;
+      border: 1px solid #2a2a2a;
+      background: #0c0c0c;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .signature-pad canvas {
+      width: 100%;
+      height: 120px;
+      border-radius: 10px;
+      background: #111111;
+      border: 1px dashed #3a3a3a;
+      touch-action: none;
+    }
+
+    .signature-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .signature-note {
+      font-size: 0.75rem;
+      color: #8a8a8a;
+      margin-top: 0.25rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: #262626;
+      margin: 1.4rem 0;
+      border-radius: 999px;
+    }
+
+    .pill-label {
+      display: inline-block;
+      border-radius: 999px;
+      border: 1px solid #333333;
+      padding: 0.15rem 0.65rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9c9c9c;
+      margin-bottom: 0.45rem;
     }
 
     /* Responsive */
-
     @media (max-width: 768px) {
       .header-inner {
         flex-direction: column;
@@ -400,12 +545,13 @@
         justify-content: flex-start;
       }
 
-      .two-column {
+      .two-column,
+      .hero {
         grid-template-columns: minmax(0, 1fr);
       }
 
       .card {
-        padding: 1.25rem 1.1rem 1.6rem;
+        padding: 1.25rem 1.1rem 1.7rem;
       }
     }
   </style>
@@ -418,7 +564,7 @@
         <div class="brand">
           <div class="brand-logo">
             <!-- Replace "logo.png" with the actual path/filename of your logo -->
-            <img src="LOGO.jpg" alt="Anchor Homes logo" />
+            <img src="logo.png" alt="Anchor Homes logo" />
           </div>
           <div class="brand-text">
             <div class="brand-name">Anchor Homes</div>
@@ -427,19 +573,64 @@
         </div>
 
         <nav>
-          <button class="nav-link active" data-section="about">About Us</button>
+          <button class="nav-link active" data-section="welcome">Welcome</button>
+          <button class="nav-link" data-section="about">About Us</button>
           <button class="nav-link" data-section="services">Services</button>
-          <button class="nav-link" data-section="contact">Contact</button>
           <button class="nav-link" data-section="change-requests">Change Request</button>
           <button class="nav-link" data-section="subcontractors">Subcontractor Invoices</button>
+          <button class="nav-link" data-section="new-subcontractors">New Subcontractors</button>
+          <button class="nav-link" data-section="contact">Contact</button>
         </nav>
       </div>
     </header>
 
     <main>
       <div class="content">
+        <!-- WELCOME / LANDING -->
+        <section id="welcome" class="section active">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Welcome</h1>
+              <p class="card-subtitle">
+                Building homes and spaces that feel solid, simple, and thoughtfully finished.
+              </p>
+            </div>
+
+            <div class="hero">
+              <div>
+                <h2 class="hero-title">Anchor Homes</h2>
+                <p class="hero-tagline">
+                  A builder focused on clear communication, strong structure, and clean design—from
+                  first footing to final walk-through.
+                </p>
+                <ul class="hero-highlights muted">
+                  <li>Custom homes and large-scale remodels</li>
+                  <li>Light commercial build-outs and improvements</li>
+                  <li>Hands-on project management and responsive updates</li>
+                </ul>
+
+                <div class="button-row">
+                  <button type="button" class="btn btn-primary" data-jump="change-requests">
+                    Request a Change
+                  </button>
+                  <button type="button" class="btn btn-outline" data-jump="new-subcontractors">
+                    New Subcontractor Setup
+                  </button>
+                </div>
+              </div>
+
+              <div class="hero-image-frame">
+                <!-- Replace these src paths with your own photos later -->
+                <img src="stock1.jpg" alt="Home framing in progress" class="hero-slide active" />
+                <img src="stock2.jpg" alt="Job site with home under construction" class="hero-slide" />
+                <img src="stock3.jpg" alt="Completed new construction home" class="hero-slide" />
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- ABOUT US -->
-        <section id="about" class="section active">
+        <section id="about" class="section">
           <div class="card">
             <div class="card-header">
               <h1 class="card-title">About Us</h1>
@@ -459,7 +650,10 @@
               <div>
                 <p class="muted">
                   Led by owner <strong style="color:#ffffff;">Austin Bream</strong>, Anchor Homes
-                  combines practical job-site experience with a detail-driven planning process. Austin Bream has achieved local legend status not for his athleticism or academic prowess, but for his truly unhinged devotion to raw hotdogs—no buns, no condiments, just cold, slippery tubes of mystery meat straight from the pack. While most folks reach for a grill, Austin reaches for the fridge with the confidence of a man who’s made peace with his choices. Around town, he's affectionately (and somewhat fearfully) known as the “Glizzy Gobbler,” a title he wears like a badge of honor. But it’s the whispered moniker “Throat Goat” that really cements his legacy—earned not through scandal, but through the sheer velocity and volume with which he can down a raw frank. Neighborhood barbecues haven’t been the same since.
+                  combines practical job-site experience with a detail-driven planning process.
+                  Austin is known for being hands-on, responsive, and deeply invested in making sure
+                  every project finishes the way it was promised—on spec, on budget, and with pride
+                  in the finished product.
                 </p>
               </div>
             </div>
@@ -523,52 +717,6 @@
           </div>
         </section>
 
-        <!-- CONTACT -->
-        <section id="contact" class="section">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">Contact</h1>
-              <p class="card-subtitle">
-                Reach out to Anchor Homes for questions, consultations, or project updates.
-              </p>
-            </div>
-
-            <div class="two-column">
-              <div>
-                <div class="info-block">
-                  <div class="info-label">Phone</div>
-                  <!-- Replace with your real phone number -->
-                  <div class="info-value">(555) 555-5555</div>
-                </div>
-                <div class="info-block">
-                  <div class="info-label">Email</div>
-                  <!-- Replace with your real email -->
-                  <div class="info-value">
-                    <a href="mailto:info@anchorhomes.com">info@anchorhomes.com</a>
-                  </div>
-                </div>
-                <div class="info-block">
-                  <div class="info-label">Business Address</div>
-                  <!-- Replace with your real address -->
-                  <div class="info-value">
-                    1234 Anchor Way<br />
-                    Suite 100<br />
-                    Your City, ST 00000
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <p class="muted">
-                  Office hours, service areas, or additional contact notes can be listed here. For
-                  example: “Meetings by appointment only,” or “Serving Williamson County and the
-                  Greater Nashville area.”
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <!-- CHANGE REQUESTS -->
         <section id="change-requests" class="section">
           <div class="card">
@@ -581,7 +729,7 @@
 
             <!-- Replace YOUR_CHANGE_REQUEST_FORM_ID with your Formspree form ID -->
             <form
-              action="https://formspree.io/f/YOUR_CHANGE_REQUEST_FORM_ID"
+              action="https://formspree.io/f/xanrbjlk"
               method="POST"
               accept-charset="UTF-8"
             >
@@ -637,6 +785,9 @@
                   required
                   placeholder="Start typing your project address..."
                 />
+                <p class="hint">
+                  Autocomplete is limited to street, city, state, and ZIP for clarity.
+                </p>
               </div>
 
               <div class="field-group">
@@ -650,8 +801,8 @@
                   placeholder="Describe the change you are requesting. Include room, finishes, materials, and any timeline notes."
                 ></textarea>
                 <p class="hint">
-                  Please note that all change requests are subject to pricing review and schedule
-                  impact. Your project manager will follow up to confirm details.
+                  All change requests are subject to pricing review and schedule impact. Your
+                  project manager will follow up to confirm details.
                 </p>
               </div>
 
@@ -679,7 +830,7 @@
 
             <!-- Replace YOUR_SUBCONTRACTOR_FORM_ID with your Formspree form ID -->
             <form
-              action="https://formspree.io/f/YOUR_SUBCONTRACTOR_FORM_ID"
+              action="https://formspree.io/f/xanrbjlk"
               method="POST"
               enctype="multipart/form-data"
               accept-charset="UTF-8"
@@ -801,6 +952,534 @@
             </form>
           </div>
         </section>
+
+        <!-- NEW SUBCONTRACTORS -->
+        <section id="new-subcontractors" class="section">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">New Subcontractors</h1>
+              <p class="card-subtitle">
+                Complete the Subcontractor Agreement, W-9, and upload your Certificate of Insurance.
+                / Complete el Acuerdo de Subcontratista, el W-9 y cargue su Certificado de Seguro.
+              </p>
+            </div>
+
+            <!-- Replace YOUR_NEW_SUBCONTRACTOR_FORM_ID with your Formspree form ID -->
+            <form
+              id="new-subcontractor-form"
+              action="https://formspree.io/f/xanrbjlk"
+              method="POST"
+              enctype="multipart/form-data"
+              accept-charset="UTF-8"
+            >
+              <input type="hidden" name="form_name" value="New Subcontractor Packet" />
+
+              <span class="pill-label">
+                Section A – Subcontractor Information / Información del Subcontratista
+              </span>
+
+              <div class="two-column" style="margin-top:0.75rem;">
+                <div class="field-group">
+                  <label for="ns-name">
+                    Subcontractor Name / Nombre del Subcontratista<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="ns-name"
+                    name="ns_name"
+                    required
+                    placeholder="Legal name"
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="ns-company">
+                    Company / Empresa
+                  </label>
+                  <input
+                    type="text"
+                    id="ns-company"
+                    name="ns_company"
+                    placeholder="Business or DBA name"
+                  />
+                </div>
+              </div>
+
+              <div class="two-column">
+                <div class="field-group">
+                  <label for="ns-email">
+                    Email / Correo electrónico<span class="required">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="ns-email"
+                    name="ns_email"
+                    required
+                    placeholder="you@company.com"
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="ns-phone">
+                    Phone / Teléfono<span class="required">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="ns-phone"
+                    name="ns_phone"
+                    required
+                    placeholder="(555) 555-5555"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="ns-address">
+                  Mailing Address / Dirección Postal<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="ns-address"
+                  name="ns_address"
+                  required
+                  placeholder="Start typing your address..."
+                />
+                <p class="hint">
+                  Autocomplete will return only street number, street name, city, state, and ZIP.
+                </p>
+              </div>
+
+              <div class="field-group">
+                <label for="ns-project-address">
+                  Primary Project Address / Dirección Principal del Proyecto
+                </label>
+                <input
+                  type="text"
+                  id="ns-project-address"
+                  name="ns_project_address"
+                  placeholder="Start typing the project address..."
+                />
+              </div>
+
+              <div class="two-column">
+                <div class="field-group">
+                  <label for="ns-trade">
+                    Trade / Scope of Work<br />
+                    <span class="label-sub">Oficio / Alcance del Trabajo</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="ns-trade"
+                    name="ns_trade"
+                    placeholder="Framing, electrical, concrete, etc."
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="ns-price">
+                    Contract Price (if known) / Precio del Contrato
+                  </label>
+                  <input
+                    type="text"
+                    id="ns-price"
+                    name="ns_price"
+                    placeholder="$0.00"
+                  />
+                </div>
+              </div>
+
+              <div class="two-column">
+                <div class="field-group">
+                  <label for="ns-start-date">
+                    Anticipated Start Date / Fecha de Inicio Estimada
+                  </label>
+                  <input
+                    type="text"
+                    id="ns-start-date"
+                    name="ns_start_date"
+                    placeholder="MM/DD/YYYY"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="ns-end-date">
+                    Anticipated Completion / Finalización Estimada
+                  </label>
+                  <input
+                    type="text"
+                    id="ns-end-date"
+                    name="ns_end_date"
+                    placeholder="MM/DD/YYYY"
+                  />
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">
+                Section B – Subcontractor Agreement / Acuerdo de Subcontratista
+              </span>
+
+              <div class="agreement-wrapper">
+                <p class="hint">
+                  Below is space to display your Subcontractor Agreement. You can paste your full
+                  agreement text into the <code>&lt;div class="agreement-body"&gt;</code> in this
+                  HTML file so your subcontractors can read it before signing.
+                  / A continuación hay espacio para mostrar su Acuerdo de Subcontratista. Puede
+                  pegar el texto completo del acuerdo en el
+                  <code>&lt;div class="agreement-body"&gt;</code> en este archivo HTML para que los
+                  subcontratistas lo lean antes de firmar.
+                </p>
+                <div class="agreement-body">
+[PASTE YOUR SUBCONTRACTOR AGREEMENT TEXT HERE]
+
+Sample Subcontractor Agreement heading
+Construction Subcontract Agreement
+
+On this ___ day of ____________, 20 ____, [Contractor] and [Subcontractor] enter into this
+Subcontract for work to be performed on behalf of Contractor by Subcontractor at the Work
+Site(s) identified in this Agreement.
+
+(Replace this sample text with the full language from your own agreement document.)
+                </div>
+              </div>
+
+              <div class="signature-group">
+                <label>
+                  Subcontractor Initials / Iniciales del Subcontratista<span class="required">*</span>
+                </label>
+                <div class="signature-pad" data-input-id="sig-initials">
+                  <canvas></canvas>
+                  <div class="signature-actions">
+                    <button type="button" class="btn btn-outline btn-sm signature-clear">
+                      Clear / Borrar
+                    </button>
+                  </div>
+                </div>
+                <div class="signature-note">
+                  By initialing, subcontractor confirms they have read and agree to the
+                  Subcontractor Agreement above. / Al colocar sus iniciales, el subcontratista
+                  confirma que ha leído y acepta el Acuerdo de Subcontratista anterior.
+                </div>
+              </div>
+
+              <div class="two-column">
+                <div class="signature-group">
+                  <label>
+                    Subcontractor Signature / Firma del Subcontratista<span class="required">*</span>
+                  </label>
+                  <div class="signature-pad" data-input-id="sig-subcontractor">
+                    <canvas></canvas>
+                    <div class="signature-actions">
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear / Borrar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="signature-group">
+                  <label>
+                    Contractor Signature / Firma del Contratista
+                  </label>
+                  <div class="signature-pad" data-input-id="sig-contractor">
+                    <canvas></canvas>
+                    <div class="signature-actions">
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear / Borrar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <input type="hidden" name="sig_initials_data" id="sig-initials" />
+              <input type="hidden" name="sig_subcontractor_data" id="sig-subcontractor" />
+              <input type="hidden" name="sig_contractor_data" id="sig-contractor" />
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">
+                Section C – W-9 Information (Required for U.S. payees)
+              </span>
+
+              <!-- Simplified W-9 layout -->
+              <div class="two-column" style="margin-top:0.75rem;">
+                <div class="field-group">
+                  <label for="w9-name">
+                    Name (as shown on tax return)<span class="required">*</span><br />
+                    <span class="label-sub">Nombre (según su declaración de impuestos)</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-name"
+                    name="w9_name"
+                    required
+                    placeholder="Name"
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="w9-business">
+                    Business name / disregarded entity name<br />
+                    <span class="label-sub">Nombre comercial o entidad ignorada</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-business"
+                    name="w9_business_name"
+                    placeholder="Business / DBA name"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label>
+                  Federal tax classification / Clasificación fiscal federal<span class="required">*</span>
+                </label>
+                <div class="muted" style="font-size:0.85rem;">
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="individual" required />
+                    Individual / Sole proprietor
+                  </label><br />
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="c_corp" />
+                    C Corporation
+                  </label><br />
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="s_corp" />
+                    S Corporation
+                  </label><br />
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="partnership" />
+                    Partnership
+                  </label><br />
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="trust_estate" />
+                    Trust / Estate
+                  </label><br />
+                  <label>
+                    <input type="radio" name="w9_tax_class" value="llc" />
+                    LLC (specify C, S, or P in comments)
+                  </label>
+                </div>
+              </div>
+
+              <div class="two-column">
+                <div class="field-group">
+                  <label for="w9-exempt-payee">
+                    Exempt payee code (if any)
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-exempt-payee"
+                    name="w9_exempt_payee_code"
+                    placeholder="Optional"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="w9-exempt-fatca">
+                    FATCA exemption code (if any)
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-exempt-fatca"
+                    name="w9_fatca_code"
+                    placeholder="Optional"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="w9-address">
+                  Address (number, street, and apt. or suite) / Dirección<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="w9-address"
+                  name="w9_address"
+                  required
+                  placeholder="Start typing your address..."
+                />
+                <p class="hint">
+                  Autocomplete will limit the result to street number, street name, city, state, and ZIP.
+                </p>
+              </div>
+
+              <div class="two-column">
+                <div class="field-group">
+                  <label for="w9-city-state-zip">
+                    City, state, and ZIP / Ciudad, estado y código postal<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-city-state-zip"
+                    name="w9_city_state_zip"
+                    required
+                    placeholder="City, ST 00000"
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="w9-account">
+                    Account numbers (optional) / Números de cuenta (opcional)
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-account"
+                    name="w9_account_numbers"
+                    placeholder="Optional"
+                  />
+                </div>
+              </div>
+
+              <div class="two-column">
+                <div class="field-group">
+                  <label for="w9-ssn">
+                    Social security number<br />
+                    <span class="label-sub">Número de Seguro Social</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-ssn"
+                    name="w9_ssn"
+                    placeholder="XXX-XX-XXXX"
+                  />
+                </div>
+
+                <div class="field-group">
+                  <label for="w9-ein">
+                    Employer identification number<br />
+                    <span class="label-sub">Número de identificación del empleador</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-ein"
+                    name="w9_ein"
+                    placeholder="XX-XXXXXXX"
+                  />
+                </div>
+              </div>
+
+              <div class="hint" style="margin-top:0.4rem;">
+                By signing below, you certify under penalties of perjury that the information
+                provided in this W-9 section is correct and complete. / Al firmar a continuación,
+                usted certifica, bajo pena de perjurio, que la información proporcionada en esta
+                sección W-9 es correcta y completa.
+              </div>
+
+              <div class="two-column" style="margin-top:0.75rem;">
+                <div class="signature-group">
+                  <label>
+                    W-9 Signature / Firma del W-9<span class="required">*</span>
+                  </label>
+                  <div class="signature-pad" data-input-id="sig-w9">
+                    <canvas></canvas>
+                    <div class="signature-actions">
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear / Borrar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field-group">
+                  <label for="w9-date">
+                    Date / Fecha<span class="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="w9-date"
+                    name="w9_date"
+                    required
+                    placeholder="MM/DD/YYYY"
+                  />
+                </div>
+              </div>
+
+              <input type="hidden" name="sig_w9_data" id="sig-w9" />
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">
+                Section D – Certificate of Insurance / Certificado de Seguro
+              </span>
+
+              <div class="field-group" style="margin-top:0.75rem;">
+                <label for="ns-coi">
+                  Upload Certificate of Insurance<span class="required">*</span><br />
+                  <span class="label-sub">Cargue su Certificado de Seguro</span>
+                </label>
+                <input
+                  type="file"
+                  id="ns-coi"
+                  name="ns_coi_file"
+                  required
+                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                />
+                <p class="hint">
+                  Please upload a current Certificate of Insurance listing Anchor Homes as
+                  certificate holder. / Cargue un Certificado de Seguro vigente que incluya a
+                  Anchor Homes como titular del certificado.
+                </p>
+              </div>
+
+              <div class="button-row" style="margin-top:1rem;">
+                <button type="submit" class="btn btn-primary">
+                  Submit New Subcontractor Packet
+                </button>
+                <button type="reset" class="btn btn-outline">
+                  Clear All / Borrar Todo
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- CONTACT – kept as last page -->
+        <section id="contact" class="section">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Contact</h1>
+              <p class="card-subtitle">
+                Reach out to Anchor Homes for questions, consultations, or project updates.
+              </p>
+            </div>
+
+            <div class="two-column">
+              <div>
+                <div class="info-block">
+                  <div class="info-label">Phone</div>
+                  <!-- Replace with your real phone number -->
+                  <div class="info-value">(555) 555-5555</div>
+                </div>
+                <div class="info-block">
+                  <div class="info-label">Email</div>
+                  <!-- Replace with your real email -->
+                  <div class="info-value">
+                    <a href="mailto:info@anchorhomes.com">info@anchorhomes.com</a>
+                  </div>
+                </div>
+                <div class="info-block">
+                  <div class="info-label">Business Address</div>
+                  <!-- Replace with your real address -->
+                  <div class="info-value">
+                    1234 Anchor Way<br />
+                    Suite 100<br />
+                    Your City, ST 00000
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p class="muted">
+                  Office hours, service areas, or additional contact notes can be listed here. For
+                  example: “Meetings by appointment only,” or “Serving Williamson County and the
+                  Greater Nashville area.”
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
 
@@ -814,111 +1493,301 @@
     // Get your key from https://geocode.maps.co and replace the placeholder below.
     const MAPSCO_API_KEY = "6930d4d437fad769672610qmbb9060f";
 
-    // Handle tab-like navigation between sections
-    const navLinks = document.querySelectorAll(".nav-link");
-    const sections = document.querySelectorAll(".section");
+    document.addEventListener("DOMContentLoaded", () => {
+      // Handle tab-like navigation between sections
+      const navLinks = document.querySelectorAll(".nav-link");
+      const sections = document.querySelectorAll(".section");
 
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        const targetId = link.getAttribute("data-section");
-
-        navLinks.forEach((l) => l.classList.remove("active"));
-        link.classList.add("active");
-
+      function activateSection(targetId) {
+        navLinks.forEach((l) => {
+          const id = l.getAttribute("data-section");
+          l.classList.toggle("active", id === targetId);
+        });
         sections.forEach((section) => {
           section.classList.toggle("active", section.id === targetId);
         });
-      });
-    });
-
-    // Set current year in footer
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Address autocomplete using geocode.maps.co
-    function attachAddressAutocomplete(input) {
-      if (!MAPSCO_API_KEY || MAPSCO_API_KEY === "YOUR_MAPSCO_API_KEY_HERE") {
-        console.warn(
-          "Maps.co API key is not set. Address autocomplete is disabled for:",
-          input.id
-        );
-        return;
       }
 
-      const wrapper = document.createElement("div");
-      wrapper.className = "autocomplete-wrapper";
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          const targetId = link.getAttribute("data-section");
+          activateSection(targetId);
+        });
+      });
 
-      // Wrap the existing input
-      input.parentNode.insertBefore(wrapper, input);
-      wrapper.appendChild(input);
+      // Buttons on welcome hero that jump to other sections
+      document.querySelectorAll("[data-jump]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-jump");
+          activateSection(targetId);
+        });
+      });
 
-      const list = document.createElement("div");
-      list.className = "autocomplete-list";
-      wrapper.appendChild(list);
+      // Set current year in footer
+      const yearSpan = document.getElementById("year");
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
 
-      let currentFetchId = 0;
+      // Address autocomplete using geocode.maps.co
+      function formatShortAddress(place) {
+        const addr = place.address || {};
+        const parts = [];
 
-      input.addEventListener("input", () => {
-        const query = input.value.trim();
-        if (query.length < 3) {
-          list.innerHTML = "";
-          list.style.display = "none";
+        const street = [addr.house_number, addr.road].filter(Boolean).join(" ");
+        if (street) parts.push(street);
+
+        const city =
+          addr.city ||
+          addr.town ||
+          addr.village ||
+          addr.hamlet ||
+          addr.municipality;
+        if (city) parts.push(city);
+
+        if (addr.state) parts.push(addr.state);
+        if (addr.postcode) parts.push(addr.postcode);
+
+        if (parts.length > 0) {
+          return parts.join(", ");
+        }
+
+        // Fallback: trim display_name to first 4 comma-separated parts
+        if (place.display_name) {
+          const segments = place.display_name.split(",").map((s) => s.trim());
+          return segments.slice(0, 4).join(", ");
+        }
+
+        return "";
+      }
+
+      function attachAddressAutocomplete(selector) {
+        const input = document.querySelector(selector);
+        if (!input) return;
+
+        if (!MAPSCO_API_KEY || MAPSCO_API_KEY === "YOUR_MAPSCO_API_KEY_HERE") {
+          console.warn(
+            "Maps.co API key is not set. Address autocomplete is disabled for:",
+            selector
+          );
           return;
         }
 
-        const fetchId = ++currentFetchId;
+        const wrapper = document.createElement("div");
+        wrapper.className = "autocomplete-wrapper";
 
-        fetch(
-          "https://geocode.maps.co/search?q=" +
-            encodeURIComponent(query) +
-            "&api_key=" +
-            encodeURIComponent(MAPSCO_API_KEY)
-        )
-          .then((res) => res.json())
-          .then((data) => {
+        // Wrap the existing input
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+
+        const list = document.createElement("div");
+        list.className = "autocomplete-list";
+        wrapper.appendChild(list);
+
+        let currentFetchId = 0;
+
+        input.addEventListener("input", async () => {
+          const query = input.value.trim();
+          if (query.length < 3) {
+            list.innerHTML = "";
+            list.style.display = "none";
+            return;
+          }
+
+          const fetchId = ++currentFetchId;
+
+          try {
+            const response = await fetch(
+              "https://geocode.maps.co/search?q=" +
+                encodeURIComponent(query) +
+                "&api_key=" +
+                encodeURIComponent(MAPSCO_API_KEY)
+            );
+            const results = await response.json();
+
             if (fetchId !== currentFetchId) return;
+
             list.innerHTML = "";
 
-            if (!Array.isArray(data) || data.length === 0) {
+            if (!Array.isArray(results) || results.length === 0) {
               list.style.display = "none";
               return;
             }
 
-            data.slice(0, 5).forEach((place) => {
+            results.slice(0, 6).forEach((place) => {
+              const shortAddress = formatShortAddress(place);
+              if (!shortAddress) return;
+
               const item = document.createElement("div");
               item.className = "autocomplete-item";
-              item.textContent = place.display_name || "";
+              item.textContent = shortAddress;
               item.addEventListener("click", () => {
-                input.value = place.display_name || "";
+                input.value = shortAddress;
                 list.innerHTML = "";
                 list.style.display = "none";
               });
               list.appendChild(item);
             });
 
-            list.style.display = "block";
-          })
-          .catch((err) => {
+            list.style.display = list.children.length ? "block" : "none";
+          } catch (err) {
             console.error("Error fetching suggestions from maps.co:", err);
             list.innerHTML = "";
             list.style.display = "none";
-          });
-      });
+          }
+        });
 
-      // Hide list when clicking outside
-      document.addEventListener("click", (event) => {
-        if (!wrapper.contains(event.target)) {
-          list.style.display = "none";
+        // Hide list when clicking outside
+        document.addEventListener("click", (event) => {
+          if (!wrapper.contains(event.target)) {
+            list.style.display = "none";
+          }
+        });
+      }
+
+      // Attach autocomplete to relevant address fields
+      attachAddressAutocomplete("#cr-address");
+      attachAddressAutocomplete("#sub-project");
+      attachAddressAutocomplete("#ns-address");
+      attachAddressAutocomplete("#ns-project-address");
+      attachAddressAutocomplete("#w9-address");
+
+      // Hero image rotation (random shuffle order, then cycle)
+      const slides = Array.from(document.querySelectorAll(".hero-slide"));
+      if (slides.length > 1) {
+        let order = slides.map((_, idx) => idx);
+
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
         }
-      });
-    }
 
-    // Attach autocomplete to address fields
-    const addressInputs = [
-      document.getElementById("cr-address"),
-      document.getElementById("sub-project")
-    ].filter(Boolean);
+        shuffle(order);
+        let pointer = 0;
 
-    addressInputs.forEach(attachAddressAutocomplete);
+        function showNextSlide() {
+          const index = order[pointer];
+          slides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === index);
+          });
+          pointer++;
+          if (pointer >= order.length) {
+            pointer = 0;
+            shuffle(order);
+          }
+        }
+
+        showNextSlide();
+        setInterval(showNextSlide, 5000);
+      }
+
+      // Signature pads
+      function initSignaturePads() {
+        const pads = document.querySelectorAll(".signature-pad");
+        pads.forEach((pad) => {
+          const canvas = pad.querySelector("canvas");
+          const clearBtn = pad.querySelector(".signature-clear");
+          if (!canvas) return;
+
+          const ctx = canvas.getContext("2d");
+          const rect = canvas.getBoundingClientRect();
+          // Set canvas size to actual display size
+          canvas.width = rect.width * window.devicePixelRatio;
+          canvas.height = rect.height * window.devicePixelRatio;
+          ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+          ctx.lineWidth = 2;
+          ctx.lineCap = "round";
+          ctx.strokeStyle = "#ffffff";
+
+          let drawing = false;
+          let lastX = 0;
+          let lastY = 0;
+
+          function getPos(evt) {
+            const bounds = canvas.getBoundingClientRect();
+            const point = evt.touches ? evt.touches[0] : evt;
+            return {
+              x: point.clientX - bounds.left,
+              y: point.clientY - bounds.top,
+            };
+          }
+
+          function startDrawing(evt) {
+            evt.preventDefault();
+            drawing = true;
+            const pos = getPos(evt);
+            lastX = pos.x;
+            lastY = pos.y;
+          }
+
+          function draw(evt) {
+            if (!drawing) return;
+            evt.preventDefault();
+            const pos = getPos(evt);
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            lastX = pos.x;
+            lastY = pos.y;
+          }
+
+          function stopDrawing(evt) {
+            if (!drawing) return;
+            evt.preventDefault();
+            drawing = false;
+          }
+
+          canvas.addEventListener("mousedown", startDrawing);
+          canvas.addEventListener("mousemove", draw);
+          canvas.addEventListener("mouseup", stopDrawing);
+          canvas.addEventListener("mouseleave", stopDrawing);
+
+          canvas.addEventListener("touchstart", startDrawing, { passive: false });
+          canvas.addEventListener("touchmove", draw, { passive: false });
+          canvas.addEventListener("touchend", stopDrawing);
+          canvas.addEventListener("touchcancel", stopDrawing);
+
+          if (clearBtn) {
+            clearBtn.addEventListener("click", () => {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              const hiddenId = pad.getAttribute("data-input-id");
+              if (hiddenId) {
+                const hidden = document.getElementById(hiddenId);
+                if (hidden) hidden.value = "";
+              }
+            });
+          }
+        });
+      }
+
+      initSignaturePads();
+
+      function captureSignaturesForForm(form) {
+        const pads = form.querySelectorAll(".signature-pad");
+        pads.forEach((pad) => {
+          const canvas = pad.querySelector("canvas");
+          const hiddenId = pad.getAttribute("data-input-id");
+          if (!canvas || !hiddenId) return;
+          const hidden = document.getElementById(hiddenId);
+          if (!hidden) return;
+          try {
+            hidden.value = canvas.toDataURL("image/png");
+          } catch (e) {
+            console.warn("Unable to capture signature data URL:", e);
+          }
+        });
+      }
+
+      const newSubForm = document.getElementById("new-subcontractor-form");
+      if (newSubForm) {
+        newSubForm.addEventListener("submit", () => {
+          captureSignaturesForForm(newSubForm);
+        });
+      }
+    });
   </script>
 </body>
 </html>
