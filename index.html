@@ -392,10 +392,6 @@
       color: var(--accent-soft);
     }
 
-    .autocomplete-item strong {
-      color: var(--accent);
-    }
-
     .autocomplete-item:hover {
       background: #232323;
     }
@@ -457,28 +453,26 @@
       opacity: 1;
     }
 
+    .section-divider {
+      height: 1px;
+      background: #262626;
+      margin: 1.4rem 0;
+      border-radius: 999px;
+    }
+
+    .pill-label {
+      display: inline-block;
+      border-radius: 999px;
+      border: 1px solid #333333;
+      padding: 0.15rem 0.65rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9c9c9c;
+      margin-bottom: 0.45rem;
+    }
+
     /* Agreement and signatures */
-    .agreement-wrapper {
-      margin-top: 1.25rem;
-      border-radius: 14px;
-      border: 1px solid var(--border-subtle);
-      background: #0d0d0d;
-      padding: 1.15rem 1.1rem 1.25rem;
-    }
-
-    .agreement-body {
-      max-height: 260px;
-      overflow-y: auto;
-      padding: 0.75rem;
-      margin-top: 0.5rem;
-      border-radius: 10px;
-      border: 1px solid #262626;
-      background: #121212;
-      font-size: 0.9rem;
-      color: #c5c5c5;
-      white-space: pre-wrap;
-    }
-
     .signature-group {
       margin-top: 1rem;
     }
@@ -514,26 +508,73 @@
       margin-top: 0.25rem;
     }
 
-    .section-divider {
-      height: 1px;
-      background: #262626;
-      margin: 1.4rem 0;
-      border-radius: 999px;
+    /* Overlay docs (Agreement & W9) */
+    .pdf-overlay {
+      position: relative;
+      border-radius: 14px;
+      border: 1px solid #262626;
+      background: #111;
+      overflow: hidden;
+      max-width: 100%;
+      margin-top: 0.75rem;
     }
 
-    .pill-label {
-      display: inline-block;
-      border-radius: 999px;
-      border: 1px solid #333333;
-      padding: 0.15rem 0.65rem;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #9c9c9c;
-      margin-bottom: 0.45rem;
+    .pdf-overlay img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+      user-select: none;
     }
 
-    /* Responsive */
+    .pdf-overlay-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .pdf-field {
+      position: absolute;
+      pointer-events: auto;
+    }
+
+    .pdf-field input[type="text"],
+    .pdf-field input[type="email"],
+    .pdf-field input[type="tel"],
+    .pdf-field textarea {
+      background: transparent;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid #555555;
+      padding: 0.05rem 0.15rem;
+      font-size: 0.75rem;
+      color: #ffffff;
+      width: 100%;
+    }
+
+    .pdf-field textarea {
+      resize: none;
+      height: 1.4rem;
+    }
+
+    .pdf-field .signature-pad {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .pdf-field .signature-pad canvas {
+      background: transparent;
+      border: 1px solid #666666;
+      height: 70px;
+    }
+
+    .pdf-field .btn-sm {
+      margin-top: 0.2rem;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.6rem;
+    }
+
     @media (max-width: 768px) {
       .header-inner {
         flex-direction: column;
@@ -563,7 +604,7 @@
       <div class="header-inner">
         <div class="brand">
           <div class="brand-logo">
-            <!-- Replace "logo.png" with the actual path/filename of your logo -->
+            <!-- replace logo.png with your logo file -->
             <img src="logo.png" alt="Anchor Homes logo" />
           </div>
           <div class="brand-text">
@@ -586,7 +627,7 @@
 
     <main>
       <div class="content">
-        <!-- WELCOME / LANDING -->
+        <!-- WELCOME -->
         <section id="welcome" class="section active">
           <div class="card">
             <div class="card-header">
@@ -610,9 +651,6 @@
                 </ul>
 
                 <div class="button-row">
-                  <button type="button" class="btn btn-primary" data-jump="change-requests">
-                    Request a Change
-                  </button>
                   <button type="button" class="btn btn-outline" data-jump="new-subcontractors">
                     New Subcontractor Setup
                   </button>
@@ -620,7 +658,7 @@
               </div>
 
               <div class="hero-image-frame">
-                <!-- Replace these src paths with your own photos later -->
+                <!-- replace stock1/2/3.jpg with your own images later -->
                 <img src="stock1.jpg" alt="Home framing in progress" class="hero-slide active" />
                 <img src="stock2.jpg" alt="Job site with home under construction" class="hero-slide" />
                 <img src="stock3.jpg" alt="Completed new construction home" class="hero-slide" />
@@ -629,7 +667,7 @@
           </div>
         </section>
 
-        <!-- ABOUT US -->
+        <!-- ABOUT -->
         <section id="about" class="section">
           <div class="card">
             <div class="card-header">
@@ -658,7 +696,6 @@
               </div>
             </div>
 
-            <!-- Block where you can paste your own About text -->
             <div class="card" style="margin-top: 1.5rem; background: rgba(5,5,5,0.6);">
               <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
                 <h2 class="card-title" style="font-size: 1rem;">Your About Us Content</h2>
@@ -668,7 +705,7 @@
               </p>
               <p style="margin-top: 0.75rem;">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat dolor
-                vitae est interdum, in auctor arcu faucibus. <!-- Replace with real content -->
+                vitae est interdum, in auctor arcu faucibus.
               </p>
             </div>
           </div>
@@ -689,16 +726,16 @@
                 <h2 class="info-label" style="margin-bottom:0.4rem;">Residential Construction</h2>
                 <ul class="muted" style="padding-left:1.2rem; margin-bottom:1.5rem;">
                   <li>Custom new-home builds</li>
-                  <li>Whole-home renovations & gut remodels</li>
-                  <li>Kitchen & bath remodels</li>
-                  <li>Room additions & second stories</li>
-                  <li>Basement & bonus room build-outs</li>
+                  <li>Whole-home renovations &amp; gut remodels</li>
+                  <li>Kitchen &amp; bath remodels</li>
+                  <li>Room additions &amp; second stories</li>
+                  <li>Basement &amp; bonus room build-outs</li>
                   <li>Outdoor living spaces, decks, and covered porches</li>
                   <li>Exterior upgrades, siding, roofing, and windows</li>
                 </ul>
               </div>
               <div>
-                <h2 class="info-label" style="margin-bottom:0.4rem;">Commercial & Light Commercial</h2>
+                <h2 class="info-label" style="margin-bottom:0.4rem;">Commercial &amp; Light Commercial</h2>
                 <ul class="muted" style="padding-left:1.2rem; margin-bottom:1.5rem;">
                   <li>Tenant build-outs and interior finish-outs</li>
                   <li>Office and professional space remodeling</li>
@@ -727,7 +764,6 @@
               </p>
             </div>
 
-            <!-- Replace YOUR_CHANGE_REQUEST_FORM_ID with your Formspree form ID -->
             <form
               action="https://formspree.io/f/xanrbjlk"
               method="POST"
@@ -828,9 +864,8 @@
               </p>
             </div>
 
-            <!-- Replace YOUR_SUBCONTRACTOR_FORM_ID with your Formspree form ID -->
             <form
-              action="https://formspree.io/f/xanrbjlk"
+              action="https://formspree.io/f/YOUR_SUBCONTRACTOR_FORM_ID"
               method="POST"
               enctype="multipart/form-data"
               accept-charset="UTF-8"
@@ -953,7 +988,7 @@
           </div>
         </section>
 
-        <!-- NEW SUBCONTRACTORS -->
+        <!-- NEW SUBCONTRACTORS (all 8 pages + W9 overlay) -->
         <section id="new-subcontractors" class="section">
           <div class="card">
             <div class="card-header">
@@ -964,16 +999,16 @@
               </p>
             </div>
 
-            <!-- Replace YOUR_NEW_SUBCONTRACTOR_FORM_ID with your Formspree form ID -->
             <form
               id="new-subcontractor-form"
-              action="https://formspree.io/f/xanrbjlk"
+              action="https://formspree.io/f/YOUR_NEW_SUBCONTRACTOR_FORM_ID"
               method="POST"
               enctype="multipart/form-data"
               accept-charset="UTF-8"
             >
               <input type="hidden" name="form_name" value="New Subcontractor Packet" />
 
+              <!-- SECTION A – BASIC INFO -->
               <span class="pill-label">
                 Section A – Subcontractor Information / Información del Subcontratista
               </span>
@@ -1115,284 +1150,542 @@
 
               <div class="section-divider"></div>
 
+              <!-- SECTION B – SUBCONTRACTOR AGREEMENT (8 PAGES OVERLAYED) -->
               <span class="pill-label">
                 Section B – Subcontractor Agreement / Acuerdo de Subcontratista
               </span>
+              <p class="hint" style="margin-top:0.4rem;">
+                Each page below is the original agreement page with fillable text fields and
+                signature / initials canvases overlaid so it appears as though you filled out the
+                original document. / Cada página a continuación es el acuerdo original con campos
+                rellenables y firmas / iniciales superpuestas para que parezca que completó el
+                documento original.
+              </p>
 
-              <div class="agreement-wrapper">
-                <p class="hint">
-                  Below is space to display your Subcontractor Agreement. You can paste your full
-                  agreement text into the <code>&lt;div class="agreement-body"&gt;</code> in this
-                  HTML file so your subcontractors can read it before signing.
-                  / A continuación hay espacio para mostrar su Acuerdo de Subcontratista. Puede
-                  pegar el texto completo del acuerdo en el
-                  <code>&lt;div class="agreement-body"&gt;</code> en este archivo HTML para que los
-                  subcontratistas lo lean antes de firmar.
-                </p>
-                <div class="agreement-body">
-[PASTE YOUR SUBCONTRACTOR AGREEMENT TEXT HERE]
-
-Sample Subcontractor Agreement heading
-Construction Subcontract Agreement
-
-On this ___ day of ____________, 20 ____, [Contractor] and [Subcontractor] enter into this
-Subcontract for work to be performed on behalf of Contractor by Subcontractor at the Work
-Site(s) identified in this Agreement.
-
-(Replace this sample text with the full language from your own agreement document.)
-                </div>
-              </div>
-
-              <div class="signature-group">
-                <label>
-                  Subcontractor Initials / Iniciales del Subcontratista<span class="required">*</span>
-                </label>
-                <div class="signature-pad" data-input-id="sig-initials">
-                  <canvas></canvas>
-                  <div class="signature-actions">
-                    <button type="button" class="btn btn-outline btn-sm signature-clear">
-                      Clear / Borrar
-                    </button>
+              <!-- PAGE 1 -->
+              <div class="pdf-overlay">
+                <img src="subagreement-page1.png" alt="Subcontractor Agreement page 1" />
+                <div class="pdf-overlay-layer">
+                  <!-- Date (line after "On this ___ day of") -->
+                  <div class="pdf-field" style="top: 10%; left: 21%; width: 18%;">
+                    <input
+                      type="text"
+                      id="agr-day-month"
+                      name="agreement_day_month"
+                      placeholder="Month & day"
+                    />
                   </div>
-                </div>
-                <div class="signature-note">
-                  By initialing, subcontractor confirms they have read and agree to the
-                  Subcontractor Agreement above. / Al colocar sus iniciales, el subcontratista
-                  confirma que ha leído y acepta el Acuerdo de Subcontratista anterior.
-                </div>
-              </div>
 
-              <div class="two-column">
-                <div class="signature-group">
-                  <label>
-                    Subcontractor Signature / Firma del Subcontratista<span class="required">*</span>
-                  </label>
-                  <div class="signature-pad" data-input-id="sig-subcontractor">
-                    <canvas></canvas>
-                    <div class="signature-actions">
+                  <!-- Year (20___) -->
+                  <div class="pdf-field" style="top: 10%; left: 49%; width: 7%;">
+                    <input
+                      type="text"
+                      id="agr-year"
+                      name="agreement_year"
+                      placeholder="Year"
+                    />
+                  </div>
+
+                  <!-- Contractor name -->
+                  <div class="pdf-field" style="top: 10%; left: 57%; width: 27%;">
+                    <input
+                      type="text"
+                      id="agr-contractor-name"
+                      name="agreement_contractor_name"
+                      placeholder="Contractor"
+                    />
+                  </div>
+
+                  <!-- Subcontractor legal name -->
+                  <div class="pdf-field" style="top: 12.5%; left: 19%; width: 36%;">
+                    <input
+                      type="text"
+                      id="agr-sub-name"
+                      name="agreement_sub_name"
+                      placeholder="Subcontractor"
+                    />
+                  </div>
+
+                  <!-- Subcontract price (sum) -->
+                  <div class="pdf-field" style="top: 30.7%; left: 34%; width: 20%;">
+                    <input
+                      type="text"
+                      id="agr-price"
+                      name="agreement_price"
+                      placeholder="000,000.00"
+                    />
+                  </div>
+
+                  <!-- Price in words / description (optional) -->
+                  <div class="pdf-field" style="top: 30.7%; left: 13%; width: 19%;">
+                    <input
+                      type="text"
+                      id="agr-price-words"
+                      name="agreement_price_words"
+                      placeholder="Amount in words"
+                    />
+                  </div>
+
+                  <!-- Scope of work (edit-underlined paragraph) -->
+                  <div class="pdf-field" style="top: 38.2%; left: 11%; width: 78%;">
+                    <input
+                      type="text"
+                      id="agr-scope"
+                      name="agreement_scope"
+                      placeholder="Scope of work for this subcontract"
+                    />
+                  </div>
+
+                  <!-- Work site locations -->
+                  <div class="pdf-field" style="top: 51%; left: 11%; width: 78%;">
+                    <input
+                      type="text"
+                      id="agr-worksite"
+                      name="agreement_worksite"
+                      placeholder="Location(s) of all work sites included under this agreement"
+                    />
+                  </div>
+
+                  <!-- Page 1 initials: Subcontractor -->
+                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-sub-p1">
+                      <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear / Borrar
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Page 1 initials: Contractor -->
+                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-contractor-p1">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
                       </button>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div class="signature-group">
-                  <label>
-                    Contractor Signature / Firma del Contratista
-                  </label>
-                  <div class="signature-pad" data-input-id="sig-contractor">
-                    <canvas></canvas>
-                    <div class="signature-actions">
+              <!-- PAGE 2 -->
+              <div class="pdf-overlay">
+                <img src="subagreement-page2.png" alt="Subcontractor Agreement page 2" />
+                <div class="pdf-overlay-layer">
+                  <!-- Anticipated completion date or number of days -->
+                  <div class="pdf-field" style="top: 26.5%; left: 54%; width: 32%;">
+                    <input
+                      type="text"
+                      id="agr-completion"
+                      name="agreement_completion"
+                      placeholder="Anticipated completion date or number of days"
+                    />
+                  </div>
+
+                  <!-- Page 2 initials: Subcontractor -->
+                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-sub-p2">
+                      <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear / Borrar
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Page 2 initials: Contractor -->
+                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-contractor-p2">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <input type="hidden" name="sig_initials_data" id="sig-initials" />
+              <!-- PAGE 3 -->
+              <div class="pdf-overlay">
+                <img src="subagreement-page3.png" alt="Subcontractor Agreement page 3" />
+                <div class="pdf-overlay-layer">
+                  <!-- Contractor address to insert in section 4.2 -->
+                  <div class="pdf-field" style="top: 70.5%; left: 40%; width: 46%;">
+                    <input
+                      type="text"
+                      id="agr-contractor-address"
+                      name="agreement_contractor_notice_address"
+                      placeholder="Contractor notice address"
+                    />
+                  </div>
+
+                  <!-- Page 3 initials: Subcontractor -->
+                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-sub-p3">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Page 3 initials: Contractor -->
+                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-contractor-p3">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PAGE 4 -->
+              <div class="pdf-overlay">
+                <img src="subagreement-page4.png" alt="Subcontractor Agreement page 4" />
+                <div class="pdf-overlay-layer">
+                  <!-- Page 4 initials: Subcontractor -->
+                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-sub-p4">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Page 4 initials: Contractor -->
+                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-contractor-p4">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PAGE 5 -->
+              <div class="pdf-overlay">
+                <img src="subagreement-page5.png" alt="Subcontractor Agreement page 5" />
+                <div class="pdf-overlay-layer">
+                  <!-- Page 5 initials: Subcontractor -->
+                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-sub-p5">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Page 5 initials: Contractor -->
+                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-contractor-p5">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PAGE 6 -->
+              <div class="pdf-overlay">
+                <img src="subagreement-page6.png" alt="Subcontractor Agreement page 6" />
+                <div class="pdf-overlay-layer">
+                  <!-- Page 6 initials: Subcontractor -->
+                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-sub-p6">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Page 6 initials: Contractor -->
+                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-contractor-p6">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PAGE 7 -->
+              <div class="pdf-overlay">
+                <img src="subagreement-page7.png" alt="Subcontractor Agreement page 7" />
+                <div class="pdf-overlay-layer">
+                  <!-- Subcontractor signature -->
+                  <div class="pdf-field" style="top: 78%; left: 12%; width: 28%;">
+                    <div class="signature-pad" data-input-id="sig-subcontractor">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Contractor signature -->
+                  <div class="pdf-field" style="top: 78%; left: 60%; width: 28%;">
+                    <div class="signature-pad" data-input-id="sig-contractor">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Subcontractor printed name -->
+                  <div class="pdf-field" style="top: 82.5%; left: 14%; width: 26%;">
+                    <input
+                      type="text"
+                      id="agr-sub-by"
+                      name="agreement_sub_by"
+                      placeholder="Subcontractor - printed name"
+                    />
+                  </div>
+
+                  <!-- Contractor printed name -->
+                  <div class="pdf-field" style="top: 82.5%; left: 62%; width: 26%;">
+                    <input
+                      type="text"
+                      id="agr-contractor-by"
+                      name="agreement_contractor_by"
+                      placeholder="Contractor - printed name"
+                    />
+                  </div>
+
+                  <!-- Subcontractor title -->
+                  <div class="pdf-field" style="top: 86%; left: 14%; width: 26%;">
+                    <input
+                      type="text"
+                      id="agr-sub-title"
+                      name="agreement_sub_title"
+                      placeholder="Title"
+                    />
+                  </div>
+
+                  <!-- Contractor title -->
+                  <div class="pdf-field" style="top: 86%; left: 62%; width: 26%;">
+                    <input
+                      type="text"
+                      id="agr-contractor-title"
+                      name="agreement_contractor_title"
+                      placeholder="Title"
+                    />
+                  </div>
+
+                  <!-- Page 7 initials: Subcontractor -->
+                  <div class="pdf-field" style="top: 92%; left: 18%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-sub-p7">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Page 7 initials: Contractor -->
+                  <div class="pdf-field" style="top: 92%; left: 43%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-contractor-p7">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PAGE 8 -->
+              <div class="pdf-overlay">
+                <img src="subagreement-page8.png" alt="Subcontractor Agreement page 8" />
+                <div class="pdf-overlay-layer">
+                  <!-- Page 8 initials: Subcontractor -->
+                  <div class="pdf-field" style="top: 95%; left: 18%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-sub-p8">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Page 8 initials: Contractor -->
+                  <div class="pdf-field" style="top: 95%; left: 43%; width: 13%;">
+                    <div class="signature-pad" data-input-id="sig-initials-contractor-p8">
+                      <canvas></canvas>
+                      <button type="button" class="btn btn-outline btn-sm signature-clear">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hidden fields for ALL agreement initials & signatures -->
+              <input type="hidden" name="sig_initials_sub_p1_data" id="sig-initials-sub-p1" />
+              <input type="hidden" name="sig_initials_contractor_p1_data" id="sig-initials-contractor-p1" />
+              <input type="hidden" name="sig_initials_sub_p2_data" id="sig-initials-sub-p2" />
+              <input type="hidden" name="sig_initials_contractor_p2_data" id="sig-initials-contractor-p2" />
+              <input type="hidden" name="sig_initials_sub_p3_data" id="sig-initials-sub-p3" />
+              <input type="hidden" name="sig_initials_contractor_p3_data" id="sig-initials-contractor-p3" />
+              <input type="hidden" name="sig_initials_sub_p4_data" id="sig-initials-sub-p4" />
+              <input type="hidden" name="sig_initials_contractor_p4_data" id="sig-initials-contractor-p4" />
+              <input type="hidden" name="sig_initials_sub_p5_data" id="sig-initials-sub-p5" />
+              <input type="hidden" name="sig_initials_contractor_p5_data" id="sig-initials-contractor-p5" />
+              <input type="hidden" name="sig_initials_sub_p6_data" id="sig-initials-sub-p6" />
+              <input type="hidden" name="sig_initials_contractor_p6_data" id="sig-initials-contractor-p6" />
+              <input type="hidden" name="sig_initials_sub_p7_data" id="sig-initials-sub-p7" />
+              <input type="hidden" name="sig_initials_contractor_p7_data" id="sig-initials-contractor-p7" />
+              <input type="hidden" name="sig_initials_sub_p8_data" id="sig-initials-sub-p8" />
+              <input type="hidden" name="sig_initials_contractor_p8_data" id="sig-initials-contractor-p8" />
+
               <input type="hidden" name="sig_subcontractor_data" id="sig-subcontractor" />
               <input type="hidden" name="sig_contractor_data" id="sig-contractor" />
 
               <div class="section-divider"></div>
 
+              <!-- SECTION C – W-9 OVERLAY -->
               <span class="pill-label">
-                Section C – W-9 Information (Required for U.S. payees)
+                Section C – W-9 (U.S. Taxpayer Information)
               </span>
 
-              <!-- Simplified W-9 layout -->
-              <div class="two-column" style="margin-top:0.75rem;">
-                <div class="field-group">
-                  <label for="w9-name">
-                    Name (as shown on tax return)<span class="required">*</span><br />
-                    <span class="label-sub">Nombre (según su declaración de impuestos)</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-name"
-                    name="w9_name"
-                    required
-                    placeholder="Name"
-                  />
-                </div>
+              <p class="hint" style="margin-top:0.4rem;">
+                The fields below are positioned over the W-9 image so it appears you are completing
+                the actual form. / Los campos están colocados sobre la imagen del W-9 para que
+                parezca que está completando el formulario real.
+              </p>
 
-                <div class="field-group">
-                  <label for="w9-business">
-                    Business name / disregarded entity name<br />
-                    <span class="label-sub">Nombre comercial o entidad ignorada</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-business"
-                    name="w9_business_name"
-                    placeholder="Business / DBA name"
-                  />
-                </div>
-              </div>
+              <!-- export W9 first page as fw9-page1.png -->
+              <div class="pdf-overlay">
+                <img src="fw9-page1.png" alt="IRS W-9" />
+                <div class="pdf-overlay-layer">
+                  <!-- Line 1 name -->
+                  <div class="pdf-field" style="top: 12%; left: 23%; width: 50%;">
+                    <input
+                      type="text"
+                      id="w9-name"
+                      name="w9_name"
+                      placeholder="Name (as shown on tax return)"
+                    />
+                  </div>
 
-              <div class="field-group">
-                <label>
-                  Federal tax classification / Clasificación fiscal federal<span class="required">*</span>
-                </label>
-                <div class="muted" style="font-size:0.85rem;">
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="individual" required />
-                    Individual / Sole proprietor
-                  </label><br />
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="c_corp" />
-                    C Corporation
-                  </label><br />
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="s_corp" />
-                    S Corporation
-                  </label><br />
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="partnership" />
-                    Partnership
-                  </label><br />
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="trust_estate" />
-                    Trust / Estate
-                  </label><br />
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="llc" />
-                    LLC (specify C, S, or P in comments)
-                  </label>
-                </div>
-              </div>
+                  <!-- Line 2 business name -->
+                  <div class="pdf-field" style="top: 16%; left: 30%; width: 43%;">
+                    <input
+                      type="text"
+                      id="w9-business"
+                      name="w9_business_name"
+                      placeholder="Business name / disregarded entity name"
+                    />
+                  </div>
 
-              <div class="two-column">
-                <div class="field-group">
-                  <label for="w9-exempt-payee">
-                    Exempt payee code (if any)
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-exempt-payee"
-                    name="w9_exempt_payee_code"
-                    placeholder="Optional"
-                  />
-                </div>
-                <div class="field-group">
-                  <label for="w9-exempt-fatca">
-                    FATCA exemption code (if any)
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-exempt-fatca"
-                    name="w9_fatca_code"
-                    placeholder="Optional"
-                  />
-                </div>
-              </div>
+                  <!-- Tax classification (free-text summary of checkboxes) -->
+                  <div class="pdf-field" style="top: 22%; left: 13%; width: 60%;">
+                    <input
+                      type="text"
+                      name="w9_tax_class"
+                      placeholder="Federal tax classification (e.g., Individual, LLC, C Corp)"
+                    />
+                  </div>
 
-              <div class="field-group">
-                <label for="w9-address">
-                  Address (number, street, and apt. or suite) / Dirección<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="w9-address"
-                  name="w9_address"
-                  required
-                  placeholder="Start typing your address..."
-                />
-                <p class="hint">
-                  Autocomplete will limit the result to street number, street name, city, state, and ZIP.
-                </p>
-              </div>
+                  <!-- Exempt payee code -->
+                  <div class="pdf-field" style="top: 27%; left: 35%; width: 12%;">
+                    <input
+                      type="text"
+                      id="w9-exempt-payee"
+                      name="w9_exempt_payee_code"
+                      placeholder="Code"
+                    />
+                  </div>
 
-              <div class="two-column">
-                <div class="field-group">
-                  <label for="w9-city-state-zip">
-                    City, state, and ZIP / Ciudad, estado y código postal<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-city-state-zip"
-                    name="w9_city_state_zip"
-                    required
-                    placeholder="City, ST 00000"
-                  />
-                </div>
+                  <!-- FATCA code -->
+                  <div class="pdf-field" style="top: 27%; left: 65%; width: 12%;">
+                    <input
+                      type="text"
+                      id="w9-exempt-fatca"
+                      name="w9_fatca_code"
+                      placeholder="Code"
+                    />
+                  </div>
 
-                <div class="field-group">
-                  <label for="w9-account">
-                    Account numbers (optional) / Números de cuenta (opcional)
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-account"
-                    name="w9_account_numbers"
-                    placeholder="Optional"
-                  />
-                </div>
-              </div>
+                  <!-- Address line (number & street) -->
+                  <div class="pdf-field" style="top: 35%; left: 25%; width: 53%;">
+                    <input
+                      type="text"
+                      id="w9-address"
+                      name="w9_address"
+                      placeholder="Number, street, and apt or suite"
+                    />
+                  </div>
 
-              <div class="two-column">
-                <div class="field-group">
-                  <label for="w9-ssn">
-                    Social security number<br />
-                    <span class="label-sub">Número de Seguro Social</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-ssn"
-                    name="w9_ssn"
-                    placeholder="XXX-XX-XXXX"
-                  />
-                </div>
+                  <!-- City, state, ZIP -->
+                  <div class="pdf-field" style="top: 39%; left: 27%; width: 51%;">
+                    <input
+                      type="text"
+                      id="w9-city-state-zip"
+                      name="w9_city_state_zip"
+                      placeholder="City, state, and ZIP code"
+                    />
+                  </div>
 
-                <div class="field-group">
-                  <label for="w9-ein">
-                    Employer identification number<br />
-                    <span class="label-sub">Número de identificación del empleador</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-ein"
-                    name="w9_ein"
-                    placeholder="XX-XXXXXXX"
-                  />
-                </div>
-              </div>
+                  <!-- Account numbers -->
+                  <div class="pdf-field" style="top: 44%; left: 29%; width: 49%;">
+                    <input
+                      type="text"
+                      id="w9-account"
+                      name="w9_account_numbers"
+                      placeholder="Account numbers (optional)"
+                    />
+                  </div>
 
-              <div class="hint" style="margin-top:0.4rem;">
-                By signing below, you certify under penalties of perjury that the information
-                provided in this W-9 section is correct and complete. / Al firmar a continuación,
-                usted certifica, bajo pena de perjurio, que la información proporcionada en esta
-                sección W-9 es correcta y completa.
-              </div>
+                  <!-- SSN -->
+                  <div class="pdf-field" style="top: 57%; left: 33%; width: 26%;">
+                    <input
+                      type="text"
+                      id="w9-ssn"
+                      name="w9_ssn"
+                      placeholder="XXX-XX-XXXX"
+                    />
+                  </div>
 
-              <div class="two-column" style="margin-top:0.75rem;">
-                <div class="signature-group">
-                  <label>
-                    W-9 Signature / Firma del W-9<span class="required">*</span>
-                  </label>
-                  <div class="signature-pad" data-input-id="sig-w9">
-                    <canvas></canvas>
-                    <div class="signature-actions">
+                  <!-- EIN -->
+                  <div class="pdf-field" style="top: 57%; left: 69%; width: 20%;">
+                    <input
+                      type="text"
+                      id="w9-ein"
+                      name="w9_ein"
+                      placeholder="XX-XXXXXXX"
+                    />
+                  </div>
+
+                  <!-- Signature box -->
+                  <div class="pdf-field" style="top: 73%; left: 20%; width: 32%;">
+                    <div class="signature-pad" data-input-id="sig-w9">
+                      <canvas></canvas>
                       <button type="button" class="btn btn-outline btn-sm signature-clear">
-                        Clear / Borrar
+                        Clear
                       </button>
                     </div>
                   </div>
-                </div>
 
-                <div class="field-group">
-                  <label for="w9-date">
-                    Date / Fecha<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-date"
-                    name="w9_date"
-                    required
-                    placeholder="MM/DD/YYYY"
-                  />
+                  <!-- Date -->
+                  <div class="pdf-field" style="top: 73%; left: 64%; width: 18%;">
+                    <input
+                      type="text"
+                      id="w9-date"
+                      name="w9_date"
+                      placeholder="MM/DD/YYYY"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -1400,6 +1693,7 @@ Site(s) identified in this Agreement.
 
               <div class="section-divider"></div>
 
+              <!-- SECTION D – COI -->
               <span class="pill-label">
                 Section D – Certificate of Insurance / Certificado de Seguro
               </span>
@@ -1435,7 +1729,7 @@ Site(s) identified in this Agreement.
           </div>
         </section>
 
-        <!-- CONTACT – kept as last page -->
+        <!-- CONTACT (last page) -->
         <section id="contact" class="section">
           <div class="card">
             <div class="card-header">
@@ -1449,19 +1743,16 @@ Site(s) identified in this Agreement.
               <div>
                 <div class="info-block">
                   <div class="info-label">Phone</div>
-                  <!-- Replace with your real phone number -->
                   <div class="info-value">(555) 555-5555</div>
                 </div>
                 <div class="info-block">
                   <div class="info-label">Email</div>
-                  <!-- Replace with your real email -->
                   <div class="info-value">
                     <a href="mailto:info@anchorhomes.com">info@anchorhomes.com</a>
                   </div>
                 </div>
                 <div class="info-block">
                   <div class="info-label">Business Address</div>
-                  <!-- Replace with your real address -->
                   <div class="info-value">
                     1234 Anchor Way<br />
                     Suite 100<br />
@@ -1489,12 +1780,11 @@ Site(s) identified in this Agreement.
   </div>
 
   <script>
-    // ==== CONFIGURE YOUR MAPS.CO API KEY HERE ====
-    // Get your key from https://geocode.maps.co and replace the placeholder below.
+    /* Insert your actual Maps.co API key here */
     const MAPSCO_API_KEY = "6930d4d437fad769672610qmbb9060f";
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Handle tab-like navigation between sections
+      // Navigation
       const navLinks = document.querySelectorAll(".nav-link");
       const sections = document.querySelectorAll(".section");
 
@@ -1515,7 +1805,6 @@ Site(s) identified in this Agreement.
         });
       });
 
-      // Buttons on welcome hero that jump to other sections
       document.querySelectorAll("[data-jump]").forEach((btn) => {
         btn.addEventListener("click", () => {
           const targetId = btn.getAttribute("data-jump");
@@ -1523,20 +1812,16 @@ Site(s) identified in this Agreement.
         });
       });
 
-      // Set current year in footer
+      // Footer year
       const yearSpan = document.getElementById("year");
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-      // Address autocomplete using geocode.maps.co
+      // Address autocomplete helpers
       function formatShortAddress(place) {
         const addr = place.address || {};
         const parts = [];
-
         const street = [addr.house_number, addr.road].filter(Boolean).join(" ");
         if (street) parts.push(street);
-
         const city =
           addr.city ||
           addr.town ||
@@ -1544,20 +1829,13 @@ Site(s) identified in this Agreement.
           addr.hamlet ||
           addr.municipality;
         if (city) parts.push(city);
-
         if (addr.state) parts.push(addr.state);
         if (addr.postcode) parts.push(addr.postcode);
-
-        if (parts.length > 0) {
-          return parts.join(", ");
-        }
-
-        // Fallback: trim display_name to first 4 comma-separated parts
+        if (parts.length > 0) return parts.join(", ");
         if (place.display_name) {
           const segments = place.display_name.split(",").map((s) => s.trim());
           return segments.slice(0, 4).join(", ");
         }
-
         return "";
       }
 
@@ -1566,17 +1844,12 @@ Site(s) identified in this Agreement.
         if (!input) return;
 
         if (!MAPSCO_API_KEY || MAPSCO_API_KEY === "YOUR_MAPSCO_API_KEY_HERE") {
-          console.warn(
-            "Maps.co API key is not set. Address autocomplete is disabled for:",
-            selector
-          );
+          console.warn("Maps.co API key is not set. Autocomplete disabled for", selector);
           return;
         }
 
         const wrapper = document.createElement("div");
         wrapper.className = "autocomplete-wrapper";
-
-        // Wrap the existing input
         input.parentNode.insertBefore(wrapper, input);
         wrapper.appendChild(input);
 
@@ -1604,11 +1877,9 @@ Site(s) identified in this Agreement.
                 encodeURIComponent(MAPSCO_API_KEY)
             );
             const results = await response.json();
-
             if (fetchId !== currentFetchId) return;
 
             list.innerHTML = "";
-
             if (!Array.isArray(results) || results.length === 0) {
               list.style.display = "none";
               return;
@@ -1617,7 +1888,6 @@ Site(s) identified in this Agreement.
             results.slice(0, 6).forEach((place) => {
               const shortAddress = formatShortAddress(place);
               if (!shortAddress) return;
-
               const item = document.createElement("div");
               item.className = "autocomplete-item";
               item.textContent = shortAddress;
@@ -1637,36 +1907,30 @@ Site(s) identified in this Agreement.
           }
         });
 
-        // Hide list when clicking outside
         document.addEventListener("click", (event) => {
-          if (!wrapper.contains(event.target)) {
-            list.style.display = "none";
-          }
+          if (!wrapper.contains(event.target)) list.style.display = "none";
         });
       }
 
-      // Attach autocomplete to relevant address fields
+      // Attach autocomplete to all address fields
       attachAddressAutocomplete("#cr-address");
       attachAddressAutocomplete("#sub-project");
       attachAddressAutocomplete("#ns-address");
       attachAddressAutocomplete("#ns-project-address");
       attachAddressAutocomplete("#w9-address");
 
-      // Hero image rotation (random shuffle order, then cycle)
+      // Hero slideshow
       const slides = Array.from(document.querySelectorAll(".hero-slide"));
       if (slides.length > 1) {
         let order = slides.map((_, idx) => idx);
-
         function shuffle(array) {
           for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
           }
         }
-
         shuffle(order);
         let pointer = 0;
-
         function showNextSlide() {
           const index = order[pointer];
           slides.forEach((slide, i) => {
@@ -1678,7 +1942,6 @@ Site(s) identified in this Agreement.
             shuffle(order);
           }
         }
-
         showNextSlide();
         setInterval(showNextSlide, 5000);
       }
@@ -1692,14 +1955,17 @@ Site(s) identified in this Agreement.
           if (!canvas) return;
 
           const ctx = canvas.getContext("2d");
-          const rect = canvas.getBoundingClientRect();
-          // Set canvas size to actual display size
-          canvas.width = rect.width * window.devicePixelRatio;
-          canvas.height = rect.height * window.devicePixelRatio;
-          ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-          ctx.lineWidth = 2;
-          ctx.lineCap = "round";
-          ctx.strokeStyle = "#ffffff";
+          function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+            ctx.lineWidth = 2;
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "#ffffff";
+          }
+          resizeCanvas();
+          window.addEventListener("resize", resizeCanvas);
 
           let drawing = false;
           let lastX = 0;
