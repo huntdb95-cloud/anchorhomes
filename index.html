@@ -1484,10 +1484,10 @@
                   </label>
                   <input
                     type="text"
-                    id="w9-city"
-                    name="w9_city"
-                    required
-                    placeholder="City"
+                  id="w9-city"
+                  name="w9_city"
+                  required
+                  placeholder="City"
                   />
                 </div>
                 <div class="field-group">
@@ -1682,8 +1682,8 @@
 
   <!-- Signature Pad for drawing signatures -->
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-  <!-- html2pdf for generating PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- html2pdf for generating PDF (downgraded to 0.9.3 for stability) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -1881,144 +1881,15 @@
               return v == null ? "" : v.toString();
             };
 
+            // (We still create these in case you want them later, but the PDF will capture the canvases directly)
             const agreementSigDataUrl = window.agreementPad.toDataURL("image/png");
             const w9SigDataUrl = window.w9Pad.toDataURL("image/png");
 
-            // Build an off-screen container that html2pdf can actually render
-            const pdfContainer = document.createElement("div");
-            pdfContainer.style.position = "fixed";
-            pdfContainer.style.left = "-10000px"; // off-screen
-            pdfContainer.style.top = "0";
-            pdfContainer.style.width = "800px";
-            pdfContainer.style.backgroundColor = "#ffffff";
-            pdfContainer.style.zIndex = "-1";
-            pdfContainer.style.pointerEvents = "none";
-            pdfContainer.style.fontFamily = "system-ui, sans-serif";
-            pdfContainer.style.fontSize = "11pt";
-            pdfContainer.style.color = "#000";
-
-            const agreementBoxHtml =
-              document.querySelector("#new-subcontractors .agreement-box")?.innerHTML || "";
-            const w9BoxHtml =
-              document.querySelector("#new-subcontractors .w9-box")?.innerHTML || "";
-
-            pdfContainer.innerHTML = `
-              <div style="padding:20px;">
-                <h1 style="text-align:center; margin-bottom:6px;">Anchor Homes – Subcontractors Agreement</h1>
-                <p style="text-align:center; margin-top:0; font-size:10pt;">
-                  <strong>Subcontractor Onboarding Packet</strong>
-                </p>
-
-                <h2 style="margin-top:16px; font-size:12pt;">Subcontractor Information</h2>
-                <table style="width:100%; border-collapse:collapse; font-size:10pt; margin-top:4px;">
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Company Name</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("sc_company_name")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Contact Name</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("sc_contact_name")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Email</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("sc_email")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Phone</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("sc_phone")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Address</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">
-                      ${getVal("sc_address")}<br/>
-                      ${getVal("sc_city")}, ${getVal("sc_state")} ${getVal("sc_zip")}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Trade / Scope</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("sc_trade")}</td>
-                  </tr>
-                </table>
-
-                <h2 style="margin-top:18px; font-size:12pt;">Agreement Text</h2>
-                <div style="font-size:9.5pt; line-height:1.4; margin-top:6px;">
-                  ${agreementBoxHtml}
-                </div>
-
-                <h2 style="margin-top:18px; font-size:12pt;">Agreement Signature</h2>
-                <p style="font-size:10pt;">
-                  <strong>Subcontractor Name:</strong> ${getVal("agreement_subcontractor_name")}<br/>
-                  <strong>Title:</strong> ${getVal("agreement_subcontractor_title")}<br/>
-                  <strong>Date:</strong> ${getVal("agreement_date")}<br/>
-                  <strong>Arbitration Initials:</strong> ${getVal("agreement_arbitration_initials")}<br/>
-                  <strong>Typed Signature:</strong> ${getVal("agreement_typed_signature_name")}
-                </p>
-                <div style="margin-top:8px;">
-                  <img src="${agreementSigDataUrl}" alt="Agreement Signature"
-                       style="max-width:100%; height:auto; border:1px solid #ccc;"/>
-                </div>
-
-                <div style="page-break-before:always;"></div>
-
-                <h1 style="text-align:center; margin-bottom:6px;">Form W-9 – Request for Taxpayer Identification Number and Certification</h1>
-
-                <h2 style="margin-top:16px; font-size:12pt;">W-9 Information</h2>
-                <table style="width:100%; border-collapse:collapse; font-size:10pt; margin-top:4px;">
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Name</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("w9_name")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Business Name</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("w9_business_name")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Tax Classification</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("w9_tax_class")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>LLC Tax Class</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("w9_llc_tax_classification")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Address</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">
-                      ${getVal("w9_address")}<br/>
-                      ${getVal("w9_city")}, ${getVal("w9_state")} ${getVal("w9_zip")}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>Account Numbers</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("w9_account_numbers")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>SSN</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("w9_ssn")}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:3px; border:1px solid #ccc;"><strong>EIN</strong></td>
-                    <td style="padding:3px; border:1px solid #ccc;">${getVal("w9_ein")}</td>
-                  </tr>
-                </table>
-
-                <div style="margin-top:14px; font-size:9.5pt; line-height:1.4;">
-                  ${w9BoxHtml}
-                </div>
-
-                <h2 style="margin-top:18px; font-size:12pt;">W-9 Signature</h2>
-                <p style="font-size:10pt;">
-                  <strong>Typed Name:</strong> ${getVal("w9_typed_signature_name")}<br/>
-                  <strong>Date:</strong> ${getVal("w9_signature_date")}
-                </p>
-                <div style="margin-top:8px;">
-                  <img src="${w9SigDataUrl}" alt="W-9 Signature"
-                       style="max-width:100%; height:auto; border:1px solid #ccc;"/>
-                </div>
-              </div>
-            `;
-
-            // Attach to DOM so html2canvas/html2pdf can measure and render it
-            document.body.appendChild(pdfContainer);
+            // Generate PDF from the visible New Subcontractors section
+            const pdfElement = document.getElementById("new-subcontractors");
+            if (!pdfElement) {
+              throw new Error("PDF element (#new-subcontractors) not found.");
+            }
 
             const opt = {
               margin: [10, 10, 10, 10],
@@ -2028,11 +1899,8 @@
               jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
             };
 
-            const worker = html2pdf().set(opt).from(pdfContainer);
+            const worker = html2pdf().set(opt).from(pdfElement);
             const pdfBlob = await worker.outputPdf("blob");
-
-            // Clean up the off-screen element
-            document.body.removeChild(pdfContainer);
 
             // Build the payload for Formspree
             const sendData = new FormData();
