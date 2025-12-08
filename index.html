@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <title>Anchor Homes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+
 
   <style>
     /* --------- GLOBAL STYLES --------- */
@@ -14,27 +21,46 @@
       --accent: #ffffff;
       --accent-soft: #d3d3d3;
       --border-subtle: #2b2b2b;
-      --error: #ff4d4d;
-      --radius-lg: 18px;
-      --shadow-soft: 0 22px 50px rgba(0, 0, 0, 0.7);
+      --danger: #ff4b4b;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --radius-lg: 22px;
+      --radius-md: 14px;
+      --radius-pill: 999px;
+      --text-main: #f6f6f6;
+      --text-muted: #acacac;
+      --text-soft: #a0a0a0;
+      --input-bg: #111111;
+      --input-border: #2b2b2b;
+      --input-border-focus: #f6f6f6;
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-main);
-      color: var(--accent-soft);
-      line-height: 1.6;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #262626 0, #050505 52%) fixed;
+      color: var(--text-main);
       -webkit-font-smoothing: antialiased;
     }
 
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
     a {
-      color: var(--accent);
+      color: var(--accent-soft);
       text-decoration: none;
     }
 
@@ -42,112 +68,121 @@
       text-decoration: underline;
     }
 
-    .page-wrapper {
+    /* --------- LAYOUT --------- */
+    .page-wrap {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      color: var(--text-main);
     }
 
-    /* --------- HEADER & NAV --------- */
     header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(26px);
+      background: radial-gradient(circle at top left, #262626 0, #050505 45%);
       position: sticky;
       top: 0;
-      z-index: 100;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(
-        to bottom,
-        rgba(5, 5, 5, 0.96),
-        rgba(5, 5, 5, 0.88)
-      );
-      border-bottom: 1px solid var(--border-subtle);
+      z-index: 50;
     }
 
     .header-inner {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 0.75rem 1.5rem;
+      padding: 0.9rem 1.5rem 0.85rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1.75rem;
+      gap: 1.25rem;
     }
 
-    .brand {
+    .brand-lockup {
       display: flex;
       align-items: center;
       gap: 0.9rem;
+      min-width: 0;
     }
 
     .brand-logo {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at 0% 0%, #ffffff 0, #e0e0e0 40%, #9a9a9a 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #000000;
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
     }
 
     .brand-logo img {
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 110%;
+      max-height: 110%;
       display: block;
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
-      gap: 0.12rem;
+      gap: 2px;
     }
 
     .brand-name {
-      font-size: 1.15rem;
-      letter-spacing: 0.18em;
+      font-size: 1.05rem;
+      font-weight: 650;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: #ffffff;
     }
 
     .brand-tagline {
-      font-size: 0.8rem;
-      color: #9f9f9f;
+      font-size: 0.74rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
     }
 
     nav {
       display: flex;
-      gap: 0.5rem;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      gap: 0.4rem;
+      margin-left: auto;
     }
 
     .nav-link {
-      font-size: 0.85rem;
-      padding: 0.45rem 0.95rem;
+      background: rgba(255, 255, 255, 0.03);
       border-radius: 999px;
+      padding: 0.45rem 0.95rem;
       border: 1px solid transparent;
-      color: #c0c0c0;
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      font-weight: 550;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
-        transform 0.1s ease;
-      background: transparent;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
     }
 
     .nav-link:hover {
       background: #1c1c1c;
-      border-color: var(--border-subtle);
-      color: var(--accent);
-      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
     }
 
     .nav-link.active {
       background: #ffffff;
       color: #000000;
       border-color: #ffffff;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8);
+    }
+
+    .nav-link.active::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: #000000;
     }
 
     main {
@@ -156,433 +191,958 @@
 
     .content {
       max-width: 1120px;
-      margin: 1.5rem auto 2.5rem;
-      padding: 0 1.5rem;
-    }
-
-    .card {
-      background: radial-gradient(circle at top left, #222222 0, #121212 45%, #050505 100%);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem 1.6rem 2.1rem;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-subtle);
-      margin-bottom: 1.5rem;
-    }
-
-    .card-header {
-      margin-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 0.9rem;
-    }
-
-    .card-title {
-      font-size: 1.45rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .card-subtitle {
-      font-size: 0.85rem;
-      color: #9f9f9f;
-      margin-top: 0.45rem;
-    }
-
-    .muted {
-      color: #aaaaaa;
-      font-size: 0.95rem;
-    }
-
-    .two-column {
+      margin: 0 auto;
+      padding: 1.8rem 1.5rem 2.5rem;
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 2rem;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.2fr);
+      gap: 1.6rem;
       align-items: flex-start;
     }
 
-    .info-block {
-      margin-bottom: 1rem;
-    }
-
-    .info-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #b0b0b0;
-      margin-bottom: 0.2rem;
-    }
-
-    .info-value {
-      font-size: 1rem;
-      color: var(--accent);
-    }
-
-    /* --------- FORMS --------- */
-
-    form {
+    /* --------- HERO / WELCOME --------- */
+    .hero {
       display: grid;
-      gap: 1rem;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.35fr);
+      gap: 1.6rem;
+      margin-bottom: 1.6rem;
     }
 
-    .field-group {
+    .hero-copy {
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 1.1rem;
+      justify-content: center;
     }
 
-    label {
-      font-size: 0.8rem;
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #bbbbbb;
+      color: var(--accent-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
-    .label-sub {
-      font-size: 0.75rem;
-      color: #8c8c8c;
+    .hero-eyebrow-badge {
+      padding: 0.1rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.16), transparent 60%);
+      font-size: 0.68rem;
+      color: var(--accent-soft);
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    input[type="file"],
-    input[type="date"],
-    textarea {
-      padding: 0.7rem 0.85rem;
-      border-radius: 11px;
-      border: 1px solid var(--border-subtle);
-      background-color: var(--bg-alt);
-      color: var(--accent);
+    .hero-title {
+      font-size: 2.35rem;
+      line-height: 1.12;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-title span {
+      display: block;
+      color: #f0f0f0;
+    }
+
+    .hero-body {
       font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      width: 100%;
+      color: var(--text-soft);
+      max-width: 32rem;
     }
 
-    input::placeholder,
-    textarea::placeholder {
-      color: #777777;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #ffffff;
-      box-shadow: 0 0 0 1px #ffffff22;
-      background-color: #181818;
-    }
-
-    textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .hint {
-      font-size: 0.8rem;
-      color: #8a8a8a;
-    }
-
-    .button-row {
-      margin-top: 0.5rem;
+    .hero-cta-row {
       display: flex;
-      gap: 0.75rem;
       flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
     }
 
     .btn {
-      border-radius: 999px;
-      padding: 0.65rem 1.5rem;
-      border: none;
-      font-size: 0.85rem;
+      border-radius: var(--radius-pill);
+      padding: 0.6rem 1.2rem;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      font-weight: 550;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease,
-        color 0.2s ease, border-color 0.2s ease;
-      white-space: nowrap;
+      gap: 0.4rem;
+      transition: all 0.18s ease;
     }
 
     .btn-primary {
-      background-color: #ffffff;
+      background: #ffffff;
       color: #000000;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.85);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.9);
     }
 
     .btn-outline {
       background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: var(--accent-soft);
     }
 
     .btn-outline:hover {
-      background: #ffffff;
-      color: #000000;
+      background: rgba(255, 255, 255, 0.08);
     }
 
-    .btn-sm {
-      padding: 0.35rem 0.85rem;
-      font-size: 0.7rem;
+    .hero-secondary-text {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-secondary-text span.pill {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 0.15rem 0.6rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .hero-media {
+      position: relative;
+      min-height: 260px;
+    }
+
+    .hero-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      overflow: hidden;
+      background: radial-gradient(circle at 10% 0, #ffffff 0, #777777 40%, #222222 100%);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-media-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.9) 55%);
+      pointer-events: none;
+    }
+
+    .hero-media-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+    }
+
+    .hero-slides {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-slide:nth-child(1) {
+      background-image: url("https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200");
+    }
+
+    .hero-slide:nth-child(2) {
+      background-image: url("https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1200");
+    }
+
+    .hero-slide:nth-child(3) {
+      background-image: url("https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1200");
+    }
+
+    .hero-slide-gradient {
+      position: absolute;
+      inset: auto 0 0;
+      height: 45%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+    }
+
+    .hero-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.9rem;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.92),
+        rgba(4, 4, 4, 0.95),
+        rgba(0, 0, 0, 0.92)
+      );
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-meta-primary {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .hero-meta-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
       letter-spacing: 0.14em;
+      color: var(--accent-soft);
     }
 
-    .required {
-      color: var(--error);
-      margin-left: 0.1rem;
+    .hero-meta-subtitle {
+      font-size: 0.74rem;
+      color: var(--text-soft);
     }
 
+    .hero-metrics {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .hero-metrics span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .hero-metrics span::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #777777);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+    }
+
+    /* --------- SECTIONS / CARDS --------- */
     .section {
       display: none;
     }
 
     .section.active {
       display: block;
-      animation: fadeIn 0.3s ease-out;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(4px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 1rem 1.5rem 1.5rem;
-      font-size: 0.8rem;
-      color: #777777;
-      text-align: center;
-    }
-
-    /* --------- HERO --------- */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .hero-title {
-      font-size: 2rem;
-      color: var(--accent);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-tagline {
-      font-size: 1.05rem;
-      color: #d0d0d0;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-highlights {
-      list-style: none;
-      padding-left: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-highlights li::before {
-      content: "– ";
-      color: #ffffff;
-    }
-
-    .hero-image-frame {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
+    .card {
+      background: radial-gradient(circle at top left, #232323 0, #141414 46%, #050505 100%);
+      border-radius: 26px;
+      padding: 1.35rem 1.4rem 1.8rem;
       box-shadow: var(--shadow-soft);
-      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
-      min-height: 260px;
+      overflow: hidden;
     }
 
-    .hero-image-frame img {
+    .card::before {
+      content: "";
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.7s ease;
+      inset: -10%;
+      background: radial-gradient(
+        circle at top left,
+        rgba(255, 255, 255, 0.08),
+        transparent 55%
+      );
+      opacity: 0.5;
+      pointer-events: none;
     }
 
-    .hero-image-frame img.active {
-      opacity: 1;
+    .card > * {
+      position: relative;
+      z-index: 1;
     }
 
-    /* --------- MISC --------- */
-    .section-divider {
-      height: 1px;
-      background: #262626;
-      margin: 1.4rem 0;
-      border-radius: 999px;
+    .card-header {
+      margin-bottom: 1.2rem;
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      max-width: 32rem;
     }
 
     .pill-label {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.12rem 0.75rem;
       border-radius: 999px;
-      border: 1px solid #333333;
-      padding: 0.15rem 0.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: #9c9ccf;
-      margin-bottom: 0.45rem;
-    }
-
-    /* --------- REVIEWS --------- */
-    .reviews {
-      margin-top: 1.75rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .reviews-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .reviews-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #cfcfcf;
-    }
-
-    .reviews-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #888888;
-    }
-
-    .review-quote {
-      font-size: 0.95rem;
-      color: var(--accent);
-      font-style: italic;
-      margin-bottom: 0.4rem;
-      transition: opacity 0.3s ease;
-    }
-
-    .review-author {
-      font-size: 0.85rem;
-      color: #b0b0b0;
-    }
-
-    /* --------- AGREEMENT & W9 STYLES --------- */
-    .agreement-box,
-    .w9-box {
-      background: #0b0b0b;
-      border-radius: 12px;
-      border: 1px solid #262626;
-      padding: 0.9rem 0.95rem;
-      max-height: 260px;
-      overflow-y: auto;
-      font-size: 0.85rem;
-      color: #d0d0d0;
-      line-height: 1.5;
-      margin-bottom: 0.9rem;
-    }
-
-    .agreement-box h3,
-    .w9-box h3 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #f0f0f0;
-      margin-bottom: 0.5rem;
-    }
-
-    .agreement-box p,
-    .w9-box p {
-      margin-bottom: 0.45rem;
-    }
-
-    .agreement-box ul {
-      padding-left: 1.1rem;
+      color: var(--text-muted);
       margin-bottom: 0.4rem;
     }
 
-    .signature-block {
-      margin-top: 0.75rem;
-      border-top: 1px dashed #333333;
-      padding-top: 0.75rem;
+    .pill-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #888888);
     }
 
-    .signature-canvas-wrapper {
-      margin-top: 0.4rem;
-      border-radius: 10px;
-      border: 1px dashed #444444;
-      background: #050505;
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .signature-canvas-wrapper canvas {
-      width: 100%;
-      height: 100%;
-    }
-
-    .inline-inputs {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .inline-inputs .field-group {
-      flex: 1 1 120px;
-    }
-
-    .w9-tax-classification {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.35rem;
-      margin-top: 0.35rem;
-      font-size: 0.85rem;
-    }
-
-    .w9-tax-classification label {
-      font-size: 0.8rem;
-      text-transform: none;
-      letter-spacing: 0;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      color: #d0d0d0;
-    }
-
-    .w9-tax-classification input[type="radio"] {
-      width: auto;
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
     .tiny-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .section-divider {
+      height: 1px;
+      border-radius: 999px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.14),
+        transparent
+      );
+      margin: 1.2rem 0 1.0rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.2fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .info-block {
+      margin-bottom: 0.65rem;
+    }
+
+    .info-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+      margin-bottom: 0.15rem;
+    }
+
+    .info-value {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.4rem;
+    }
+
+    .badge {
+      padding: 0.15rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.9rem 1.5rem 1.1rem;
+      font-size: 0.78rem;
+      text-align: center;
+      color: var(--text-muted);
+      background: #050505;
+    }
+
+    /* --------- FORM ELEMENTS --------- */
+    form {
+      margin-top: 0.4rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.75rem 1rem;
+    }
+
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem 1rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+    }
+
+    .form-label span {
+      color: var(--accent-soft);
+      margin-left: 0.1rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: var(--input-bg);
+      border-radius: 14px;
+      border: 1px solid var(--input-border);
+      padding: 0.55rem 0.7rem;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease,
+        background-color 0.18s ease;
+      font-family: inherit;
+      min-width: 0;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: #555555;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--input-border-focus);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+      background-color: #141414;
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .helper-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.3rem;
+    }
+
+    .switch-row input[type="checkbox"] {
+      width: 1rem;
+      height: 1rem;
+      accent-color: #ffffff;
+    }
+
+    .subtle-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.15rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+
+    .subtle-chip span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #777777);
+    }
+
+    .badge-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.12rem 0.6rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .badge-pill span {
+      display: inline-flex;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #777777);
+    }
+
+    .section-note {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      margin-bottom: 0.6rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+
+    .button-row .btn {
+      flex-shrink: 0;
+    }
+
+    .button-row .btn-outline {
+      color: var(--accent-soft);
+    }
+
+    .button-row .btn-outline.danger {
+      border-color: rgba(255, 75, 75, 0.8);
+      color: #ff9b9b;
+    }
+
+    .button-row .btn-outline.danger:hover {
+      background: rgba(255, 75, 75, 0.08);
+    }
+
+    .pill-number {
+      padding: 0.14rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .pill-number span.index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.1rem;
+      height: 1.1rem;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #000000;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .signature-pad-wrapper {
+      background: #0b0b0b;
+      border-radius: 14px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      padding: 0.45rem 0.55rem 0.55rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .signature-pad-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .signature-pad-toolbar button {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.2rem 0.6rem;
+      background: transparent;
+      color: var(--accent-soft);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .signature-pad-toolbar button:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .signature-pad-canvas {
+      width: 100%;
+      height: 135px;
+      border-radius: 10px;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      cursor: crosshair;
+    }
+
+    .file-input {
+      border: 1px dashed rgba(255, 255, 255, 0.3);
+      border-radius: 14px;
+      padding: 0.55rem 0.7rem;
+      font-size: 0.83rem;
+      color: var(--text-soft);
+      background: #0b0b0b;
+    }
+
+    .file-input input[type="file"] {
+      width: 100%;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    .language-toggle {
+      display: inline-flex;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      overflow: hidden;
+    }
+
+    .language-toggle button {
+      border: none;
+      padding: 0.28rem 0.7rem;
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-muted);
+    }
+
+    .language-toggle button.active {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .lang-es {
+      display: none;
+    }
+
+    .language-es-active .lang-es {
+      display: inline;
+    }
+
+    .language-es-active .lang-en-only {
+      display: none;
+    }
+
+    /* Billing information styles (from billing page) */
+    .billing-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 1.4rem;
+      align-items: flex-start;
+    }
+
+    .billing-summary {
+      padding: 0.9rem 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: radial-gradient(circle at top left, #1f1f1f 0, #0c0c0c 42%, #050505 100%);
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    .billing-summary h2 {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.4rem;
+      color: var(--accent-soft);
+    }
+
+    .billing-summary ul {
+      margin: 0.3rem 0 0.6rem;
+      padding-left: 1.15rem;
+    }
+
+    .billing-summary li {
+      margin-bottom: 0.25rem;
+    }
+
+    .billing-summary .carrier-list {
+      margin-top: 0.4rem;
+      padding-top: 0.5rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+    }
+
+    .billing-summary .carrier-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+      margin-bottom: 0.18rem;
+    }
+
+    .billing-summary .carrier-name {
+      color: var(--accent-soft);
+    }
+
+    .billing-summary .carrier-phone {
+      color: var(--text-muted);
+    }
+
+    .accent-pill {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      border-radius: 999px;
+      padding: 0.16rem 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--accent-soft);
+    }
+
+    .accent-pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #777777);
+    }
+
+    .note-box {
+      border-radius: 16px;
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      padding: 0.65rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.55);
+    }
+
+    /* Invoice / Subcontractor boxes */
+    .subcard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 0.7rem;
+    }
+
+    .subcard {
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #262626 0, #111 45%, #050505 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.9rem 1rem;
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .subcard::before {
+      content: "";
+      position: absolute;
+      inset: -5%;
+      background: radial-gradient(
+        circle at top left,
+        rgba(255, 255, 255, 0.08),
+        transparent 55%
+      );
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .subcard-label {
       font-size: 0.75rem;
-      color: #8a8a8a;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 0.3rem;
+    }
+
+    .subcard-value {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin-bottom: 0.15rem;
+    }
+
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.14rem 0.55rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+
+    .pill-tag span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #777777);
+    }
+
+    .card-subsection-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .subdued-link {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .subdued-link a {
+      color: var(--accent-soft);
+    }
+
+    .subdued-link a:hover {
+      text-decoration: underline;
+    }
+
+    .language-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    .subtle-callout {
+      border-radius: 14px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      padding: 0.55rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 0.4rem;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .badge-row-cols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem 0.75rem;
+      margin-top: 0.4rem;
+    }
+
+    .badge-row-cols .badge {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .horizontal-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.45rem;
+    }
+
+    .horizontal-pill-row .pill-label {
+      margin-bottom: 0;
+    }
+
+    /* Projects map styles */
+    /* --------- PROJECTS MAP --------- */
+    #projects-map {
+      width: 100%;
+      height: 380px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      margin-top: 0.9rem;
+    }
+
+    .project-photos {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .project-photos-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .project-photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .project-photos-grid img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: #000;
+      object-fit: cover;
     }
 
     @media (max-width: 768px) {
+      #projects-map {
+        height: 320px;
+      }
+    }
+
+    /* --------- RESPONSIVE --------- */
+    @media (max-width: 960px) {
+      .content {
+        grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.2fr);
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      }
+    }
+
+    @media (max-width: 820px) {
       .header-inner {
         flex-direction: column;
         align-items: flex-start;
+        gap: 0.7rem;
       }
 
       nav {
@@ -590,30 +1150,69 @@
         justify-content: flex-start;
       }
 
-      .two-column,
+      .content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
       .hero {
         grid-template-columns: minmax(0, 1fr);
+      }
+
+      .billing-wrapper {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        padding: 0.7rem 1rem 0.7rem;
+      }
+
+      .brand-name {
+        font-size: 0.98rem;
+      }
+
+      nav {
+        gap: 0.3rem;
+      }
+
+      .content {
+        padding: 1.35rem 1rem 2.1rem;
       }
 
       .card {
         padding: 1.25rem 1.1rem 1.7rem;
       }
+
+      .two-column,
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .form-grid,
+      .form-grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .subcard-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
   </style>
-</head>
 
+</head>
 <body>
-  <div class="page-wrapper">
+  <div class="page-wrap">
     <header>
       <div class="header-inner">
-        <div class="brand">
+        <div class="brand-lockup">
           <div class="brand-logo">
-            <!-- Replace logo.png with your logo file if desired -->
-            <img src="logo.png" alt="Anchor Homes logo" />
+            <!-- Replace with actual Anchor Homes logo -->
+            <img src="https://via.placeholder.com/80x80?text=Anchor+Homes" alt="Anchor Homes Logo" />
           </div>
           <div class="brand-text">
-            <div class="brand-name">Anchor Homes</div>
-            <div class="brand-tagline">Custom Homes &amp; Renovations</div>
+            <div class="brand-name">ANCHOR HOMES LLC</div>
+            <div class="brand-tagline">Middle Tennessee Construction &amp; Renovation</div>
           </div>
         </div>
 
@@ -621,6 +1220,7 @@
           <button class="nav-link active" data-section="welcome">Welcome</button>
           <button class="nav-link" data-section="about">About Us</button>
           <button class="nav-link" data-section="services">Services</button>
+          <button class="nav-link" data-section="projects">Projects</button>
           <button class="nav-link" data-section="change-requests">Change Request</button>
           <button class="nav-link" data-section="subcontractors">Invoices</button>
           <button class="nav-link" data-section="new-subcontractors">New Subcontractors</button>
@@ -634,49 +1234,91 @@
         <!-- --------- WELCOME --------- -->
         <section id="welcome" class="section active">
           <div class="card">
-            <div class="card-header">
-              <h1 class="card-title">Welcome</h1>
-              <p class="card-subtitle">
-                Building homes and spaces that feel solid, simple, and thoughtfully finished.
-              </p>
-            </div>
-
             <div class="hero">
-              <div>
-                <h2 class="hero-title">Anchor Homes</h2>
-                <p class="hero-tagline">
-                  A builder focused on clear communication, strong structure, and clean design—from
-                  first footing to final walk-through.
+              <div class="hero-copy">
+                <div class="hero-eyebrow">
+                  <span class="hero-eyebrow-badge">Licensed · Insured · Local</span>
+                  Serving Middle Tennessee
+                </div>
+                <h1 class="hero-title">
+                  <span>Renovations, New Builds,</span>
+                  <span>and Everything In-Between.</span>
+                </h1>
+                <p class="hero-body">
+                  Anchor Homes LLC is a full-service construction and renovation company
+                  focused on quality craftsmanship, clear communication, and a smooth process from
+                  first sketch to final walkthrough.
                 </p>
-                <ul class="hero-highlights muted">
-                  <li>Custom homes and large-scale remodels</li>
-                  <li>Light commercial build-outs and improvements</li>
-                  <li>Hands-on project management and responsive updates</li>
-                </ul>
-
-                <div class="button-row">
-                  <button type="button" class="btn btn-outline" data-jump="new-subcontractors">
-                    New Subcontractor Setup
+                <div class="hero-cta-row">
+                  <button class="btn btn-primary" data-jump="change-requests">
+                    Request a Project Change
                   </button>
+                  <button class="btn btn-outline" data-jump="subcontractors">
+                    Submit an Invoice
+                  </button>
+                </div>
+                <div class="hero-secondary-text">
+                  <span>Need a quote or have questions?</span>
+                  <span class="pill">Call or text &bull; (615) 555-0000</span>
+                </div>
+                <div class="hero-secondary-text" style="margin-top: 0.35rem;">
+                  <span>E-mail</span>
+                  <a href="mailto:info@anchorhomes.com">info@anchorhomes.com</a>
                 </div>
               </div>
 
-              <div class="hero-image-frame">
-                <!-- Replace with your job-site photos later -->
-                <img src="stock1.jpg" alt="Home framing in progress" class="hero-slide active" />
-                <img src="stock2.jpg" alt="Job site with home under construction" class="hero-slide" />
-                <img src="stock3.jpg" alt="Completed new construction home" class="hero-slide" />
+              <div class="hero-media">
+                <div class="hero-frame">
+                  <div class="hero-media-inner">
+                    <div class="hero-slides">
+                      <div class="hero-slide active"></div>
+                      <div class="hero-slide"></div>
+                      <div class="hero-slide"></div>
+                      <div class="hero-slide-gradient"></div>
+                    </div>
+                    <div class="hero-meta-bar">
+                      <div class="hero-meta-primary">
+                        <div class="hero-meta-title">Featured Projects</div>
+                        <div class="hero-meta-subtitle">
+                          Kitchens · Whole-Home Renovations · Custom Builds
+                        </div>
+                      </div>
+                      <div class="hero-metrics">
+                        <span>Licensed &amp; Insured</span>
+                        <span>Middle Tennessee</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hero-media-overlay"></div>
+                </div>
               </div>
             </div>
 
-            <!-- CUSTOMER REVIEWS -->
-            <div class="reviews">
-              <div class="reviews-header">
-                <div class="reviews-title">Customer Reviews</div>
-                <div class="reviews-label">Rotating every few seconds</div>
+            <div class="section-divider"></div>
+
+            <div class="two-column">
+              <div>
+                <span class="pill-label">What We Do</span>
+                <p class="muted">
+                  From single-room updates to full home remodels, we handle framing, finishes,
+                  exteriors, and custom details—coordinating every step so you don’t have to.
+                </p>
+                <div class="badge-row" style="margin-top:0.55rem;">
+                  <span class="badge">Renovations</span>
+                  <span class="badge">New Construction</span>
+                  <span class="badge">Additions</span>
+                  <span class="badge">Outdoor Living</span>
+                </div>
               </div>
-              <div class="review-quote" id="review-quote"></div>
-              <div class="review-author" id="review-author"></div>
+              <div>
+                <span class="pill-label">How This Page Helps</span>
+                <p class="muted">
+                  Use the navigation above to submit project change requests, upload
+                  subcontractor invoices, or send us your information as a new subcontractor.
+                  Each form is designed to collect everything we need the first time, helping
+                  us respond quickly and accurately.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -687,38 +1329,63 @@
             <div class="card-header">
               <h1 class="card-title">About Us</h1>
               <p class="card-subtitle">
-                A brief overview of who you are, what you build, and what sets Anchor Homes apart.
+                Anchor Homes LLC is a locally-focused construction company built on trust, clarity,
+                and craftsmanship.
               </p>
             </div>
+
             <div class="two-column">
               <div>
+                <span class="pill-label">Our Approach</span>
                 <p class="muted">
-                  Anchor Homes is a residential and commercial builder focused on clean design,
-                  honest communication, and durable craftsmanship. From first walkthrough to final
-                  punch list, our goal is to keep every project predictable, transparent, and
-                  enjoyable for the families and businesses who trust us.
+                  We believe successful projects are built on clear expectations and consistent
+                  communication. From the first estimate to final walkthrough, our goal is to keep
+                  you informed, supported, and confident in every decision.
+                </p>
+                <p class="muted" style="margin-top:0.6rem;">
+                  We treat your home as if it were our own—protecting your space, respecting your
+                  time, and planning schedules and trades to minimize disruption.
                 </p>
               </div>
               <div>
-                <p class="muted">
-                  Led by owner <strong style="color:#ffffff;">Austin Bream</strong>, Anchor Homes
-                  combines practical job-site experience with a detail-driven planning process.
-                  Austin Bream has achieved local legend status not for his athleticism or academic prowess, but for his truly unhinged devotion to raw hotdogs—no buns, no condiments, just cold, slippery tubes of mystery meat straight from the pack. While most folks reach for a grill, Austin reaches for the fridge with the confidence of a man who’s made peace with his choices. Around town, he's affectionately (and somewhat fearfully) known as the “Glizzy Gobbler,” a title he wears like a badge of honor. But it’s the whispered moniker “Throat Goat” that really cements his legacy—earned not through scandal, but through the sheer velocity and volume with which he can down a raw frank. Neighborhood barbecues haven’t been the same since.
-                </p>
+                <span class="pill-label">What You Can Expect</span>
+                <ul class="muted" style="padding-left:1.2rem; margin-top:0.2rem;">
+                  <li>Transparent estimates and clear scopes of work</li>
+                  <li>Professional, respectful crews and trade partners</li>
+                  <li>Clean job sites and thoughtful scheduling</li>
+                  <li>Regular updates on progress and next steps</li>
+                  <li>Quality-focused work with attention to detail</li>
+                </ul>
               </div>
             </div>
 
-            <div class="card" style="margin-top: 1.5rem; background: rgba(5,5,5,0.6);">
-              <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
-                <h2 class="card-title" style="font-size: 1rem;">Your About Us Content</h2>
+            <div class="section-divider"></div>
+
+            <div class="two-column">
+              <div>
+                <div class="info-block">
+                  <div class="info-label">Service Area</div>
+                  <div class="info-value">
+                    Franklin · Brentwood · Nolensville · Spring Hill · Nashville and the surrounding areas
+                  </div>
+                </div>
+                <div class="info-block">
+                  <div class="info-label">Project Types</div>
+                  <div class="info-value">
+                    Whole-home renovations, additions, kitchens and baths, exterior upgrades,
+                    and select custom new-home builds.
+                  </div>
+                </div>
               </div>
-              <p class="hint" style="margin-top: 0.4rem;">
-                Replace this placeholder text with your detailed About Us description in the HTML file.
-              </p>
-              <p style="margin-top: 0.75rem;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat dolor
-                vitae est interdum, in auctor arcu faucibus.
-              </p>
+              <div>
+                <div class="info-block">
+                  <div class="info-label">Ready to Talk?</div>
+                  <div class="info-value">
+                    Reach out using the Contact section, or submit details through the Change
+                    Request form if you’re an existing client.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -747,24 +1414,82 @@
                 </ul>
               </div>
               <div>
-                <h2 class="info-label" style="margin-bottom:0.4rem;">Commercial &amp; Light Commercial</h2>
+                <h2 class="info-label" style="margin-bottom:0.4rem;">Light Commercial</h2>
                 <ul class="muted" style="padding-left:1.2rem; margin-bottom:1.5rem;">
-                  <li>Tenant build-outs and interior finish-outs</li>
-                  <li>Office and professional space remodeling</li>
-                  <li>Retail and showroom improvements</li>
-                  <li>Small business build-to-suit projects</li>
-                  <li>Site and accessibility upgrades</li>
-                  <li>Ongoing maintenance and small-project work</li>
+                  <li>Office and tenant build-outs</li>
+                  <li>Retail refreshes and layout changes</li>
+                  <li>Small multi-family renovations</li>
+                  <li>Code-compliance work and interior reconfigurations</li>
                 </ul>
               </div>
             </div>
 
+            <div class="section-divider"></div>
+
+            <div class="two-column">
+              <div>
+                <span class="pill-label">Existing Clients</span>
+                <p class="muted">
+                  If you already have an active project with us and need to adjust scope, finishes,
+                  timelines, or allowances, use the Change Request section. It helps us document and
+                  price changes quickly and accurately.
+                </p>
+              </div>
+              <div>
+                <span class="pill-label">Trade Partners &amp; Subcontractors</span>
+                <p class="muted">
+                  If you’re a subcontractor, you can upload invoices and project details through the
+                  Invoices section, or share your information and W-9 through the New Subcontractors
+                  section. This keeps everything organized and moving.
+                </p>
+              </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <span class="pill-label">Have Something Unique?</span>
             <p class="muted">
-              If you don’t see your exact project type listed, reach out—we can usually tailor a
-              solution or point you to someone we trust.
+              If your project doesn’t quite fit the categories above, reach out through the Contact
+              section to tell us more. We’ll be honest about whether we’re the right fit and can
+              usually tailor a solution or point you to someone we trust.
             </p>
           </div>
         </section>
+
+        <!-- --------- PROJECTS --------- -->
+        <section id="projects" class="section">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Projects</h1>
+              <p class="card-subtitle">
+                Recent and current Anchor Homes projects across Middle Tennessee.
+              </p>
+            </div>
+
+            <p class="muted">
+              Use the map below to explore projects in the greater Middle Tennessee area.
+              Tap / click a pin to see photos from that job.
+            </p>
+
+            <div id="projects-map"></div>
+
+            <div id="project-photos" class="project-photos">
+              <div class="project-photos-header">
+                <div class="info-label" id="project-photos-title">
+                  Project Photos
+                </div>
+                <div class="tiny-note" id="project-photos-location">
+                  Click a pin on the map to load photos.
+                </div>
+              </div>
+
+              <div class="project-photos-grid" id="project-photos-grid">
+                <!-- Images will be injected here when a marker is clicked -->
+              </div>
+            </div>
+          </div>
+        </section>
+
 
         <!-- --------- CHANGE REQUEST --------- -->
         <section id="change-requests" class="section">
@@ -777,843 +1502,700 @@
             </div>
 
             <form
-              action="https://formspree.io/f/xanrbjlk"
+              action="https://formspree.io/f/xdkqdpgd"
               method="POST"
-              accept-charset="UTF-8"
+              enctype="multipart/form-data"
+              id="change-request-form"
             >
-              <input type="hidden" name="form_name" value="Change Request" />
+              <input type="hidden" name="form_name" value="change-request" />
 
-              <div class="field-group">
-                <label for="cr-name">
-                  Customer Name<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="cr-name"
-                  name="customer_name"
-                  required
-                  placeholder="First and last name"
-                />
+              <span class="pill-label">Step 1 · Project Information</span>
+
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="cr-customer-name">Customer Name<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="cr-customer-name"
+                    name="cr_customer_name"
+                    required
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="cr-project-address">Project Address<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="cr-project-address"
+                    name="cr_project_address"
+                    required
+                  />
+                </div>
               </div>
 
-              <div class="field-group">
-                <label for="cr-phone">
-                  Phone<span class="required">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="cr-phone"
-                  name="customer_phone"
-                  required
-                  placeholder="(555) 555-5555"
-                />
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="cr-phone">Phone<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="tel"
+                    id="cr-phone"
+                    name="cr_phone"
+                    required
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="cr-email">Email<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="cr-email"
+                    name="cr_email"
+                    required
+                  />
+                </div>
               </div>
 
-              <div class="field-group">
-                <label for="cr-email">
-                  Email<span class="required">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="cr-email"
-                  name="customer_email"
-                  required
-                  placeholder="you@example.com"
-                />
-              </div>
+              <div class="section-divider"></div>
 
-              <div class="field-group">
-                <label for="cr-address">
-                  Project Address<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="cr-address"
-                  name="project_address"
-                  required
-                  placeholder="Street address, city, state, ZIP"
-                />
-              </div>
+              <span class="pill-label">Step 2 · Change Details</span>
 
-              <div class="field-group">
-                <label for="cr-details">
-                  Change Request Details<span class="required">*</span>
-                </label>
+              <div class="form-field">
+                <label class="form-label" for="cr-description">Describe Your Requested Change<span>*</span></label>
                 <textarea
-                  id="cr-details"
-                  name="change_request_details"
+                  class="form-textarea"
+                  id="cr-description"
+                  name="cr_description"
+                  placeholder="Please include room/area, materials or finishes you’d like, and any timing considerations."
                   required
-                  placeholder="Describe the change you are requesting. Include room, finishes, materials, and any timeline notes."
                 ></textarea>
-                <p class="hint">
-                  All change requests are subject to pricing review and schedule impact. Your
-                  project manager will follow up to confirm details.
+                <p class="helper-text">
+                  The more detail you can provide, the easier it is for us to price and schedule your change accurately.
                 </p>
               </div>
 
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="cr-budget">Rough Budget (if known)</label>
+                  <input
+                    class="form-input"
+                    type="number"
+                    step="0.01"
+                    id="cr-budget"
+                    name="cr_budget"
+                    placeholder="Example: 2500"
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="cr-timing">Timing / Deadline</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="cr-timing"
+                    name="cr_timing"
+                    placeholder="Example: Before closing, before move-in, or flexible"
+                  />
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">Step 3 · Photos or Files (Optional)</span>
+
+              <p class="tiny-note">
+                You can attach photos, sketches, or inspiration images to help us understand your request.
+              </p>
+
+              <div class="file-input" style="margin-top:0.3rem;">
+                <input
+                  type="file"
+                  id="cr-files"
+                  name="cr_files"
+                  accept=".jpg,.jpeg,.png,.pdf"
+                  multiple
+                />
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">Step 4 · Confirmation</span>
+
+              <div class="switch-row">
+                <input type="checkbox" id="cr-confirm" name="cr_confirm" required />
+                <label for="cr-confirm" class="tiny-note">
+                  I understand this request may change the contract price and schedule and that Anchor Homes will
+                  provide written confirmation of any approved changes before work proceeds.
+                </label>
+              </div>
+
               <div class="button-row">
-                <button type="submit" class="btn btn-primary">
-                  Submit Change Request
-                </button>
-                <button type="reset" class="btn btn-outline">
-                  Clear Form
-                </button>
+                <button type="submit" class="btn btn-primary">Submit Change Request</button>
+                <button type="reset" class="btn btn-outline">Clear Form</button>
               </div>
             </form>
           </div>
         </section>
 
-        <!-- --------- INVOICES --------- -->
+        <!-- --------- SUBCONTRACTORS: INVOICES --------- -->
         <section id="subcontractors" class="section">
           <div class="card">
             <div class="card-header">
-              <h1 class="card-title">Invoices</h1>
+              <h1 class="card-title">Subcontractor Invoices</h1>
               <p class="card-subtitle">
-                Upload invoices related to Anchor Homes projects for processing and payment.
+                Upload your invoice, project details, and supporting documents so we can process payment quickly.
               </p>
             </div>
 
-            <form
-              action="https://formspree.io/f/xanrbjlk"
-              method="POST"
-              enctype="multipart/form-data"
-              accept-charset="UTF-8"
-            >
-              <input type="hidden" name="form_name" value="Invoice Upload" />
-
-              <div class="field-group">
-                <label for="sub-name">
-                  Contact Name<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sub-name"
-                  name="sub_name"
-                  required
-                  placeholder="First and last name"
-                />
+            <div class="subcard-grid">
+              <div class="subcard">
+                <div class="subcard-label">For Trade Partners</div>
+                <div class="subcard-value">Keep your invoices and job details in one place.</div>
+                <p class="tiny-note">
+                  Clearly label each invoice with the project address and scope performed (e.g., framing,
+                  electrical rough-in, tile install). This helps us match your work to the right project and schedule.
+                </p>
+                <div style="margin-top:0.6rem;">
+                  <span class="pill-tag">
+                    <span class="dot"></span>
+                    Invoices &amp; Job Details
+                  </span>
+                </div>
               </div>
-
-              <div class="field-group">
-                <label for="sub-company">
-                  Company Name<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sub-company"
-                  name="sub_company"
-                  required
-                  placeholder="Business or trade name"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-email">
-                  Email<span class="required">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="sub-email"
-                  name="sub_email"
-                  required
-                  placeholder="you@yourcompany.com"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-phone">
-                  Phone<span class="required">*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="sub-phone"
-                  name="sub_phone"
-                  required
-                  placeholder="(555) 555-5555"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-project">
-                  Project Name / Address<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sub-project"
-                  name="sub_project"
-                  required
-                  placeholder="Project name or address"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-amount">
-                  Invoice Amount (Optional)
-                </label>
-                <input
-                  type="text"
-                  id="sub-amount"
-                  name="sub_amount"
-                  placeholder="$0.00"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sub-file">
-                  Upload Invoice<span class="required">*</span>
-                </label>
-                <input
-                  type="file"
-                  id="sub-file"
-                  name="invoice_file"
-                  required
-                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx"
-                />
-                <p class="hint">
-                  Accepted formats: PDF, image files, Word, or Excel. One file per submission.
+              <div class="subcard">
+                <div class="subcard-label">Need to Update Your Info?</div>
+                <div class="subcard-value">
+                  If your mailing address, contact, or insurance has changed, use the New Subcontractors section.
+                </div>
+                <p class="tiny-note">
+                  Keeping your information current helps us avoid delays in processing payments and maintaining
+                  compliance.
                 </p>
               </div>
+            </div>
 
-              <div class="field-group">
-                <label for="sub-notes">
-                  Notes (Optional)
-                </label>
+            <div class="section-divider"></div>
+
+            <form
+              action="https://formspree.io/f/xdkqdpgd"
+              method="POST"
+              enctype="multipart/form-data"
+              id="invoice-form"
+            >
+              <input type="hidden" name="form_name" value="subcontractor-invoice" />
+
+              <span class="pill-label">Step 1 · Company &amp; Contact</span>
+
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="inv-company-name">Company Name<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="inv-company-name"
+                    name="inv_company_name"
+                    required
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="inv-contact-name">Contact Name<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="inv-contact-name"
+                    name="inv_contact_name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="inv-phone">Phone<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="tel"
+                    id="inv-phone"
+                    name="inv_phone"
+                    required
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="inv-email">Email<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="inv-email"
+                    name="inv_email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">Step 2 · Project Details</span>
+
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="inv-project-address">Project Address<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="inv-project-address"
+                    name="inv_project_address"
+                    required
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="inv-scope">Scope of Work<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="inv-scope"
+                    name="inv_scope"
+                    placeholder="Example: framing labor, tile install, electrical rough-in"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="inv-date-completed">Date Completed</label>
+                  <input
+                    class="form-input"
+                    type="date"
+                    id="inv-date-completed"
+                    name="inv_date_completed"
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="inv-po-number">PO / Job Number (if applicable)</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="inv-po-number"
+                    name="inv_po_number"
+                  />
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">Step 3 · Invoice &amp; Supporting Files</span>
+
+              <p class="tiny-note">
+                Please upload your invoice as a PDF if possible. You can also attach photos or additional documents
+                related to your work.
+              </p>
+
+              <div class="file-input" style="margin-top:0.3rem;">
+                <input
+                  type="file"
+                  id="inv-file"
+                  name="inv_file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  required
+                />
+              </div>
+
+              <div class="file-input" style="margin-top:0.6rem;">
+                <label class="tiny-note" for="inv-supporting-files">Additional Photos or Supporting Files (Optional)</label>
+                <input
+                  type="file"
+                  id="inv-supporting-files"
+                  name="inv_supporting_files"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  multiple
+                />
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">Step 4 · Notes</span>
+
+              <div class="form-field">
+                <label class="form-label" for="inv-notes">Notes / Payment Details</label>
                 <textarea
-                  id="sub-notes"
-                  name="sub_notes"
-                  placeholder="Any notes related to this invoice, work completed, or billing period."
+                  class="form-textarea"
+                  id="inv-notes"
+                  name="inv_notes"
+                  placeholder="Include any special instructions, phase information, or notes we should know about this invoice."
                 ></textarea>
               </div>
 
               <div class="button-row">
-                <button type="submit" class="btn btn-primary">
-                  Submit Invoice
-                </button>
-                <button type="reset" class="btn btn-outline">
-                  Clear Form
-                </button>
+                <button type="submit" class="btn btn-primary">Submit Invoice</button>
+                <button type="reset" class="btn btn-outline">Clear Form</button>
               </div>
             </form>
           </div>
         </section>
 
-        <!-- --------- NEW SUBCONTRACTORS (AGREEMENT + W9) --------- -->
+        <!-- --------- NEW SUBCONTRACTORS --------- -->
         <section id="new-subcontractors" class="section">
           <div class="card">
             <div class="card-header">
               <h1 class="card-title">New Subcontractors</h1>
               <p class="card-subtitle">
-                Complete the Subcontractors Agreement and W-9 so we can add you to our system.
+                Share your company information, upload your W-9 and insurance certificate, and sign our subcontractor
+                agreement so we can add you to our active trade partners.
               </p>
             </div>
 
+            <div class="subcard-grid">
+              <div class="subcard">
+                <div class="subcard-label">Why We Collect This</div>
+                <div class="subcard-value">We want to pay you quickly and keep projects compliant.</div>
+                <p class="tiny-note">
+                  The information you provide here allows us to set you up correctly in our system for payment,
+                  tax reporting, and insurance compliance. Thank you for taking a few minutes to complete it.
+                </p>
+              </div>
+              <div class="subcard">
+                <div class="subcard-label">Already Submitted?</div>
+                <div class="subcard-value">
+                  If you’ve already submitted this information and just need to update a W-9 or insurance certificate,
+                  you can upload updated documents here and note “update only” in the comments.
+                </div>
+              </div>
+            </div>
+
+            <div class="section-divider"></div>
+
             <form
-              id="new-subcontractor-form"
+              id="subcontractor-form"
               action="https://formspree.io/f/xdkqdpgd"
               method="POST"
-              accept-charset="UTF-8"
+              enctype="multipart/form-data"
             >
-              <input type="hidden" name="form_name" value="New Subcontractor Agreement and W9" />
+              <input type="hidden" name="form_name" value="new-subcontractor" />
+              <input type="hidden" id="generated_pdf" name="generated_pdf" />
+              <input type="hidden" id="agreement_signature_data" name="agreement_signature_data" />
+              <input type="hidden" id="w9_signature_data" name="w9_signature_data" />
 
-              <!-- BASIC INFO -->
-              <span class="pill-label">Step 1 · Subcontractor Information</span>
+              <span class="pill-label">Step 1 · Company Information</span>
 
-              <div class="field-group">
-                <label for="sc-company">
-                  Company / Subcontractor Name<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sc-company"
-                  name="sc_company_name"
-                  required
-                  placeholder="Legal business name"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="sc-contact">
-                  Contact Name<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sc-contact"
-                  name="sc_contact_name"
-                  required
-                  placeholder="First and last name"
-                />
-              </div>
-
-              <div class="inline-inputs">
-                <div class="field-group">
-                  <label for="sc-email">
-                    Email<span class="required">*</span>
-                  </label>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="company-name">Company Name<span>*</span></label>
                   <input
-                    type="email"
-                    id="sc-email"
-                    name="sc_email"
+                    class="form-input"
+                    type="text"
+                    id="company-name"
+                    name="company_name"
                     required
-                    placeholder="you@yourcompany.com"
                   />
                 </div>
-                <div class="field-group">
-                  <label for="sc-phone">
-                    Phone<span class="required">*</span>
-                  </label>
+                <div class="form-field">
+                  <label class="form-label" for="contact-name">Contact Name<span>*</span></label>
                   <input
+                    class="form-input"
+                    type="text"
+                    id="contact-name"
+                    name="contact_name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="phone">Phone<span>*</span></label>
+                  <input
+                    class="form-input"
                     type="tel"
-                    id="sc-phone"
-                    name="sc_phone"
+                    id="phone"
+                    name="phone"
                     required
-                    placeholder="(555) 555-5555"
+                  />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="email">Email<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
                   />
                 </div>
               </div>
 
-              <div class="field-group">
-                <label for="sc-address">
-                  Mailing Address<span class="required">*</span>
-                </label>
+              <div class="form-field">
+                <label class="form-label" for="mailing-address">Mailing Address<span>*</span></label>
                 <input
+                  class="form-input"
                   type="text"
-                  id="sc-address"
-                  name="sc_address"
+                  id="mailing-address"
+                  name="mailing_address"
                   required
-                  placeholder="Street address"
-                />
-              </div>
-
-              <div class="inline-inputs">
-                <div class="field-group">
-                  <label for="sc-city">
-                    City<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="sc-city"
-                    name="sc_city"
-                    required
-                    placeholder="City"
-                  />
-                </div>
-                <div class="field-group">
-                  <label for="sc-state">
-                    State<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="sc-state"
-                    name="sc_state"
-                    required
-                    placeholder="ST"
-                  />
-                </div>
-                <div class="field-group">
-                  <label for="sc-zip">
-                    ZIP<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="sc-zip"
-                    name="sc_zip"
-                    required
-                    placeholder="00000"
-                  />
-                </div>
-              </div>
-
-              <div class="field-group">
-                <label for="sc-trade">
-                  Primary Trade / Scope of Work<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sc-trade"
-                  name="sc_trade"
-                  required
-                  placeholder="Example: framing, electrical, drywall, etc."
                 />
               </div>
 
               <div class="section-divider"></div>
 
-              <!-- SUBCONTRACTOR AGREEMENT -->
-              <span class="pill-label">Step 2 · Subcontractors Agreement</span>
+              <span class="pill-label">Step 2 · W-9 Information</span>
 
-              <div class="agreement-box">
-                <h3>Subcontractors Agreement</h3>
-
-                <p>
-                  This document is a binding contract, which will serve as a blanket agreement for and between
-                  <strong>Kristina Chapman Contractor Dba Chapman &amp; Chapman Homes</strong> (herein known as
-                  <strong>Builder</strong>) and the undersigned (herein known as <strong>Subcontractor</strong>).
-                  By signing, Subcontractor and Builder agree to the terms set forth herein. This agreement shall remain
-                  in force from the date hereof and from year to year unless changed in writing by both parties.
-                </p>
-
-                <p><strong>1. GENERAL PERFORMANCE</strong><br />
-                  All work of the Subcontractor will be performed in a good and workmanlike manner in accordance with
-                  the plans and specifications for each job and must comply with all applicable laws, codes, ordinances,
-                  and regulations. All permits, fees, taxes, and expenses connected with such compliance are to be paid
-                  by the Subcontractor.
-                </p>
-
-                <p><strong>2. INDEPENDENT CONTRACTOR</strong><br />
-                  The Builder and Subcontractor agree that the Subcontractor is being hired solely as an independent
-                  contractor and that neither the Subcontractor nor Subcontractor’s employees shall be deemed to be
-                  employees of the Builder.
-                </p>
-
-                <p><strong>3. TIME</strong><br />
-                  The Subcontractor agrees to promptly begin work as soon as notified by the Builder, and to complete
-                  the work in a professional manner within a reasonable period of time and by any deadlines established
-                  by the Builder in writing. Subcontractor shall coordinate with other trades to allow each to complete
-                  its work on schedule and shall provide proper supervision, labor, and materials to maintain the
-                  Builder’s schedule. If Subcontractor’s work does not conform to plans, specifications, or quality
-                  standards, Builder may require correction or may correct the work and back charge the Subcontractor.
-                </p>
-
-                <p><strong>4. EXTRAS</strong><br />
-                  No deviations from the work specified in the contract will be permitted or paid for unless a written
-                  extra work or change order is first agreed upon and signed as required.
-                </p>
-
-                <p><strong>5. ASSIGNMENT</strong><br />
-                  No assignment of this subcontract agreement by Subcontractor is permitted without prior written
-                  permission from the Builder.
-                </p>
-
-                <p><strong>6. HOLD HARMLESS</strong><br />
-                  The Subcontractor agrees to protect, defend, and indemnify the Builder against, and hold the Builder
-                  harmless for, any and all claims, demands, liabilities, losses, expenses, suits, and actions (including
-                  attorney’s fees) arising out of or in connection with the work covered by this subcontract, except to
-                  the extent a claim is determined to be attributable solely to the fault or negligence of the Builder.
-                  Builder may withhold funds to protect against such claims.
-                </p>
-
-                <p><strong>7. MECHANICS LIEN</strong><br />
-                  Subcontractor shall furnish all partial and final lien waivers and sworn statements as required by the
-                  Builder. If any lien, encumbrance, or claim of nonpayment is asserted against the Builder’s property
-                  arising out of Subcontractor’s work, Subcontractor shall protect, indemnify, and hold the Builder
-                  harmless from all such liens and related costs and expenses.
-                </p>
-
-                <p><strong>8. CLEAN-UP</strong><br />
-                  Subcontractor agrees to clean up all debris, trash, and refuse generated by its trade at the end of each
-                  day and to leave the job broom clean. Failure to do so after notice may result in clean-up by Builder
-                  and back charge to Subcontractor.
-                </p>
-
-                <p><strong>9. DEFAULT</strong><br />
-                  If Subcontractor defaults in performance of any duties or obligations hereunder and such default
-                  continues after notice, Builder may immediately terminate this Agreement. Subcontractor shall be due
-                  only such sums for approved work up to termination and shall furnish lien waivers upon payment.
-                </p>
-
-                <p><strong>10. CARE OF MATERIALS</strong><br />
-                  Subcontractor agrees to properly care for materials supplied by Builder, storing them to protect from
-                  damage and disposing of unusable materials responsibly. Builder may back charge Subcontractor for
-                  materials damaged by negligent care.
-                </p>
-
-                <p><strong>11. PAYMENT</strong><br />
-                  Builder shall provide time frames for Subcontractor to submit invoices. Late invoices will be processed
-                  in the next pay period. Invoices in dispute may be held until resolution, and payment for disputed
-                  amounts may be withheld from any sums due.
-                </p>
-
-                <p><strong>12. INSURANCE</strong><br />
-                  Subcontractor shall provide Builder with a Certificate of Insurance showing the following coverage and
-                  shall maintain such coverage during the contract period (with 30 days’ written notice of cancellation
-                  or non-renewal):
-                </p>
-                <ul>
-                  <li>Commercial General Liability with limits at or above:
-                    <br />$1,000,000 each occurrence / $2,000,000 general aggregate /
-                    $2,000,000 products-completed operations aggregate (Builder named as additional insured).</li>
-                  <li>Workers Compensation Insurance covering all persons performing work at Builder’s job sites.</li>
-                  <li>Automobile Liability Insurance for vehicles used at or to/from jobsites with minimum coverage of
-                    $500,000 per accident.</li>
-                </ul>
-
-                <p><strong>Health and Safety:</strong> Subcontractor agrees to comply with all applicable health and
-                  safety requirements, supply required protective equipment to its workers, and accept responsibility
-                  for penalties and costs resulting from non-compliance.
-                </p>
-
-                <p><strong>13. CONDUCT</strong><br />
-                  Subcontractor’s employees and agents shall conduct themselves professionally, free from drugs or
-                  alcohol on the job site. Subcontractor agrees to comply with any applicable drug-testing policy in the
-                  event of an accident and will not enter into any agreement directly with Builder’s customer regarding
-                  the property while it is under construction.
-                </p>
-
-                <p><strong>14. MAINTENANCE OF EROSION CONTROL</strong><br />
-                  Subcontractor shall not disturb erosion control systems on site. Any moved silt fencing or other
-                  measures shall be promptly restored, and Subcontractor shall indemnify Builder for any damages or
-                  fines resulting from their disturbance.
-                </p>
-
-                <p><strong>15. ARBITRATION</strong><br />
-                  Any dispute arising under this Agreement, or regarding the meaning of the Drawings or Specifications,
-                  shall be resolved by binding arbitration as the sole remedy. Each party shall select one arbitrator, and
-                  the two arbitrators shall select a third. The decision of a majority shall be final and binding, and the
-                  expense of arbitration shall be borne equally by Builder and Subcontractor.
-                </p>
-
-                <p><strong>16. WARRANTY</strong><br />
-                  Subcontractor warrants against defects in workmanship and materials supplied by Subcontractor for a
-                  period of one year from the date the home is first occupied by the homeowner, on the same standards
-                  and duration as the Builder’s warranty provided to the Owner.
-                </p>
-              </div>
-
-              <div class="field-group">
-                <label>
-                  <input type="checkbox" name="agreement_read_ack" required />
-                  &nbsp;I have read and agree to the Subcontractors Agreement above.
-                </label>
-              </div>
-
-              <div class="inline-inputs">
-                <div class="field-group">
-                  <label for="sc-agreement-name">
-                    Subcontractor Name (for Agreement)<span class="required">*</span>
-                  </label>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="w9-name">Name (as shown on tax return)<span>*</span></label>
                   <input
+                    class="form-input"
                     type="text"
-                    id="sc-agreement-name"
-                    name="agreement_subcontractor_name"
+                    id="w9-name"
+                    name="w9_name"
                     required
-                    placeholder="Name of Subcontractor / Company"
                   />
                 </div>
-                <div class="field-group">
-                  <label for="sc-agreement-title">
-                    Title
-                  </label>
+                <div class="form-field">
+                  <label class="form-label" for="w9-business-name">Business Name / Disregarded Entity</label>
                   <input
+                    class="form-input"
                     type="text"
-                    id="sc-agreement-title"
-                    name="agreement_subcontractor_title"
-                    placeholder="Owner, Manager, etc."
+                    id="w9-business-name"
+                    name="w9_business_name"
                   />
                 </div>
               </div>
 
-              <div class="inline-inputs">
-                <div class="field-group">
-                  <label for="sc-agreement-date">
-                    Agreement Date<span class="required">*</span>
-                  </label>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="w9-entity-type">Federal Tax Classification<span>*</span></label>
+                  <select
+                    class="form-select"
+                    id="w9-entity-type"
+                    name="w9_entity_type"
+                    required
+                  >
+                    <option value="">Select one</option>
+                    <option value="individual">Individual / Sole Proprietor</option>
+                    <option value="c-corp">C Corporation</option>
+                    <option value="s-corp">S Corporation</option>
+                    <option value="partnership">Partnership</option>
+                    <option value="trust-estate">Trust / Estate</option>
+                    <option value="llc">LLC</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="w9-ssn-ein">SSN or EIN<span>*</span></label>
                   <input
+                    class="form-input"
+                    type="text"
+                    id="w9-ssn-ein"
+                    name="w9_ssn_ein"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">Step 3 · Insurance Certificate</span>
+
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="insurance-carrier">Insurance Carrier</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="insurance-carrier"
+                    name="insurance_carrier"
+                    placeholder="Example: General Liability &amp; Workers Comp carrier name"
+                  />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="policy-limits">Policy Limits</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="policy-limits"
+                    name="policy_limits"
+                    placeholder="Example: $1,000,000 / $2,000,000 GL, Workers Comp statutory"
+                  />
+                </div>
+              </div>
+
+              <div class="file-input" style="margin-top:0.4rem;">
+                <label class="tiny-note" for="insurance-certificate">
+                  Upload Certificate of Insurance (PDF or image)
+                </label>
+                <input
+                  type="file"
+                  id="insurance-certificate"
+                  name="insurance_certificate"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  required
+                />
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">Step 4 · Upload W-9</span>
+
+              <div class="file-input">
+                <label class="tiny-note" for="w9-upload">Upload Completed W-9 (PDF preferred)</label>
+                <input
+                  type="file"
+                  id="w9-upload"
+                  name="w9_upload"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  required
+                />
+              </div>
+
+              <div class="section-divider"></div>
+
+              <span class="pill-label">Step 5 · Subcontractor Agreement</span>
+
+              <p class="tiny-note">
+                Please review the subcontractor agreement below and sign electronically. A copy of your signed agreement
+                and W-9 will be combined into a single PDF and sent to Anchor Homes.
+              </p>
+
+              <div id="agreement-text" style="
+                margin-top:0.6rem;
+                padding:0.75rem 0.85rem;
+                border-radius:16px;
+                border:1px solid rgba(255,255,255,0.18);
+                background:rgba(0,0,0,0.55);
+                max-height:260px;
+                overflow:auto;
+                font-size:0.82rem;
+              ">
+                <h3 style="margin-top:0;">Subcontractor Agreement</h3>
+                <p>
+                  This Subcontractor Agreement (“Agreement”) is entered into between Anchor Homes LLC (“Contractor”) and
+                  the undersigned subcontractor (“Subcontractor”) for the provision of labor and/or materials on one or
+                  more construction projects directed by Contractor.
+                </p>
+                <p>
+                  Subcontractor agrees to perform all work in a professional, workmanlike manner consistent with industry
+                  standards, applicable codes, and all requirements provided by Contractor. Subcontractor is responsible
+                  for all labor, tools, equipment, supervision, and incidentals necessary to complete their scope of work.
+                </p>
+                <p>
+                  Subcontractor acknowledges that they are an independent contractor and not an employee of Anchor Homes
+                  LLC. Subcontractor is responsible for all applicable taxes, licenses, insurance, and compliance with
+                  federal, state, and local laws.
+                </p>
+                <p>
+                  Subcontractor shall maintain general liability and workers’ compensation insurance (where required by
+                  law) in limits acceptable to Contractor and shall provide certificates of insurance naming Contractor as
+                  a certificate holder upon request.
+                </p>
+                <p>
+                  Payment terms will be as agreed on a project-by-project basis, typically upon satisfactory completion of
+                  work and receipt of invoice, subject to applicable lien and retainage laws.
+                </p>
+                <p>
+                  Additional project-specific terms may be provided in writing by Contractor and will be incorporated by
+                  reference into this Agreement.
+                </p>
+                <p>
+                  By signing below, Subcontractor acknowledges that they have read and agree to the terms of this
+                  Agreement and that all information provided in connection with this form is true and correct.
+                </p>
+              </div>
+
+              <div class="form-grid" style="margin-top:0.8rem;">
+                <div class="form-field">
+                  <label class="form-label" for="agreement-name">Name / Title<span>*</span></label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="agreement-name"
+                    name="agreement_name"
+                    required
+                  />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="agreement-date">Date<span>*</span></label>
+                  <input
+                    class="form-input"
                     type="date"
-                    id="sc-agreement-date"
+                    id="agreement-date"
                     name="agreement_date"
                     required
                   />
                 </div>
-                <div class="field-group">
-                  <label for="sc-arb-initials">
-                    Arbitration Initials<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="sc-arb-initials"
-                    name="agreement_arbitration_initials"
-                    required
-                    placeholder="Initials to acknowledge arbitration clause"
-                  />
-                </div>
               </div>
 
-              <div class="signature-block">
-                <div class="info-label">Subcontractor Signature (draw)</div>
-                <p class="tiny-note">
-                  Use your finger (on mobile) or mouse (on desktop) to sign inside the box. You can clear and redraw if needed.
-                </p>
-                <div class="signature-canvas-wrapper">
-                  <canvas id="agreement-signature"></canvas>
-                </div>
-                <div class="button-row">
-                  <button type="button" class="btn btn-outline btn-sm" id="agreement-clear">
-                    Clear Signature
-                  </button>
-                </div>
-                <div class="field-group" style="margin-top:0.5rem;">
-                  <label for="agreement-signature-name">
-                    Typed Name (Signature)<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="agreement-signature-name"
-                    name="agreement_typed_signature_name"
-                    required
-                    placeholder="Type your full name as signature"
-                  />
+              <div class="form-field" style="margin-top:0.6rem;">
+                <label class="form-label">Signature (Agreement)<span>*</span></label>
+                <div class="signature-pad-wrapper">
+                  <div class="signature-pad-toolbar">
+                    <span>Draw your signature in the box</span>
+                    <button type="button" id="clear-agreement-signature">
+                      Clear
+                    </button>
+                  </div>
+                  <canvas id="agreement-signature" class="signature-pad-canvas"></canvas>
                 </div>
               </div>
 
               <div class="section-divider"></div>
 
-              <!-- W9 SECTION -->
-              <span class="pill-label">Step 3 · W-9 (Taxpayer Identification)</span>
-
-              <div class="w9-box">
-                <h3>Form W-9 – Request for Taxpayer Identification Number and Certification</h3>
-                <p class="tiny-note">
-                  This section collects the same information as IRS Form W-9, page 1. Please complete all
-                  required fields so we can issue any required tax forms (such as Form 1099).
-                </p>
-              </div>
-
-              <div class="field-group">
-                <label for="w9-name">
-                  Name (as shown on your income tax return)<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="w9-name"
-                  name="w9_name"
-                  required
-                  placeholder="Exact name from your tax return"
-                />
-              </div>
-
-              <div class="field-group">
-                <label for="w9-business">
-                  Business name / disregarded entity name (if different from above)
-                </label>
-                <input
-                  type="text"
-                  id="w9-business"
-                  name="w9_business_name"
-                  placeholder="Business or DBA name"
-                />
-              </div>
-
-              <div class="field-group">
-                <label>
-                  Federal Tax Classification<span class="required">*</span>
-                </label>
-                <div class="w9-tax-classification">
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="individual/sole proprietor" required />
-                    Individual / sole proprietor or single-member LLC
-                  </label>
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="c_corporation" />
-                    C Corporation
-                  </label>
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="s_corporation" />
-                    S Corporation
-                  </label>
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="partnership" />
-                    Partnership
-                  </label>
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="trust/estate" />
-                    Trust / Estate
-                  </label>
-                  <label>
-                    <input type="radio" name="w9_tax_class" value="llc_other" />
-                    Limited liability company (enter tax classification in box below)
-                  </label>
-                </div>
-              </div>
-
-              <div class="field-group">
-                <label for="w9-llc-class">
-                  If LLC, enter tax classification (C = C corp, S = S corp, P = Partnership)
-                </label>
-                <input
-                  type="text"
-                  id="w9-llc-class"
-                  name="w9_llc_tax_classification"
-                  placeholder="C, S, or P"
-                />
-              </div>
-
-              <div class="inline-inputs">
-                <div class="field-group">
-                  <label for="w9-exempt-payee">
-                    Exempt payee code (if any)
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-exempt-payee"
-                    name="w9_exempt_payee_code"
-                    placeholder=""
-                  />
-                </div>
-                <div class="field-group">
-                  <label for="w9-fatca">
-                    Exemption from FATCA reporting code (if any)
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-fatca"
-                    name="w9_fatca_code"
-                    placeholder=""
-                  />
-                </div>
-              </div>
-
-              <div class="field-group">
-                <label for="w9-address">
-                  Address (number, street, and apt. or suite no.)<span class="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="w9-address"
-                  name="w9_address"
-                  required
-                  placeholder="Street address"
-                />
-              </div>
-
-              <div class="inline-inputs">
-                <div class="field-group">
-                  <label for="w9-city">
-                    City<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-city"
-                    name="w9_city"
-                    required
-                    placeholder="City"
-                  />
-                </div>
-                <div class="field-group">
-                  <label for="w9-state">
-                    State<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-state"
-                    name="w9_state"
-                    required
-                    placeholder="ST"
-                  />
-                </div>
-                <div class="field-group">
-                  <label for="w9-zip">
-                    ZIP<span class="required">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="w9-zip"
-                    name="w9_zip"
-                    required
-                    placeholder="00000"
-                  />
-                </div>
-              </div>
-
-              <div class="field-group">
-                <label for="w9-account-nums">
-                  List account number(s) here (optional)
-                </label>
-                <input
-                  type="text"
-                  id="w9-account-nums"
-                  name="w9_account_numbers"
-                  placeholder="Account numbers, if any"
-                />
-              </div>
-
-              <div class="section-divider"></div>
-
-              <!-- TIN -->
-              <span class="pill-label">Step 4 · Taxpayer Identification Number</span>
+              <span class="pill-label">Step 6 · Sign W-9</span>
 
               <p class="tiny-note">
-                Enter your Social Security Number (SSN) or Employer Identification Number (EIN). Do not enter both unless applicable.
+                Please sign your W-9 electronically below. This signature confirms that the information provided on your
+                W-9 is accurate to the best of your knowledge.
               </p>
 
-              <div class="inline-inputs">
-                <div class="field-group">
-                  <label for="w9-ssn">
-                    Social Security Number (SSN)
-                  </label>
+              <div class="form-grid" style="margin-top:0.6rem;">
+                <div class="form-field">
+                  <label class="form-label" for="w9-signature-name">Name<span>*</span></label>
                   <input
+                    class="form-input"
                     type="text"
-                    id="w9-ssn"
-                    name="w9_ssn"
-                    placeholder="XXX-XX-XXXX"
+                    id="w9-signature-name"
+                    name="w9_signature_name"
+                    required
                   />
                 </div>
-                <div class="field-group">
-                  <label for="w9-ein">
-                    Employer Identification Number (EIN)
-                  </label>
+                <div class="form-field">
+                  <label class="form-label" for="w9-signature-date">Date<span>*</span></label>
                   <input
-                    type="text"
-                    id="w9-ein"
-                    name="w9_ein"
-                    placeholder="XX-XXXXXXX"
+                    class="form-input"
+                    type="date"
+                    id="w9-signature-date"
+                    name="w9_signature_date"
+                    required
                   />
                 </div>
               </div>
 
-              <p class="tiny-note">
-                By signing below, you certify that: (1) the number shown above is your correct taxpayer
-                identification number (or you are waiting for a number to be issued); (2) you are not
-                subject to backup withholding (unless otherwise indicated to us); and (3) you are a U.S.
-                person (including a U.S. resident alien).
-              </p>
-
-              <div class="signature-block">
-                <div class="info-label">W-9 Signature (draw)</div>
-                <p class="tiny-note">
-                  Use your finger (on mobile) or mouse (on desktop) to sign inside the box. You can clear and redraw if needed.
-                </p>
-                <div class="signature-canvas-wrapper">
-                  <canvas id="w9-signature"></canvas>
-                </div>
-                <div class="button-row">
-                  <button type="button" class="btn btn-outline btn-sm" id="w9-clear">
-                    Clear W-9 Signature
-                  </button>
-                </div>
-                <div class="inline-inputs" style="margin-top:0.5rem;">
-                  <div class="field-group">
-                    <label for="w9-signature-name">
-                      Typed Name (Signature)<span class="required">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="w9-signature-name"
-                      name="w9_typed_signature_name"
-                      required
-                      placeholder="Type your full name as signature"
-                    />
+              <div class="form-field" style="margin-top:0.6rem;">
+                <label class="form-label">Signature (W-9)<span>*</span></label>
+                <div class="signature-pad-wrapper">
+                  <div class="signature-pad-toolbar">
+                    <span>Draw your W-9 signature</span>
+                    <button type="button" id="clear-w9-signature">
+                      Clear
+                    </button>
                   </div>
-                  <div class="field-group">
-                    <label for="w9-signature-date">
-                      Date<span class="required">*</span>
-                    </label>
-                    <input
-                      type="date"
-                      id="w9-signature-date"
-                      name="w9_signature_date"
-                      required
-                    />
-                  </div>
+                  <canvas id="w9-signature" class="signature-pad-canvas"></canvas>
                 </div>
               </div>
 
               <div class="section-divider"></div>
 
-              <!-- SUBMIT -->
-              <span class="pill-label">Step 5 · Submit</span>
+              <span class="pill-label">Step 7 · Review &amp; Submit</span>
               <p class="tiny-note">
-                When you click Submit, your subcontractor information, agreement details, W-9 data, and signature images
-                will be combined into a signed PDF and sent securely to Anchor Homes via Formspree.
+                When you click Submit, a PDF copy of your subcontractor agreement and W-9 (including your signatures)
+                will be generated and sent securely to Anchor Homes along with your uploaded W-9 and insurance
+                certificate.
               </p>
 
               <div class="button-row">
@@ -1642,7 +2224,9 @@
               <div>
                 <div class="info-block">
                   <div class="info-label">Phone</div>
-                  <div class="info-value">(555) 555-5555</div>
+                  <div class="info-value">
+                    <a href="tel:+16155550000">(615) 555-0000</a>
+                  </div>
                 </div>
                 <div class="info-block">
                   <div class="info-label">Email</div>
@@ -1678,16 +2262,27 @@
     </footer>
   </div>
 
-  <!-- Signature Pad for drawing signatures -->
+  
+  <!-- Leaflet for interactive map -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-o9N1jRVvqbEExSCo9A+uH4Jv3Q9b8s7X3+HuxZiZ1t4="
+    crossorigin=""
+  ></script>
+
+<!-- Signature Pad for drawing signatures -->
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
   <!-- html2pdf for generating PDF (0.10.1, official Worker API) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+
       /* ----- NAVIGATION ----- */
       const navLinks = document.querySelectorAll(".nav-link");
       const sections = document.querySelectorAll(".section");
+      let projectsMap = null;
+      let projectsMapInitialized = false;
 
       function activateSection(targetId) {
         navLinks.forEach((l) => {
@@ -1697,6 +2292,15 @@
         sections.forEach((section) => {
           section.classList.toggle("active", section.id === targetId);
         });
+
+        if (targetId === "projects") {
+          initProjectsMap();
+          if (projectsMap) {
+            setTimeout(() => {
+              projectsMap.invalidateSize();
+            }, 50);
+          }
+        }
       }
 
       navLinks.forEach((link) => {
@@ -1709,11 +2313,14 @@
       document.querySelectorAll("[data-jump]").forEach((btn) => {
         btn.addEventListener("click", () => {
           const targetId = btn.getAttribute("data-jump");
-          activateSection(targetId);
+          if (targetId) {
+            activateSection(targetId);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
         });
       });
 
-      /* ----- FOOTER YEAR ----- */
+      /* ----- YEAR IN FOOTER ----- */
       const yearSpan = document.getElementById("year");
       if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
@@ -1728,222 +2335,382 @@
           }
         }
         shuffle(order);
-        let pointer = 0;
-        function showNextSlide() {
-          const index = order[pointer];
-          slides.forEach((slide, i) => {
-            slide.classList.toggle("active", i === index);
-          });
-          pointer++;
-          if (pointer >= order.length) {
-            pointer = 0;
-            shuffle(order);
-          }
-        }
-        showNextSlide();
-        setInterval(showNextSlide, 5000);
+
+        let currentIndex = 0;
+        slides.forEach((slide, i) => {
+          slide.classList.remove("active");
+          if (i === order[0]) slide.classList.add("active");
+        });
+
+        setInterval(() => {
+          const currentSlide = order[currentIndex];
+          const nextIndex = (currentIndex + 1) % order.length;
+          const nextSlide = order[nextIndex];
+
+          slides[currentSlide].classList.remove("active");
+          slides[nextSlide].classList.add("active");
+
+          currentIndex = nextIndex;
+        }, 5500);
       }
 
-      /* ----- CUSTOMER REVIEWS ROTATOR ----- */
-      const reviews = [
-        {
-          name: "Danny H.",
-          text: "Anchor Homes LLC made our renovation stress-free. Professional team, clear communication, and excellent results!",
-        },
-        {
-          name: "Alex B.",
-          text: "We hired Anchor Homes LLC for a kitchen remodel and couldn’t be happier. Quality craftsmanship and on-time delivery.",
-        },
-        {
-          name: "Mike Oxard",
-          text: "Dependable, detail-oriented, and honest. Anchor Homes LLC exceeded our expectations on both budget and timeline.",
-        },
-        {
-          name: "Puff Daddy",
-          text: "From start to finish, Anchor Homes LLC handled our project with care. Highly recommend for any home improvement needs.",
-        },
-        {
-          name: "Donnie K.",
-          text: "Anchor Homes LLC transformed our outdated space beautifully. Friendly crew, fair pricing, and outstanding work.",
-        },
-      ];
+      /* ----- LANGUAGE TOGGLE (IF USED) ----- */
+      const languageToggleButtons = document.querySelectorAll(".language-toggle button");
+      const pageRoot = document.body;
+      if (languageToggleButtons.length) {
+        languageToggleButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.getAttribute("data-lang");
+            languageToggleButtons.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            if (lang === "es") {
+              pageRoot.classList.add("language-es-active");
+            } else {
+              pageRoot.classList.remove("language-es-active");
+            }
+          });
+        });
+      }
 
-      const quoteEl = document.getElementById("review-quote");
-      const authorEl = document.getElementById("review-author");
+      /* ----- BILLING PAGE LOGIC: HANDLE PAYMENT TYPE TOGGLE IF PRESENT ----- */
+      const paymentTypeSelect = document.getElementById("payment-type");
+      const eftFields = document.getElementById("eft-fields");
+      const cardFields = document.getElementById("card-fields");
 
-      if (quoteEl && authorEl && reviews.length > 0) {
-        let order = reviews.map((_, idx) => idx);
+      function updatePaymentFields() {
+        if (!paymentTypeSelect || !eftFields || !cardFields) return;
+        const value = paymentTypeSelect.value;
+        if (value === "eft") {
+          eftFields.style.display = "grid";
+          cardFields.style.display = "none";
+        } else if (value === "card") {
+          eftFields.style.display = "none";
+          cardFields.style.display = "grid";
+        } else {
+          eftFields.style.display = "none";
+          cardFields.style.display = "none";
+        }
+      }
 
-        function shuffleReviews(array) {
-          for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+      if (paymentTypeSelect) {
+        paymentTypeSelect.addEventListener("change", updatePaymentFields);
+        updatePaymentFields();
+      }
+
+      /* ----- PROJECTS MAP (MIDDLE TENNESSEE) ----- */
+      function initProjectsMap() {
+        const mapEl = document.getElementById("projects-map");
+        if (!mapEl || typeof L === "undefined" || projectsMapInitialized) return;
+
+        projectsMapInitialized = true;
+
+        // Center roughly on Middle Tennessee (Old Hickory / Franklin / Nolensville)
+        projectsMap = L.map("projects-map", {
+          scrollWheelZoom: false,
+        }).setView([36.0, -86.75], 9);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap contributors",
+        }).addTo(projectsMap);
+
+        const projectsData = [
+          {
+            id: 1,
+            name: "Old Hickory Multifamily Housing",
+            locationLabel: "Old Hickory, TN",
+            coords: [36.2590, -86.6472],
+            photos: [
+              "https://via.placeholder.com/400x260?text=Old+Hickory+Multifamily+1",
+              "https://via.placeholder.com/400x260?text=Old+Hickory+Multifamily+2",
+              "https://via.placeholder.com/400x260?text=Old+Hickory+Multifamily+3",
+            ],
+          },
+          {
+            id: 2,
+            name: "Franklin Single-Family Home",
+            locationLabel: "Franklin, TN",
+            coords: [35.9251, -86.8689],
+            photos: [
+              "https://via.placeholder.com/400x260?text=Franklin+Home+1",
+              "https://via.placeholder.com/400x260?text=Franklin+Home+2",
+              "https://via.placeholder.com/400x260?text=Franklin+Home+3",
+            ],
+          },
+          {
+            id: 3,
+            name: "Nolensville Single-Family Home",
+            locationLabel: "Nolensville, TN",
+            coords: [35.9540, -86.6692],
+            photos: [
+              "https://via.placeholder.com/400x260?text=Nolensville+Home+1",
+              "https://via.placeholder.com/400x260?text=Nolensville+Home+2",
+              "https://via.placeholder.com/400x260?text=Nolensville+Home+3",
+            ],
+          },
+        ];
+
+        const photosGridEl = document.getElementById("project-photos-grid");
+        const photosTitleEl = document.getElementById("project-photos-title");
+        const photosLocationEl = document.getElementById("project-photos-location");
+
+        function showPhotos(project) {
+          if (!photosGridEl) return;
+          photosGridEl.innerHTML = "";
+
+          if (photosTitleEl) {
+            photosTitleEl.textContent = project.name;
           }
+          if (photosLocationEl) {
+            photosLocationEl.textContent = project.locationLabel;
+          }
+
+          project.photos.forEach((src) => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = project.name + " photo";
+            photosGridEl.appendChild(img);
+          });
         }
 
-        shuffleReviews(order);
-        let idxPointer = 0;
-
-        function showNextReview() {
-          const idx = order[idxPointer];
-          const review = reviews[idx];
-          quoteEl.style.opacity = 0;
-          authorEl.style.opacity = 0;
-
-          setTimeout(() => {
-            quoteEl.textContent = `“${review.text}”`;
-            authorEl.textContent = `— ${review.name}`;
-            quoteEl.style.opacity = 1;
-            authorEl.style.opacity = 1;
-          }, 200);
-
-          idxPointer++;
-          if (idxPointer >= order.length) {
-            idxPointer = 0;
-            shuffleReviews(order);
-          }
-        }
-
-        showNextReview();
-        setInterval(showNextReview, 5000);
+        projectsData.forEach((project) => {
+          const marker = L.marker(project.coords).addTo(projectsMap);
+          marker.bindPopup(
+            `<strong>${project.name}</strong><br><span style="font-size:0.8rem;color:#bbbbbb;">${project.locationLabel}</span>`
+          );
+          marker.on("click", () => {
+            showPhotos(project);
+          });
+        });
       }
 
       /* ----- SIGNATURE PADS FOR NEW SUBCONTRACTOR FORM ----- */
-      function initSignaturePad(canvasId) {
-        const canvas = document.getElementById(canvasId);
-        if (!canvas || !window.SignaturePad) return null;
+      const agreementCanvas = document.getElementById("agreement-signature");
+      const w9Canvas = document.getElementById("w9-signature");
+      let agreementPad = null;
+      let w9Pad = null;
 
-        const resizeCanvas = () => {
-          const ratio = Math.max(window.devicePixelRatio || 1, 1);
-          const rect = canvas.getBoundingClientRect();
-          canvas.width = rect.width * ratio;
-          canvas.height = rect.height * ratio;
-          const ctx = canvas.getContext("2d");
-          ctx.scale(ratio, ratio);
-        };
-        resizeCanvas();
-        window.addEventListener("resize", resizeCanvas);
-
-        return new SignaturePad(canvas, {
-          backgroundColor: "#050505",
+      if (agreementCanvas && window.SignaturePad) {
+        agreementPad = new SignaturePad(agreementCanvas, {
+          backgroundColor: "#000000",
           penColor: "#ffffff",
         });
       }
 
-      const agreementPadInstance = initSignaturePad("agreement-signature");
-      const w9PadInstance = initSignaturePad("w9-signature");
-      window.agreementPad = agreementPadInstance;
-      window.w9Pad = w9PadInstance;
-
-      const agreementClear = document.getElementById("agreement-clear");
-      if (agreementClear && agreementPadInstance) {
-        agreementClear.addEventListener("click", () => agreementPadInstance.clear());
+      if (w9Canvas && window.SignaturePad) {
+        w9Pad = new SignaturePad(w9Canvas, {
+          backgroundColor: "#000000",
+          penColor: "#ffffff",
+        });
       }
 
-      const w9Clear = document.getElementById("w9-clear");
-      if (w9Clear && w9PadInstance) {
-        w9Clear.addEventListener("click", () => w9PadInstance.clear());
+      function resizeCanvas(canvas, pad) {
+        if (!canvas || !pad) return;
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * ratio;
+        canvas.height = rect.height * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        pad.clear();
       }
 
-      /* ----- NEW SUBCONTRACTOR CUSTOM SUBMIT WITH PDF ----- */
-      const subForm = document.getElementById("new-subcontractor-form");
-      if (subForm) {
-        subForm.addEventListener("submit", async (e) => {
-          e.preventDefault();
+      window.addEventListener("resize", () => {
+        resizeCanvas(agreementCanvas, agreementPad);
+        resizeCanvas(w9Canvas, w9Pad);
+      });
 
-          if (typeof window.html2pdf === "undefined") {
-            alert("Unable to submit right now (PDF library not loaded). Please try again.");
-            console.error("html2pdf is not defined. Check that the html2pdf script tag is loading correctly.");
+      resizeCanvas(agreementCanvas, agreementPad);
+      resizeCanvas(w9Canvas, w9Pad);
+
+      const clearAgreementBtn = document.getElementById("clear-agreement-signature");
+      if (clearAgreementBtn && agreementPad) {
+        clearAgreementBtn.addEventListener("click", () => agreementPad.clear());
+      }
+
+      const clearW9Btn = document.getElementById("clear-w9-signature");
+      if (clearW9Btn && w9Pad) {
+        clearW9Btn.addEventListener("click", () => w9Pad.clear());
+      }
+
+      /* ----- PDF GENERATION FOR NEW SUBCONTRACTOR FORM ----- */
+      const subcontractorForm = document.getElementById("subcontractor-form");
+
+      async function generateSubcontractorPDF() {
+        const {
+          jsPDF
+        } = window.jspdf || {};
+        const html2pdfLib = window.html2pdf;
+
+        if (!html2pdfLib) {
+          alert("PDF library not loaded. Please try again or contact Anchor Homes.");
+          throw new Error("html2pdf not available");
+        }
+
+        const agreementSigData = agreementPad && !agreementPad.isEmpty()
+          ? agreementPad.toDataURL()
+          : null;
+        const w9SigData = w9Pad && !w9Pad.isEmpty()
+          ? w9Pad.toDataURL()
+          : null;
+
+        const pseudoContainer = document.createElement("div");
+        pseudoContainer.style.padding = "20px";
+        pseudoContainer.style.fontFamily =
+          'system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text","Segoe UI", sans-serif';
+        pseudoContainer.style.color = "#000";
+        pseudoContainer.style.fontSize = "12px";
+        pseudoContainer.style.lineHeight = "1.5";
+
+        const companyName = document.getElementById("company-name")?.value || "";
+        const contactName = document.getElementById("contact-name")?.value || "";
+        const phone = document.getElementById("phone")?.value || "";
+        const email = document.getElementById("email")?.value || "";
+        const mailingAddress = document.getElementById("mailing-address")?.value || "";
+        const w9Name = document.getElementById("w9-name")?.value || "";
+        const w9BusinessName = document.getElementById("w9-business-name")?.value || "";
+        const w9EntityType = document.getElementById("w9-entity-type")?.value || "";
+        const w9SsnEin = document.getElementById("w9-ssn-ein")?.value || "";
+        const insuranceCarrier = document.getElementById("insurance-carrier")?.value || "";
+        const policyLimits = document.getElementById("policy-limits")?.value || "";
+        const agreementName = document.getElementById("agreement-name")?.value || "";
+        const agreementDate = document.getElementById("agreement-date")?.value || "";
+        const w9SignatureName = document.getElementById("w9-signature-name")?.value || "";
+        const w9SignatureDate = document.getElementById("w9-signature-date")?.value || "";
+
+        pseudoContainer.innerHTML = `
+          <h1 style="margin-bottom:8px;">Anchor Homes LLC</h1>
+          <h2 style="margin:0 0 16px;font-size:16px;">Subcontractor Packet</h2>
+
+          <h3 style="margin:16px 0 6px;">1. Company Information</h3>
+          <p><strong>Company Name:</strong> ${companyName}</p>
+          <p><strong>Contact Name:</strong> ${contactName}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Mailing Address:</strong><br/>${mailingAddress.replace(/\n/g, "<br/>")}</p>
+
+          <h3 style="margin:16px 0 6px;">2. W-9 Information</h3>
+          <p><strong>Name (as shown on tax return):</strong> ${w9Name}</p>
+          <p><strong>Business Name / Disregarded Entity:</strong> ${w9BusinessName}</p>
+          <p><strong>Federal Tax Classification:</strong> ${w9EntityType}</p>
+          <p><strong>SSN / EIN:</strong> ${w9SsnEin}</p>
+
+          <h3 style="margin:16px 0 6px;">3. Insurance</h3>
+          <p><strong>Insurance Carrier:</strong> ${insuranceCarrier}</p>
+          <p><strong>Policy Limits:</strong> ${policyLimits}</p>
+
+          <h3 style="margin:16px 0 6px;">4. Subcontractor Agreement</h3>
+          <p><strong>Name / Title:</strong> ${agreementName}</p>
+          <p><strong>Date:</strong> ${agreementDate}</p>
+        `;
+        const agreementTextEl = document.getElementById("agreement-text");
+        if (agreementTextEl) {
+          const agreementHeader = document.createElement("h3");
+          agreementHeader.style.margin = "16px 0 6px";
+          agreementHeader.textContent = "5. Subcontractor Agreement Text";
+          pseudoContainer.appendChild(agreementHeader);
+
+          const agreementBody = document.createElement("div");
+          agreementBody.innerHTML = agreementTextEl.innerHTML;
+          pseudoContainer.appendChild(agreementBody);
+        }
+
+        // Add signatures if present
+        if (agreementSigData) {
+          const sigHeader = document.createElement("h3");
+          sigHeader.style.margin = "16px 0 6px";
+          sigHeader.textContent = "6. Agreement Signature";
+          pseudoContainer.appendChild(sigHeader);
+
+          const sigImg = document.createElement("img");
+          sigImg.src = agreementSigData;
+          sigImg.style.maxWidth = "260px";
+          sigImg.style.border = "1px solid #000";
+          sigImg.style.display = "block";
+          sigImg.style.marginBottom = "12px";
+          pseudoContainer.appendChild(sigImg);
+        }
+
+        const w9SectionHeader = document.createElement("h3");
+        w9SectionHeader.style.margin = "16px 0 6px";
+        w9SectionHeader.textContent = "7. W-9 Signature";
+        pseudoContainer.appendChild(w9SectionHeader);
+
+        const w9Meta = document.createElement("p");
+        w9Meta.innerHTML =
+          "<strong>Name:</strong> " +
+          (w9SignatureName || "") +
+          "<br/><strong>Date:</strong> " +
+          (w9SignatureDate || "");
+        pseudoContainer.appendChild(w9Meta);
+
+        if (w9SigData) {
+          const w9Img = document.createElement("img");
+          w9Img.src = w9SigData;
+          w9Img.style.maxWidth = "260px";
+          w9Img.style.border = "1px solid #000";
+          w9Img.style.display = "block";
+          w9Img.style.marginTop = "6px";
+          pseudoContainer.appendChild(w9Img);
+        }
+
+        // Store raw signature images on form as well
+        const agreementSigField = document.getElementById("agreement_signature_data");
+        if (agreementSigField) {
+          agreementSigField.value = agreementSigData || "";
+        }
+        const w9SigField = document.getElementById("w9_signature_data");
+        if (w9SigField) {
+          w9SigField.value = w9SigData || "";
+        }
+
+        // Generate PDF as data URI using html2pdf
+        const pdfOptions = {
+          margin: 0.5,
+          filename: "anchor-homes-subcontractor.pdf",
+          image: { type: "jpeg", quality: 0.95 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+        };
+
+        const dataUri = await html2pdfLib()
+          .set(pdfOptions)
+          .from(pseudoContainer)
+          .outputPdf("datauristring");
+
+        const pdfField = document.getElementById("generated_pdf");
+        if (pdfField) {
+          pdfField.value = dataUri;
+        }
+      }
+
+      if (subcontractorForm) {
+        let isSubmitting = false;
+        subcontractorForm.addEventListener("submit", async (event) => {
+          if (isSubmitting) return;
+
+          // Ensure signatures are present
+          if (!agreementPad || agreementPad.isEmpty()) {
+            alert("Please sign the Subcontractor Agreement before submitting.");
+            event.preventDefault();
             return;
           }
-          if (!window.agreementPad || window.agreementPad.isEmpty()) {
-            alert("Please sign the Subcontractors Agreement before submitting.");
-            return;
-          }
-          if (!window.w9Pad || window.w9Pad.isEmpty()) {
-            alert("Please sign the W-9 section before submitting.");
+          if (!w9Pad || w9Pad.isEmpty()) {
+            alert("Please sign the W-9 before submitting.");
+            event.preventDefault();
             return;
           }
 
-          const submitBtn = subForm.querySelector('button[type="submit"]');
-          const originalBtnText = submitBtn ? submitBtn.textContent : "";
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = "Submitting...";
-          }
+          event.preventDefault();
 
           try {
-            const fd = new FormData(subForm);
-            const getVal = (name) => {
-              const v = fd.get(name);
-              return v == null ? "" : v.toString();
-            };
-
-            // Signatures as data URLs (not strictly needed for PDF, but kept if you want them in the email)
-            const agreementSigDataUrl = window.agreementPad.toDataURL("image/png");
-            const w9SigDataUrl = window.w9Pad.toDataURL("image/png");
-
-            const pdfElement = document.getElementById("new-subcontractors");
-            if (!pdfElement) {
-              throw new Error("PDF element (#new-subcontractors) not found.");
-            }
-
-            const opt = {
-              margin: [10, 10, 10, 10],
-              filename: "Signed_Agreement_W9.pdf",
-              image: { type: "jpeg", quality: 0.96 },
-              html2canvas: { scale: 2 },
-              jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
-            };
-
-            // Use official Worker API: output('blob')
-            const pdfBlob = await html2pdf().set(opt).from(pdfElement).output("blob");
-
-            // Build the payload for Formspree
-            const sendData = new FormData();
-            sendData.append("form_name", "New Subcontractor Agreement and W9");
-            sendData.append("sc_company_name", getVal("sc_company_name"));
-            sendData.append("sc_contact_name", getVal("sc_contact_name"));
-            sendData.append("sc_email", getVal("sc_email"));
-            sendData.append("sc_phone", getVal("sc_phone"));
-
-            // Include all original fields too
-            fd.forEach((value, key) => {
-              if (!sendData.has(key)) {
-                sendData.append(key, value);
-              }
-            });
-
-            // Optionally include signature data URLs as fields (for reference)
-            sendData.append("agreement_signature_image", agreementSigDataUrl);
-            sendData.append("w9_signature_image", w9SigDataUrl);
-
-            // Attach the generated PDF
-            sendData.append("signed_pdf", pdfBlob, "Signed_Agreement_W9.pdf");
-
-            const response = await fetch("https://formspree.io/f/xdkqdpgd", {
-              method: "POST",
-              body: sendData,
-              headers: { Accept: "application/json" },
-            });
-
-            if (response.ok) {
-              alert("Thank you. Your signed agreement and W-9 have been submitted.");
-              subForm.reset();
-              if (window.agreementPad) window.agreementPad.clear();
-              if (window.w9Pad) window.w9Pad.clear();
-            } else {
-              alert("There was a problem submitting the form. Please try again or contact Anchor Homes directly.");
-            }
+            await generateSubcontractorPDF();
           } catch (err) {
-            console.error(err);
-            alert("An unexpected error occurred while creating the PDF. Please try again.");
-          } finally {
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = originalBtnText || "Submit to Anchor Homes";
-            }
+            console.error("Error generating PDF:", err);
+            // Allow submission without PDF if generation fails
           }
+
+          isSubmitting = true;
+          subcontractorForm.submit();
         });
       }
     });
